@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Curso de Inglés General - Proyecto 40</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:#0a0a0a;color:#e0e0e0;line-height:1.6;padding-bottom:80px}
+        a{color:#00e5a0;text-decoration:none;border-bottom:1px dotted #00e5a0}
+        a:hover{color:#00ff88;border-bottom-color:#00ff88}
+        .header{background:linear-gradient(135deg,#0a2e1a,#16213e);padding:20px;text-align:center;border-bottom:2px solid #00b894;position:sticky;top:0;z-index:100}
+        .header h1{font-size:1.4em;color:#00e5a0;margin-bottom:4px}
+        .header p{font-size:.85em;color:#888}
+        .week-selector{display:flex;gap:8px;padding:12px 16px;overflow-x:auto;background:#111;border-bottom:1px solid #222;-webkit-overflow-scrolling:touch}
+        .week-btn{flex-shrink:0;padding:8px 16px;border:1px solid #333;border-radius:20px;background:#1a1a1a;color:#888;font-size:.85em;cursor:pointer;transition:.3s}
+        .week-btn.active{background:#0a2e1a;color:#00e5a0;border-color:#00e5a0}
+        .container{max-width:620px;margin:0 auto;padding:16px}
+        .summary-box{background:#0a2e1a;border:1px solid #00b894;border-radius:12px;padding:16px;margin-bottom:16px}
+        .summary-box h3{color:#00e5a0;font-size:1em;margin-bottom:6px}
+        .summary-box .theme{color:#eee;font-size:.95em;margin-bottom:4px}
+        .summary-box .focus{color:#999;font-size:.8em}
+        .progress-bar{width:100%;height:6px;background:#222;border-radius:3px;margin-top:12px;overflow:hidden}
+        .progress-fill{height:100%;background:linear-gradient(90deg,#00e5a0,#00ff88);border-radius:3px;transition:width .3s}
+        .day-card{background:#1a1a1a;border-radius:12px;padding:16px;margin-bottom:12px;border:1px solid #222}
+        .day-card.completed{border-color:#00ff88;opacity:.75}
+        .day-card.today{border-color:#00e5a0;box-shadow:0 0 12px rgba(0,229,160,.15)}
+        .day-card.today::before{content:'HOY';display:inline-block;background:#00e5a0;color:#0a2e1a;font-size:.7em;font-weight:700;padding:2px 8px;border-radius:8px;margin-bottom:8px}
+        .day-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:6px}
+        .day-name{font-size:1.1em;font-weight:700;color:#00e5a0}
+        .day-time{font-size:.8em;color:#666;background:#222;padding:4px 8px;border-radius:8px}
+        .block{margin-bottom:10px}
+        .block-title{font-size:.8em;text-transform:uppercase;color:#00b894;letter-spacing:1px;margin-bottom:4px;font-weight:600}
+        .task{display:flex;align-items:flex-start;gap:10px;padding:6px 0}
+        .task input[type="checkbox"]{width:18px;height:18px;margin-top:2px;accent-color:#00e5a0;cursor:pointer;flex-shrink:0}
+        .task-text{flex:1;font-size:.9em}
+        .plantilla{background:#111;border-left:3px solid #00b894;border-radius:0 8px 8px 0;padding:10px 12px;margin:8px 0}
+        .plantilla .p-front{color:#00e5a0;font-weight:600;font-size:.95em}
+        .plantilla .p-ex{color:#aaa;font-size:.85em;margin-top:2px}
+        .grabacion{background:#0a2e1a;border:1px dashed #00b894;border-radius:8px;padding:10px 12px;margin-top:8px;font-size:.9em}
+        .grabacion strong{color:#00e5a0}
+        .book-note{background:#1a0a2e;border:1px solid #7c4dff;border-radius:8px;padding:10px 12px;margin:8px 0;font-size:.9em}
+        .book-note strong{color:#b388ff}
+        .section-title{font-size:.8em;text-transform:uppercase;color:#555;margin:16px 0 8px;letter-spacing:1px}
+        .week-nav{display:flex;justify-content:space-between;margin-top:20px;padding-bottom:20px}
+        .nav-btn{padding:12px 24px;border:1px solid #333;border-radius:8px;background:#1a1a1a;color:#00e5a0;font-size:.9em;cursor:pointer}
+        .nav-btn:disabled{opacity:.3;cursor:not-allowed}
+        .hidden{display:none}
+        .rules{background:#1a1a1a;border:1px solid #222;border-radius:12px;padding:16px;margin-bottom:16px}
+        .rules h3{color:#00e5a0;font-size:1em;margin-bottom:8px}
+        .rules li{margin:6px 0;font-size:.9em}
+        .footer{text-align:center;padding:20px;color:#444;font-size:.8em}
+        .cita{font-style:italic;color:#00b894;text-align:center;padding:8px 16px;font-size:.9em;border-left:3px solid #00b894;margin:16px 0}
+        .overview-box{background:#0a1a12;border:1px solid #00b894;border-radius:12px;padding:16px;margin-bottom:16px}
+        .overview-box h3{color:#00e5a0;font-size:1em;margin-bottom:10px}
+        .overview-stats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+        .stat{flex:1;min-width:100px;background:#111;border:1px solid #222;border-radius:8px;padding:8px 10px;text-align:center}
+        .stat .num{font-size:1.3em;font-weight:700;color:#00e5a0}
+        .stat .lab{font-size:.7em;color:#666;text-transform:uppercase;letter-spacing:.5px}
+        .overview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+        .overview-week{background:#111;border:1px solid #222;border-radius:8px;padding:8px 10px;text-align:left;cursor:pointer;color:#e0e0e0;font:inherit;line-height:1.4;transition:.2s}
+        .overview-week:hover{border-color:#00b894}
+        .overview-week.ow-done{border-color:#00ff88;background:#0a2e1a}
+        .overview-week .ow-title{font-size:.75em;color:#888;font-weight:600}
+        .overview-week .ow-pct{font-size:.7em;color:#00e5a0;text-align:right;margin-top:2px}
+        .overview-week .ow-bar{height:4px;background:#222;border-radius:2px;margin-top:6px;overflow:hidden}
+        .overview-week .ow-fill{height:100%;background:linear-gradient(90deg,#00e5a0,#00ff88);border-radius:2px;transition:width .3s}
+        @media(max-width:400px){.container{padding:12px}.day-card{padding:12px}.overview-grid{grid-template-columns:repeat(2,1fr)}}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Mi Curso de Inglés General</h1>
+        <p>30 min lunes-viernes · 60 min fin de semana · 1 día laboral</p>
+    </div>
+
+    <div class="week-selector" id="weekSelector"></div>
+
+    <div class="container">
+        <div class="cita">"No se trata de cuánto tiempo le dedicas, sino de cuántas veces al día tocas el inglés."</div>
+        <div class="overview-box">
+            <h3>📊 Progreso global</h3>
+            <div class="overview-stats">
+                <div class="stat"><div class="num" id="ovDays">0</div><div class="lab">días completados</div></div>
+                <div class="stat"><div class="num" id="ovStreak">0</div><div class="lab">racha actual</div></div>
+                <div class="stat"><div class="num" id="ovWeeks">0/12</div><div class="lab">semanas</div></div>
+            </div>
+            <div class="overview-grid" id="overviewGrid"></div>
+        </div>
+        <div class="rules" style="border-color:#f0ad4e">
+            <h3 style="color:#f0ad4e">⚠️ Antes de empezar la Semana 1</h3>
+            <ul>
+                <li>El <b>domingo previo</b> a tu Semana 1, estudia la base de la S1: <b>EGiU Un. 1-4</b> (present simple &amp; continuous) y <b>EViU Un. 35-36</b> (Jobs / Talking about your work).</li>
+                <li>A partir de ahí: <b>cada fin de semana estudias la base de la semana siguiente</b> (domingo gramática EGiU, sábado vocabulario EViU) y de lunes a viernes la practicas en voz alta.</li>
+            </ul>
+        </div>
+        <div class="rules" style="border-color:#00e5a0">
+            <h3>📢 Cómo corregir tus audios con la IA (paso a paso)</h3>
+            <ul>
+                <li><b>1.</b> Graba tu respuesta con la grabadora del móvil (60-90 segundos).</li>
+                <li><b>2.</b> Convierte tu grabación a texto: pega el audio en <b>WhatsApp</b> o <b>Google Docs (Menú → Voz → Escritura por voz)</b>, o usa el dictado por voz del teclado del móvil.</li>
+                <li><b>3.</b> Copia el texto y pégalo en el chat con tu asistente (opencode / ChatGPT).</li>
+                <li><b>4.</b> Añade siempre esta orden: <i>"Corrige mi gramática y dime si sonó natural. Dame una versión mejorada."</i></li>
+                <li><b>5.</b> Corrige 1 solo error y sigue adelante. No te castigues con todos.</li>
+            </ul>
+        </div>
+        <div class="rules">
+            <h3>Reglas de oro (léelas cada lunes)</h3>
+            <ul>
+                <li><b>Habla en voz alta siempre.</b> Shadowing, plantillas y grabación son orales, nunca solo mentales.</li>
+                <li><b>3 plantillas al día.</b> No más. Tu memoria las retiene mejor en poca cantidad.</li>
+                <li><b>La grabación es irrenunciable.</b> Si el día se complica, sacrifica lo demás menos esto.</li>
+                <li><b>Corrige 1 solo error por grabación.</b> No te castigues con todos.</li>
+                <li><b>Cada unidad de libro produce 3 plantillas</b> para la semana siguiente.</li>
+                <li><b>Primero la base, luego la práctica.</b> El domingo estudias la gramática (EGiU) de la semana que viene; de lunes a viernes la practicas en voz alta. El sábado estudias el vocabulario (EViU), cuyas plantillas usas la semana siguiente.</li>
+                <li><b>Nunca más de 3 días sin hablar en voz alta.</b></li>
+            </ul>
+        </div>
+        <div id="weekContainer"></div>
+    </div>
+
+    <div class="footer">Tu curso a medida · Inglés general B1-B2 · Proyecto 40</div>
+
+<script>
+// ===================== DATOS DEL CURSO =====================
+// cada semana: tema, gramática, libro, sugerencia podcast, y días lunes-domingo
+const PODCAST_URL = 'https://open.spotify.com/show/4LCgG4XYyQ5Lk5puCoyTWU';
+const YOUTUBE_URL = 'https://www.youtube.com/@bbclearningenglish';
+const GRAMMAR_PAGE = 'https://www.bbc.co.uk/learningenglish/basic-grammar';
+const VIDEO_URL = 'https://www.youtube.com/watch?v=';
+const WEEKS = [
+  {
+    n: 1,
+    tema: "Mi rutina y mis gustos",
+    gramatica: "Present Simple & Present Continuous",
+    libroDom: "📕 GRAMÁTICA (domingo, EGiU) → base de la S2: Un. 5-6 · Past simple & past continuous",
+    satLibro: "📘 VOCABULARIO (sábado, EViU): Un. 35-36 · Jobs / Talking about your work",
+    podcast: "6 Minute Grammar (BBC) - episodios de Present Simple",
+    video: { id: "xFsYrTIndhI", titulo: "Present Simple and Present Continuous - 6 Minute Grammar" },
+    dias: {
+      lun: {
+        nombre: "Lunes", tiempo: "30 min", tema: "Mi día a día",
+        plantillas: [
+          { f: "In the morning, I usually ___ before ___.", e: "In the morning, I usually stretch before having breakfast." },
+          { f: "I'm really into ___ these days.", e: "I'm really into home workouts these days." },
+          { f: "On ___ I always ___.", e: "On Saturdays I always go for a long walk." }
+        ],
+        grabacion: "Describe tu día típico de lunes a domingo (rutinas y gustos). Usa las 3 plantillas. 60-90 segundos."
+      },
+      mar: {
+        nombre: "Martes", tiempo: "30 min", tema: "Contar historias",
+        plantillas: [
+          { f: "Last week, I ___.", e: "Last week, I finished a big project at work." },
+          { f: "I was ___ when ___.", e: "I was cooking when the phone rang." },
+          { f: "After that, ___.", e: "After that, I took a break." }
+        ],
+        grabacion: "Cuenta algo que hiciste la semana pasada. Ordena: primero, luego, después, al final. 60-90 segundos."
+      },
+      mie: {
+        nombre: "Miércoles", tiempo: "30 min", tema: "Opinar",
+        plantillas: [
+          { f: "In my opinion, ___ because ___.", e: "In my opinion, reading every day helps because it builds vocabulary." },
+          { f: "I see your point, but I think ___.", e: "I see your point, but I think practice matters more." },
+          { f: "The way I see it, ___.", e: "The way I see it, consistency beats intensity." }
+        ],
+        grabacion: "Da tu opinión: ¿es mejor leer en inglés o escuchar podcasts? Usa las 3 plantillas. 60-90 segundos."
+      },
+      jue: {
+        nombre: "Jueves", tiempo: "30 min", tema: "Planes y futuro",
+        plantillas: [
+          { f: "I'm going to ___ this weekend.", e: "I'm going to visit my family this weekend." },
+          { f: "By this time next year, I'll be ___.", e: "By this time next year, I'll be speaking English more fluently." },
+          { f: "I'm thinking of ___.", e: "I'm thinking of starting a podcast." }
+        ],
+        grabacion: "Habla de tus planes para este fin de semana y para dentro de un año. 60-90 segundos."
+      },
+      vie: {
+        nombre: "Viernes", tiempo: "30 min", tema: "Conversación espontánea",
+        plantillas: [
+          { f: "How's it going? / What have you been up to?", e: "Hi! How's it going? What have you been up to?" },
+          { f: "That sounds great! How did it go?", e: "That sounds great! How did your interview go?" },
+          { f: "By the way, ___.", e: "By the way, did you watch that new series?" }
+        ],
+        grabacion: "Simula un diálogo de ascensor con un colega: saluda, pregunta, reacciona y cuenta algo tuyo. 90 segundos."
+      },
+      sab: {
+        nombre: "Sábado", tiempo: "60 min", tema: "TRABAJO + libro",
+        plantillas: [
+          { f: "I'd like to schedule a meeting for ___. Does that work for you?", e: "I'd like to schedule a meeting for Thursday. Does that work for you?" },
+          { f: "Could you walk me through ___?", e: "Could you walk me through the new process?" },
+          { f: "Let's follow up on this next week.", e: "Let's follow up on this next week, okay?" }
+        ],
+        libro: "📘 VOCABULARIO (EViU) Un. 35-36: Jobs / Talking about your work. Lee las 2 páginas, haz los ejercicios y escribe 3 plantillas propias.",
+        grabacion: "Simula que llamas a un colega para agendar una reunión: saluda, propón horario, pregunta por disponibilidad y cierra."
+      },
+      dom: {
+        nombre: "Domingo", tiempo: "60 min", tema: "Base semana siguiente + repaso",
+        libro: "📕 GRAMÁTICA (EGiU) base de la S2 → Un. 5-6: Past simple y past continuous. Lee, haz ejercicios y escribe 3 plantillas propias.",
+        grabacion: "GRABACIÓN LARGA (3-4 min sin guion): cuenta tu semana completa: tu rutina, una anécdota, tu opinión, tus planes y un tema de trabajo."
+      }
+    }
+  },
+  {
+    n: 2,
+    tema: "Describir personas y cosas",
+    gramatica: "Past Simple & Past Continuous",
+    libroDom: "📕 GRAMÁTICA (domingo, EGiU) → base de la S3: Un. 7-8 (+9-10) · Present perfect",
+    satLibro: "📘 VOCABULARIO (sábado, EViU): Un. 37-38 · Conditions of work / The workplace",
+    podcast: "6 Minute Grammar (BBC) - episodios de Past Simple",
+    video: { id: "uTB5I8V9Eog", titulo: "Past simple and past continuous - 6 Minute Grammar" },
+    dias: {
+      lun: {
+        nombre: "Lunes", tiempo: "30 min", tema: "Describir personas",
+        plantillas: [
+          { f: "She's very ___ and quite ___.", e: "My boss is very demanding but quite fair." },
+          { f: "It looks ___ and it feels ___.", e: "The new office looks modern and it feels bright." },
+          { f: "What's he like?", e: "What's your new colleague like?" }
+        ],
+        grabacion: "Describe a una persona que conoces bien: cómo es físicamente y de carácter. 60-90 segundos."
+      },
+      mar: {
+        nombre: "Martes", tiempo: "30 min", tema: "Contar historias",
+        plantillas: [
+          { f: "I was ___ when ___.", e: "I was driving when the accident happened." },
+          { f: "Suddenly, ___.", e: "Suddenly, the lights went out." },
+          { f: "Luckily / Unfortunately, ___.", e: "Luckily, I had my umbrella with me." }
+        ],
+        grabacion: "Cuenta un día que salió mal y luego bien. Usa pasado. 60-90 segundos."
+      },
+      mie: {
+        nombre: "Miércoles", tiempo: "30 min", tema: "Opinar",
+        plantillas: [
+          { f: "Personally, I'd rather ___ than ___.", e: "Personally, I'd rather walk than take the bus." },
+          { f: "I'm convinced that ___.", e: "I'm convinced that exercise improves your mood." },
+          { f: "It depends on ___.", e: "It depends on the situation, I think." }
+        ],
+        grabacion: "Da tu opinión: ¿es mejor vivir en ciudad o en el campo? Usa las 3 plantillas."
+      },
+      jue: {
+        nombre: "Jueves", tiempo: "30 min", tema: "Planes y futuro",
+        plantillas: [
+          { f: "I might ___ or I might ___.", e: "I might go out or I might just relax." },
+          { f: "We're planning to ___ soon.", e: "We're planning to redecorate the flat soon." },
+          { f: "I hope to ___ before the end of the year.", e: "I hope to save some money before the end of the year." }
+        ],
+        grabacion: "Habla de posibilidades: 2 planes seguros y 2 que podrían pasar. 60-90 segundos."
+      },
+      vie: {
+        nombre: "Viernes", tiempo: "30 min", tema: "Conversación espontánea",
+        plantillas: [
+          { f: "I can't believe ___!", e: "I can't believe it's already Friday!" },
+          { f: "You won't believe what happened to me.", e: "You won't believe what happened to me yesterday." },
+          { f: "Anyway, ___?", e: "Anyway, are you coming to the party?" }
+        ],
+        grabacion: "Simula contarle algo sorprendente a una amiga. 90 segundos."
+      },
+      sab: {
+        nombre: "Sábado", tiempo: "60 min", tema: "TRABAJO + libro",
+        plantillas: [
+          { f: "On a typical day, I ___.", e: "On a typical day, I check my emails first." },
+          { f: "My main duties include ___.", e: "My main duties include design and coordination." },
+          { f: "Right now, I'm focusing on ___.", e: "Right now, I'm focusing on the new project." }
+        ],
+        libro: "📘 VOCABULARIO (EViU) Un. 37-38: Conditions of work / The workplace. Lee, haz ejercicios, escribe 3 plantillas propias.",
+        grabacion: "Describe tu día laboral típico usando las 3 plantillas. 90 segundos."
+      },
+      dom: {
+        nombre: "Domingo", tiempo: "60 min", tema: "Base semana siguiente + repaso",
+        libro: "📕 GRAMÁTICA (EGiU) base de la S3 → Un. 7-8 (+9-10): Present perfect. Lee, haz ejercicios y escribe 3 plantillas propias.",
+        grabacion: "GRABACIÓN LARGA (3-4 min): cuenta tu semana con foco en contar historias y describir personas."
+      }
+    }
+  },
+  {
+    n: 3,
+    tema: "Mis experiencias",
+    gramatica: "Present Perfect",
+    libroDom: "📕 GRAMÁTICA (domingo, EGiU) → base de la S4: Un. 105-108 · Comparatives & superlatives",
+    satLibro: "📘 VOCABULARIO (sábado, EViU): Un. 39-40 · Business & companies / Money & finance",
+    podcast: "6 Minute Grammar (BBC) - Present Perfect",
+    video: { id: "jwmKjgwlMk8", titulo: "Present perfect and past simple - 6 Minute Grammar" },
+    dias: {
+      lun: {
+        nombre: "Lunes", tiempo: "30 min", tema: "Experiencias",
+        plantillas: [
+          { f: "Have you ever ___?", e: "Have you ever been to Japan?" },
+          { f: "I've never ___ but I'd love to.", e: "I've never been to South America but I'd love to." },
+          { f: "I've already ___ / I haven't ___ yet.", e: "I've already finished the report. I haven't booked the hotel yet." }
+        ],
+        grabacion: "Habla de 3 experiencias que has tenido y 2 que quieres tener. 60-90 segundos."
+      },
+      mar: {
+        nombre: "Martes", tiempo: "30 min", tema: "Experiencias",
+        plantillas: [
+          { f: "I've just ___.", e: "I've just finished reading a great book." },
+          { f: "It's the first time I've ___.", e: "It's the first time I've tried this restaurant." },
+          { f: "I've been to ___ twice.", e: "I've been to London twice, but I want to go back." }
+        ],
+        grabacion: "Cuenta 3 experiencias recientes usando 'just', 'already' y 'first time'. 60-90 segundos."
+      },
+      mie: {
+        nombre: "Miércoles", tiempo: "30 min", tema: "Opinar",
+        plantillas: [
+          { f: "As far as I'm concerned, ___.", e: "As far as I'm concerned, that's the best option." },
+          { f: "I can't stand ___.", e: "I can't stand waiting in long queues." },
+          { f: "What I love about ___ is ___.", e: "What I love about my city is the atmosphere." }
+        ],
+        grabacion: "Da tu opinión sobre 3 cosas: lo que amas, lo que odias y lo que te da igual."
+      },
+      jue: {
+        nombre: "Jueves", tiempo: "30 min", tema: "Planes y futuro",
+        plantillas: [
+          { f: "I've been meaning to ___.", e: "I've been meaning to call my friends more often." },
+          { f: "Once I finish ___, I'll ___.", e: "Once I finish this project, I'll take a holiday." },
+          { f: "By the end of this year, I want to have ___.", e: "By the end of this year, I want to have visited 3 new countries." }
+        ],
+        grabacion: "Habla de cosas pendientes que tienes y cuándo las harás. 60-90 segundos."
+      },
+      vie: {
+        nombre: "Viernes", tiempo: "30 min", tema: "Conversación espontánea",
+        plantillas: [
+          { f: "Have you seen ___?", e: "Have you seen the new café downtown?" },
+          { f: "I've got some great news!", e: "I've got some great news - I got the promotion!" },
+          { f: "That's amazing! Tell me more.", e: "That's amazing! Tell me more about it." }
+        ],
+        grabacion: "Simula una conversación: da una noticia y pregunta por la semana del otro. 90 segundos."
+      },
+      sab: {
+        nombre: "Sábado", tiempo: "60 min", tema: "TRABAJO + libro",
+        plantillas: [
+          { f: "I've been working in ___ for ___ years.", e: "I've been working in engineering for 8 years." },
+          { f: "I've handled projects such as ___.", e: "I've handled projects such as bridge design." },
+          { f: "I've never worked on ___ before.", e: "I've never worked on high-speed rail before." }
+        ],
+        libro: "📘 VOCABULARIO (EViU) Un. 39-40: Business & companies / Money & finance. Lee, haz ejercicios, escribe 3 plantillas propias.",
+        grabacion: "Habla de tu experiencia profesional: años de experiencia, tipos de proyectos y algo que aún no has hecho. 90 segundos."
+      },
+      dom: {
+        nombre: "Domingo", tiempo: "60 min", tema: "Base semana siguiente + repaso",
+        libro: "📕 GRAMÁTICA (EGiU) base de la S4 → Un. 105-108: Comparatives & superlatives. Lee, haz ejercicios y escribe 3 plantillas propias.",
+        grabacion: "GRABACIÓN LARGA (3-4 min): cuenta tu semana enfocándote en experiencias ('I've...', 'Have you ever...')."
+      }
+    }
+  },
+  {
+    n: 4,
+    tema: "Comparar y describir",
+    gramatica: "Comparativos & Superlativos",
+    libroDom: "📕 GRAMÁTICA (domingo, EGiU) → base de la S5: Un. 19-25 · Future forms",
+    satLibro: "📘 VOCABULARIO (sábado, EViU): Un. 36 (repaso) · Duties & responsibilities",
+    podcast: "6 Minute Grammar (BBC) - Comparatives",
+    video: { id: "FAhpT7BH7GE", titulo: "Comparatives and superlatives - 6 Minute Grammar" },
+    dias: {
+      lun: {
+        nombre: "Lunes", tiempo: "30 min", tema: "Comparar",
+        plantillas: [
+          { f: "___ is better than ___ because ___.", e: "Coffee is better than tea because I need the caffeine." },
+          { f: "The most ___ thing about ___ is ___.", e: "The most stressful thing about my job is deadlines." },
+          { f: "___ isn't as ___ as ___.", e: "Exercising at home isn't as fun as going to the gym." }
+        ],
+        grabacion: "Compara 2 cosas (películas, hobbies, ciudades). Usa las 3 plantillas. 60-90 segundos."
+      },
+      mar: {
+        nombre: "Martes", tiempo: "30 min", tema: "Describir lugares",
+        plantillas: [
+          { f: "It's one of the most ___ places I've been to.", e: "It's one of the most beautiful places I've been to." },
+          { f: "The further you go, the ___ it gets.", e: "The further you go, the quieter it gets." },
+          { f: "It's not as crowded as ___.", e: "It's not as crowded as the centre." }
+        ],
+        grabacion: "Describe tu lugar favorito: cómo es y compáralo con otros. 60-90 segundos."
+      },
+      mie: {
+        nombre: "Miércoles", tiempo: "30 min", tema: "Opinar",
+        plantillas: [
+          { f: "There's no doubt that ___.", e: "There's no doubt that money isn't everything." },
+          { f: "Some people say ___, but I disagree.", e: "Some people say money brings happiness, but I disagree." },
+          { f: "To be honest, ___.", e: "To be honest, I don't really care." }
+        ],
+        grabacion: "Da tu opinión sobre un tema de actualidad usando las 3 plantillas. 90 segundos."
+      },
+      jue: {
+        nombre: "Jueves", tiempo: "30 min", tema: "Planes y futuro",
+        plantillas: [
+          { f: "The sooner ___, the better.", e: "The sooner we finish, the better." },
+          { f: "I'll decide once I ___ more.", e: "I'll decide once I know more." },
+          { f: "It's going to be more ___ than ___.", e: "It's going to be more crowded than last year." }
+        ],
+        grabacion: "Habla de tus planes comparándolos con los de años anteriores. 60-90 segundos."
+      },
+      vie: {
+        nombre: "Viernes", tiempo: "30 min", tema: "Conversación espontánea",
+        plantillas: [
+          { f: "Speaking of ___, ...", e: "Speaking of food, have you tried the new place?" },
+          { f: "That's way better than ___.", e: "That's way better than what I expected." },
+          { f: "I'd say it's the best ___ I've ever ___.", e: "I'd say it's the best pizza I've ever had." }
+        ],
+        grabacion: "Simula una conversación comparando experiencias (restaurantes, películas, viajes). 90 segundos."
+      },
+      sab: {
+        nombre: "Sábado", tiempo: "60 min", tema: "TRABAJO + libro",
+        plantillas: [
+          { f: "My current role is more ___ than my previous one.", e: "My current role is more demanding than my previous one." },
+          { f: "The most challenging part of my job is ___.", e: "The most challenging part of my job is deadlines." },
+          { f: "___ isn't as ___ as ___.", e: "This project isn't as complex as the last one." }
+        ],
+        libro: "📘 VOCABULARIO (EViU) Un. 36 (repaso): Duties & responsibilities ('I'm in charge of...', 'I'm responsible for...'). Escribe 3 plantillas propias.",
+        grabacion: "Compara tu trabajo actual con uno anterior: tareas, presión, equipo. 90 segundos."
+      },
+      dom: {
+        nombre: "Domingo", tiempo: "60 min", tema: "Base semana siguiente + repaso",
+        libro: "📕 GRAMÁTICA (EGiU) base de la S5 → Un. 19-25: Future forms. Lee, haz ejercicios y escribe 3 plantillas propias.",
+        grabacion: "GRABACIÓN LARGA (3-4 min): compara tu semana con la pasada y describe tu lugar favorito."
+      }
+    }
+  },
+  {
+    n: 5,
+    tema: "Planes y decisiones",
+    gramatica: "Futuro: going to, will, might",
+    libroDom: "📕 GRAMÁTICA (domingo, EGiU) → base de la S6: Un. 15 · Past perfect",
+    satLibro: "📘 VOCABULARIO (sábado, EViU): Un. 39 (repaso) + 100 · Projects & abbreviations",
+    podcast: "6 Minute Grammar (BBC) - Future",
+    video: { id: "jcAX1RtKq3U", titulo: "Talking about the future - 6 Minute Grammar" },
+    dias: {
+      lun: {
+        nombre: "Lunes", tiempo: "30 min", tema: "Planes y decisiones",
+        plantillas: [
+          { f: "I'm going to ___ because ___.", e: "I'm going to learn guitar because it's my dream." },
+          { f: "If it rains, I'll ___.", e: "If it rains, I'll stay home and watch a film." },
+          { f: "I might ___ or I might ___.", e: "I might go out or I might just relax." }
+        ],
+        grabacion: "Habla de 2 planes seguros y 2 posibilidades futuras. 60-90 segundos."
+      },
+      mar: {
+        nombre: "Martes", tiempo: "30 min", tema: "Futuro",
+        plantillas: [
+          { f: "This time next week, I'll be ___.", e: "This time next week, I'll be on holiday." },
+          { f: "I'll probably ___ at the weekend.", e: "I'll probably visit my parents at the weekend." },
+          { f: "We're going to ___ as soon as ___.", e: "We're going to book the tickets as soon as we get paid." }
+        ],
+        grabacion: "Habla de la próxima semana: qué estarás haciendo y qué harás. 60-90 segundos."
+      },
+      mie: {
+        nombre: "Miércoles", tiempo: "30 min", tema: "Opinar",
+        plantillas: [
+          { f: "In the long run, ___.", e: "In the long run, this decision will pay off." },
+          { f: "I'm not convinced that ___.", e: "I'm not convinced that working longer is better." },
+          { f: "It's worth it because ___.", e: "It's worth it because you learn so much." }
+        ],
+        grabacion: "Da tu opinión: ¿es mejor planificar todo o improvisar? 90 segundos."
+      },
+      jue: {
+        nombre: "Jueves", tiempo: "30 min", tema: "Planes",
+        plantillas: [
+          { f: "Before I ___, I'll ___.", e: "Before I leave, I'll clean the house." },
+          { f: "I can't wait to ___.", e: "I can't wait to see you." },
+          { f: "We'll see how it goes.", e: "We'll see how it goes - fingers crossed!" }
+        ],
+        grabacion: "Habla de algo que esperas con ganas y de un plan con condiciones. 60-90 segundos."
+      },
+      vie: {
+        nombre: "Viernes", tiempo: "30 min", tema: "Conversación espontánea",
+        plantillas: [
+          { f: "Are you doing anything ___?", e: "Are you doing anything special this weekend?" },
+          { f: "I was thinking we could ___.", e: "I was thinking we could meet for coffee." },
+          { f: "Count me in! / I'll let you know.", e: "Count me in! What time?" }
+        ],
+        grabacion: "Simula quedar con alguien: propones plan, pregunta y confirma. 90 segundos."
+      },
+      sab: {
+        nombre: "Sábado", tiempo: "60 min", tema: "TRABAJO + libro",
+        plantillas: [
+          { f: "We're going to ___ next quarter.", e: "We're going to launch the new line next quarter." },
+          { f: "The project is due ___ and we'll ___.", e: "The project is due in March and we'll deliver on time." },
+          { f: "We're planning to ___.", e: "We're planning to expand the team." }
+        ],
+        libro: "📘 VOCABULARIO (EViU) Un. 39 (repaso) + Un. 100: Companies / Abbreviations. Lee, haz ejercicios, escribe 3 plantillas propias.",
+        grabacion: "Habla de los planes de tu proyecto actual: fechas, próximos pasos, objetivos. 90 segundos."
+      },
+      dom: {
+        nombre: "Domingo", tiempo: "60 min", tema: "Base semana siguiente + repaso",
+        libro: "📕 GRAMÁTICA (EGiU) base de la S6 → Un. 15: Past perfect. Lee, haz ejercicios y escribe 3 plantillas propias.",
+        grabacion: "GRABACIÓN LARGA (3-4 min): cuenta tus planes para el próximo mes y para el próximo año."
+      }
+    }
+  },
+  {
+    n: 6,
+    tema: "Contar historias (avanzado)",
+    gramatica: "Past Perfect + conectores",
+    libroDom: "📕 GRAMÁTICA (domingo, EGiU) → base de la S7: Un. 33-34 + 35 · should / I'd better",
+    satLibro: "📘 VOCABULARIO (sábado, EViU): Un. 94 · Reason and result",
+    podcast: "6 Minute Grammar (BBC) - Past Perfect",
+    video: { id: "vyvGJrB7WNM", titulo: "The past perfect tense - 6 Minute Grammar" },
+    dias: {
+      lun: {
+        nombre: "Lunes", tiempo: "30 min", tema: "Historias",
+        plantillas: [
+          { f: "I had already ___ when ___.", e: "I had already eaten when she called." },
+          { f: "By the time ___, I had ___.", e: "By the time I arrived, the meeting had started." },
+          { f: "It was the first time I had ___.", e: "It was the first time I had given a presentation in English." }
+        ],
+        grabacion: "Cuenta una historia donde algo ya había pasado antes de que ocurriera otra cosa. 90 segundos."
+      },
+      mar: {
+        nombre: "Martes", tiempo: "30 min", tema: "Historias",
+        plantillas: [
+          { f: "As soon as ___, I ___.", e: "As soon as I got home, I fell asleep." },
+          { f: "Before ___, he had ___.", e: "Before the trip, he had never flown." },
+          { f: "After I had ___, I felt ___.", e: "After I had apologized, I felt much better." }
+        ],
+        grabacion: "Cuenta una historia con secuencia temporal usando 'as soon as', 'before' y 'after'. 90 segundos."
+      },
+      mie: {
+        nombre: "Miércoles", tiempo: "30 min", tema: "Opinar",
+        plantillas: [
+          { f: "Looking back, I think ___.", e: "Looking back, I think I should have asked for help." },
+          { f: "If I had known, I would have ___.", e: "If I had known, I would have arrived earlier." },
+          { f: "In hindsight, ___.", e: "In hindsight, it was the right decision." }
+        ],
+        grabacion: "Reflexiona sobre una decisión pasada: qué habrías hecho diferente. 90 segundos."
+      },
+      jue: {
+        nombre: "Jueves", tiempo: "30 min", tema: "Planes",
+        plantillas: [
+          { f: "Once I've ___, I'll ___.", e: "Once I've saved enough, I'll travel." },
+          { f: "I'm going to make sure I ___ this time.", e: "I'm going to make sure I leave earlier this time." },
+          { f: "Next time, I'll ___ earlier.", e: "Next time, I'll book the tickets earlier." }
+        ],
+        grabacion: "Habla de lecciones aprendidas y de qué harás diferente la próxima vez. 60-90 segundos."
+      },
+      vie: {
+        nombre: "Viernes", tiempo: "30 min", tema: "Conversación espontánea",
+        plantillas: [
+          { f: "Guess what? I ___.", e: "Guess what? I won two tickets!" },
+          { f: "You should have been there!", e: "You should have been there - it was amazing!" },
+          { f: "It had already ___ by the time I ___.", e: "It had already finished by the time I arrived." }
+        ],
+        grabacion: "Simula contarle una historia divertida a alguien. 90 segundos."
+      },
+      sab: {
+        nombre: "Sábado", tiempo: "60 min", tema: "TRABAJO + libro",
+        plantillas: [
+          { f: "We had a problem with ___.", e: "We had a problem with the delivery schedule." },
+          { f: "It turned out that ___ had ___.", e: "It turned out that the data had been corrupted." },
+          { f: "We solved it by ___.", e: "We solved it by re-running the analysis." }
+        ],
+        libro: "📘 VOCABULARIO (EViU) Un. 94: Reason and result. Lee, haz ejercicios, escribe 3 plantillas propias.",
+        grabacion: "Cuenta un problema laboral reciente: qué pasó, por qué y cómo lo resolviste. 90 segundos."
+      },
+      dom: {
+        nombre: "Domingo", tiempo: "60 min", tema: "Base semana siguiente + repaso",
+        libro: "📕 GRAMÁTICA (EGiU) base de la S7 → Un. 33-34 + 35: should / I'd better. Lee, haz ejercicios y escribe 3 plantillas propias.",
+        grabacion: "GRABACIÓN LARGA (3-4 min): cuenta la mejor historia de tu semana con detalle temporal."
+      }
+    }
+  },
+  {
+    n: 7,
+    tema: "Consejos e instrucciones",
+    gramatica: "should, would, imperativo",
+    libroDom: "📕 GRAMÁTICA (domingo, EGiU) → base de la S8: Un. 37 + 26 · Requests",
+    satLibro: "📘 VOCABULARIO (sábado, EViU): Un. 96 (+38 repaso) · Filling in forms / The workplace",
+    podcast: "6 Minute Grammar (BBC) - should",
+    video: { id: "P6R1V2uQM4M", titulo: "Should: The Grammar Gameshow episode 26" },
+    dias: {
+      lun: {
+        nombre: "Lunes", tiempo: "30 min", tema: "Consejos",
+        plantillas: [
+          { f: "You should ___.", e: "You should rest before the exam." },
+          { f: "If I were you, I'd ___.", e: "If I were you, I'd take the train." },
+          { f: "Don't forget to ___.", e: "Don't forget to call your mom." }
+        ],
+        grabacion: "Da 3 consejos a un amigo que empieza a aprender inglés. 60-90 segundos."
+      },
+      mar: {
+        nombre: "Martes", tiempo: "30 min", tema: "Instrucciones",
+        plantillas: [
+          { f: "First, you need to ___.", e: "First, you need to mix the ingredients." },
+          { f: "Make sure you ___ before ___.", e: "Make sure you check the map before leaving." },
+          { f: "Don't ___ without ___.", e: "Don't start without checking the weather." }
+        ],
+        grabacion: "Explica cómo hacer algo simple (receta, ruta, instalación). 90 segundos."
+      },
+      mie: {
+        nombre: "Miércoles", tiempo: "30 min", tema: "Opinar",
+        plantillas: [
+          { f: "You'd better ___.", e: "You'd better book a table in advance." },
+          { f: "I'd strongly recommend ___.", e: "I'd strongly recommend learning with podcasts." },
+          { f: "It's a good idea to ___.", e: "It's a good idea to review every week." }
+        ],
+        grabacion: "Da consejos sobre hábitos saludables. Usa las 3 plantillas. 90 segundos."
+      },
+      jue: {
+        nombre: "Jueves", tiempo: "30 min", tema: "Planes",
+        plantillas: [
+          { f: "We should probably ___ soon.", e: "We should probably book the tickets soon." },
+          { f: "I'd better ___ before it's too late.", e: "I'd better renew my passport before it's too late." },
+          { f: "Let's agree to ___.", e: "Let's agree to meet twice a month." }
+        ],
+        grabacion: "Habla de 3 cosas que deberías hacer pronto y cuándo las harás. 60-90 segundos."
+      },
+      vie: {
+        nombre: "Viernes", tiempo: "30 min", tema: "Conversación espontánea",
+        plantillas: [
+          { f: "You really should try ___.", e: "You really should try the new bakery." },
+          { f: "I wouldn't ___ if I were you.", e: "I wouldn't miss that concert if I were you." },
+          { f: "Let me give you a tip: ___.", e: "Let me give you a tip: go early." }
+        ],
+        grabacion: "Simula recomendar un lugar o un plan a un amigo. 90 segundos."
+      },
+      sab: {
+        nombre: "Sábado", tiempo: "60 min", tema: "TRABAJO + libro",
+        plantillas: [
+          { f: "First, you need to ___.", e: "First, you need to log into the system." },
+          { f: "Make sure you ___ before ___.", e: "Make sure you save the file before closing it." },
+          { f: "Don't ___ without ___.", e: "Don't submit the report without reviewing it." }
+        ],
+        libro: "📘 VOCABULARIO (EViU) Un. 96 (+38 repaso): Filling in forms / The workplace. Lee, haz ejercicios, escribe 3 plantillas propias.",
+        grabacion: "Explica a un colega cómo hacer un proceso sencillo de tu trabajo. 90 segundos."
+      },
+      dom: {
+        nombre: "Domingo", tiempo: "60 min", tema: "Base semana siguiente + repaso",
+        libro: "📕 GRAMÁTICA (EGiU) base de la S8 → Un. 37 + 26: Requests. Lee, haz ejercicios y escribe 3 plantillas propias.",
+        grabacion: "GRABACIÓN LARGA (3-4 min): da consejos sobre un tema y explica cómo hacer algo paso a paso."
+      }
+    }
+  },
+  {
+    n: 8,
+    tema: "Peticiones con cortesía",
+    gramatica: "can, could, may, would",
+    libroDom: "📕 GRAMÁTICA (domingo, EGiU) → base de la S9: Un. 38-39 · Conditionals 1 & 2",
+    satLibro: "📘 VOCABULARIO (sábado, EViU): Un. 66 · Making requests",
+    podcast: "6 Minute Grammar (BBC) - can/could",
+    video: { id: "tbru3bW2kVE", titulo: "Using 'can', 'could', 'be able to' and 'manage to' - 6 Minute Grammar" },
+    dias: {
+      lun: {
+        nombre: "Lunes", tiempo: "30 min", tema: "Peticiones",
+        plantillas: [
+          { f: "Could you possibly ___?", e: "Could you possibly send me the file?" },
+          { f: "Would you mind ___?", e: "Would you mind closing the window?" },
+          { f: "I was wondering if you could ___.", e: "I was wondering if you could help me with this." }
+        ],
+        grabacion: "Haz 3 peticiones con cortesía: a un colega, a un amigo y en un restaurante. 60-90 segundos."
+      },
+      mar: {
+        nombre: "Martes", tiempo: "30 min", tema: "Permisos",
+        plantillas: [
+          { f: "May I ___?", e: "May I ask a quick question?" },
+          { f: "Is it okay if I ___?", e: "Is it okay if I leave a bit earlier today?" },
+          { f: "Would it be possible to ___?", e: "Would it be possible to have a day off next week?" }
+        ],
+        grabacion: "Pide permiso para 3 cosas en situaciones formales e informales. 60-90 segundos."
+      },
+      mie: {
+        nombre: "Miércoles", tiempo: "30 min", tema: "Opinar",
+        plantillas: [
+          { f: "I might be wrong, but I think ___.", e: "I might be wrong, but I think it's worth trying." },
+          { f: "Correct me if I'm wrong, but ___.", e: "Correct me if I'm wrong, but the deadline is Friday." },
+          { f: "I'd say it's a matter of ___.", e: "I'd say it's a matter of priority." }
+        ],
+        grabacion: "Opina con humildad sobre un tema usando 'I might be wrong'. 90 segundos."
+      },
+      jue: {
+        nombre: "Jueves", tiempo: "30 min", tema: "Planes",
+        plantillas: [
+          { f: "Could we ___ sometime next week?", e: "Could we meet sometime next week?" },
+          { f: "I'd love to, but I'm afraid I ___.", e: "I'd love to, but I'm afraid I'm busy on Tuesday." },
+          { f: "How about ___?", e: "How about Thursday at 5?" }
+        ],
+        grabacion: "Propón planes con cortesía y responde a una invitación. 60-90 segundos."
+      },
+      vie: {
+        nombre: "Viernes", tiempo: "30 min", tema: "Conversación espontánea",
+        plantillas: [
+          { f: "Would you like to ___?", e: "Would you like to grab a coffee sometime?" },
+          { f: "I'd appreciate it if you could ___.", e: "I'd appreciate it if you could let me know." },
+          { f: "No worries if not!", e: "No worries if not, I understand." }
+        ],
+        grabacion: "Simula invitar a alguien y manejar una negativa amable. 90 segundos."
+      },
+      sab: {
+        nombre: "Sábado", tiempo: "60 min", tema: "TRABAJO + libro",
+        plantillas: [
+          { f: "Could you please ___?", e: "Could you please share the minutes of the meeting?" },
+          { f: "Would you mind ___?", e: "Would you mind reviewing my draft?" },
+          { f: "I'd appreciate it if you could ___.", e: "I'd appreciate it if you could confirm by Friday." }
+        ],
+        libro: "📘 VOCABULARIO (EViU) Un. 66: Making requests. Lee, haz ejercicios, escribe 3 plantillas propias.",
+        grabacion: "Haz 3 peticiones corteses de oficina: una por email, una en reunión y una de pasillo. 90 segundos."
+      },
+      dom: {
+        nombre: "Domingo", tiempo: "60 min", tema: "Base semana siguiente + repaso",
+        libro: "📕 GRAMÁTICA (EGiU) base de la S9 → Un. 38-39: Conditionals 1 & 2. Lee, haz ejercicios y escribe 3 plantillas propias.",
+        grabacion: "GRABACIÓN LARGA (3-4 min): cuenta tu semana con foco en peticiones y permisos que pediste o te pidieron."
+      }
+    }
+  },
+  {
+    n: 9,
+    tema: "Condiciones e hipótesis",
+    gramatica: "First & Second Conditional",
+    libroDom: "📕 GRAMÁTICA (domingo, EGiU) → base de la S10: Un. 47-48 · Reported speech",
+    satLibro: "📘 VOCABULARIO (sábado, EViU): Un. 40 (repaso) + 97 · Money & finance / Essays & reports",
+    podcast: "6 Minute Grammar (BBC) - Conditionals",
+    video: { id: "8VETylIxyhw", titulo: "The first conditional - 6 Minute Grammar" },
+    dias: {
+      lun: {
+        nombre: "Lunes", tiempo: "30 min", tema: "Condicional 1",
+        plantillas: [
+          { f: "If I have time, I'll ___.", e: "If I have time, I'll visit you." },
+          { f: "Unless ___, I won't ___.", e: "Unless it stops raining, I won't go out." },
+          { f: "If you ___, you'll ___.", e: "If you practice daily, you'll improve fast." }
+        ],
+        grabacion: "Habla de 3 planes condicionados a algo ('si pasa X, haré Y'). 60-90 segundos."
+      },
+      mar: {
+        nombre: "Martes", tiempo: "30 min", tema: "Condicional 2",
+        plantillas: [
+          { f: "If I had more money, I would ___.", e: "If I had more money, I would travel more." },
+          { f: "If I were you, I'd ___.", e: "If I were you, I'd take that job." },
+          { f: "I would ___ if I had ___.", e: "I would move abroad if I had the chance." }
+        ],
+        grabacion: "Hipotetiza: si tuvieras más tiempo, dinero o libertad, ¿qué harías? 90 segundos."
+      },
+      mie: {
+        nombre: "Miércoles", tiempo: "30 min", tema: "Opinar",
+        plantillas: [
+          { f: "If you ask me, ___.", e: "If you ask me, it's overrated." },
+          { f: "I'd be surprised if ___.", e: "I'd be surprised if they said no." },
+          { f: "What would you do if ___?", e: "What would you do if you won the lottery?" }
+        ],
+        grabacion: "Opina hipotéticamente: ¿qué harías si fueras alcaldesa de tu ciudad? 3 ideas. 90 segundos."
+      },
+      jue: {
+        nombre: "Jueves", tiempo: "30 min", tema: "Planes",
+        plantillas: [
+          { f: "If everything goes well, we'll ___.", e: "If everything goes well, we'll finish early." },
+          { f: "In case it rains, I'll ___.", e: "In case it rains, I'll bring an umbrella." },
+          { f: "As long as ___, I'm happy.", e: "As long as I have coffee, I'm happy." }
+        ],
+        grabacion: "Habla de planes con condiciones y excepciones. 60-90 segundos."
+      },
+      vie: {
+        nombre: "Viernes", tiempo: "30 min", tema: "Conversación espontánea",
+        plantillas: [
+          { f: "If I told you ___, you wouldn't believe me.", e: "If I told you what happened, you wouldn't believe me." },
+          { f: "What would you do if you were in my shoes?", e: "What would you do if you were in my shoes?" },
+          { f: "If it weren't for ___, I'd ___.", e: "If it weren't for my sister, I'd be lost." }
+        ],
+        grabacion: "Simula una conversación hipotética con un amigo. 90 segundos."
+      },
+      sab: {
+        nombre: "Sábado", tiempo: "60 min", tema: "TRABAJO + libro",
+        plantillas: [
+          { f: "If we delay the deadline, we'll ___.", e: "If we delay the deadline, we'll miss the budget." },
+          { f: "If I were the project manager, I'd ___.", e: "If I were the project manager, I'd hire more staff." },
+          { f: "Unless we ___, we won't ___.", e: "Unless we approve the budget, we won't start." }
+        ],
+        libro: "📘 VOCABULARIO (EViU) Un. 40 (repaso) + Un. 97: Money & finance / Essays & reports. Lee, haz ejercicios, escribe 3 plantillas propias.",
+        grabacion: "Hipotetiza sobre decisiones laborales: qué pasaría si cambias algo y qué harías tú. 90 segundos."
+      },
+      dom: {
+        nombre: "Domingo", tiempo: "60 min", tema: "Base semana siguiente + repaso",
+        libro: "📕 GRAMÁTICA (EGiU) base de la S10 → Un. 47-48: Reported speech. Lee, haz ejercicios y escribe 3 plantillas propias.",
+        grabacion: "GRABACIÓN LARGA (3-4 min): usa condicionales para hablar de tus planes y de una decisión laboral."
+      }
+    }
+  },
+  {
+    n: 10,
+    tema: "Reportar y transmitir",
+    gramatica: "Reported Speech",
+    libroDom: "📕 GRAMÁTICA (domingo, EGiU) → base de la S11: Un. 42-44 (+45) · Passive voice",
+    satLibro: "📘 VOCABULARIO (sábado, EViU): Un. 97 (repaso) + 99 · Reports / Informal emails",
+    podcast: "6 Minute Grammar (BBC) - Reported Speech",
+    video: { id: "L-wTVCByxzk", titulo: "How to use reported speech - 6 Minute Grammar" },
+    dias: {
+      lun: {
+        nombre: "Lunes", tiempo: "30 min", tema: "Reportar",
+        plantillas: [
+          { f: "She said that ___.", e: "She said that the meeting was moved." },
+          { f: "He told me to ___.", e: "He told me to wait outside." },
+          { f: "I asked her if/whether ___.", e: "I asked her if she was coming." }
+        ],
+        grabacion: "Cuenta qué te dijo alguien ayer: 'dijo que...', 'me dijo que...', 'le pregunté si...'. 90 segundos."
+      },
+      mar: {
+        nombre: "Martes", tiempo: "30 min", tema: "Reportar",
+        plantillas: [
+          { f: "They announced that ___.", e: "They announced that the store would close." },
+          { f: "She mentioned that ___.", e: "She mentioned that she was looking for a new job." },
+          { f: "I reminded him to ___.", e: "I reminded him to bring the documents." }
+        ],
+        grabacion: "Reporta 3 mensajes que recibiste esta semana. 90 segundos."
+      },
+      mie: {
+        nombre: "Miércoles", tiempo: "30 min", tema: "Opinar",
+        plantillas: [
+          { f: "People say that ___, but ___.", e: "People say that money is everything, but it's not." },
+          { f: "I heard that ___.", e: "I heard that they're opening a new cinema." },
+          { f: "Apparently, ___.", e: "Apparently, the weather will be bad tomorrow." }
+        ],
+        grabacion: "Repite rumores y opiniones ajenas usando 'people say', 'I heard', 'apparently'. 90 segundos."
+      },
+      jue: {
+        nombre: "Jueves", tiempo: "30 min", tema: "Planes",
+        plantillas: [
+          { f: "He said he would ___.", e: "He said he would call me back." },
+          { f: "She told me she was going to ___.", e: "She told me she was going to quit." },
+          { f: "They promised they'd ___.", e: "They promised they'd send the invoice." }
+        ],
+        grabacion: "Reporta planes futuros que te contaron. 60-90 segundos."
+      },
+      vie: {
+        nombre: "Viernes", tiempo: "30 min", tema: "Conversación espontánea",
+        plantillas: [
+          { f: "Did you hear about ___?", e: "Did you hear about the new policy?" },
+          { f: "She told me to tell you that ___.", e: "She told me to tell you that she's running late." },
+          { f: "I won't lie, he said ___.", e: "I won't lie, he said it wasn't easy." }
+        ],
+        grabacion: "Simula pasar un mensaje de otra persona a un amigo. 90 segundos."
+      },
+      sab: {
+        nombre: "Sábado", tiempo: "60 min", tema: "TRABAJO + libro",
+        plantillas: [
+          { f: "The manager said that ___.", e: "The manager said that the deadline was extended." },
+          { f: "She mentioned that ___.", e: "She mentioned that we should hire a consultant." },
+          { f: "I reported that ___.", e: "I reported that the tests had passed." }
+        ],
+        libro: "📘 VOCABULARIO (EViU) Un. 97 (repaso) + Un. 99: Reports / Informal emails. Lee, haz ejercicios, escribe 3 plantillas propias.",
+        grabacion: "Reporta una reunión: qué se dijo, qué se acordó y cuáles son los próximos pasos. 90 segundos."
+      },
+      dom: {
+        nombre: "Domingo", tiempo: "60 min", tema: "Base semana siguiente + repaso",
+        libro: "📕 GRAMÁTICA (EGiU) base de la S11 → Un. 42-44 (+45): Passive voice. Lee, haz ejercicios y escribe 3 plantillas propias.",
+        grabacion: "GRABACIÓN LARGA (3-4 min): reporta una conversación completa que tuviste esta semana."
+      }
+    }
+  },
+  {
+    n: 11,
+    tema: "Describir procesos",
+    gramatica: "Passive Voice",
+    libroDom: "📕 GRAMÁTICA (domingo, EGiU) → base de la S12: Study Guide (hazlo y apunta lo que falles)",
+    satLibro: "📘 VOCABULARIO (sábado, EViU): Un. 94 (repaso) + 38 · Processes / The workplace",
+    podcast: "6 Minute Grammar (BBC) - Passive Voice",
+    video: { id: "38QqDrckyxM", titulo: "How to use the active and passive voice - 6 Minute Grammar" },
+    dias: {
+      lun: {
+        nombre: "Lunes", tiempo: "30 min", tema: "Procesos",
+        plantillas: [
+          { f: "It was built in ___.", e: "This bridge was built in 1995." },
+          { f: "___ are made of ___.", e: "These shirts are made of cotton." },
+          { f: "It has been ___.", e: "The project has been approved." }
+        ],
+        grabacion: "Describe un objeto o edificio famoso usando pasiva. 90 segundos."
+      },
+      mar: {
+        nombre: "Martes", tiempo: "30 min", tema: "Procesos",
+        plantillas: [
+          { f: "First, ___ is prepared.", e: "First, the dough is prepared." },
+          { f: "Then, it's ___ for ___.", e: "Then, it's baked for 30 minutes." },
+          { f: "Finally, it's ___ to ___.", e: "Finally, it's served with sauce." }
+        ],
+        grabacion: "Explica cómo se hace algo (pan, café, una reserva). Usa pasiva. 90 segundos."
+      },
+      mie: {
+        nombre: "Miércoles", tiempo: "30 min", tema: "Opinar",
+        plantillas: [
+          { f: "It's said that ___.", e: "It's said that practice makes perfect." },
+          { f: "It's believed that ___.", e: "It's believed that the deal will close soon." },
+          { f: "Something has to be done about ___.", e: "Something has to be done about pollution." }
+        ],
+        grabacion: "Opina usando pasiva impersonal: 'se dice que...', 'se cree que...'. 90 segundos."
+      },
+      jue: {
+        nombre: "Jueves", tiempo: "30 min", tema: "Planes",
+        plantillas: [
+          { f: "The results will be ___ by ___.", e: "The results will be announced by Friday." },
+          { f: "It's going to be ___ next month.", e: "It's going to be released next month." },
+          { f: "Everything needs to be ___ before ___.", e: "Everything needs to be ready before the launch." }
+        ],
+        grabacion: "Habla de planes futuros usando pasiva ('será hecho', 'se hará'). 60-90 segundos."
+      },
+      vie: {
+        nombre: "Viernes", tiempo: "30 min", tema: "Conversación espontánea",
+        plantillas: [
+          { f: "Have you ever been ___?", e: "Have you ever been interviewed on TV?" },
+          { f: "I was told that ___.", e: "I was told that the store is closing." },
+          { f: "It's not something you see every day.", e: "It's not something you see every day." }
+        ],
+        grabacion: "Simula conversar usando pasiva para experiencias ('I was...', 'I've been...'). 90 segundos."
+      },
+      sab: {
+        nombre: "Sábado", tiempo: "60 min", tema: "TRABAJO + libro",
+        plantillas: [
+          { f: "The report is prepared by ___.", e: "The report is prepared by the design team." },
+          { f: "The designs were approved last week.", e: "The designs were approved last week." },
+          { f: "Deliverables are reviewed every ___.", e: "Deliverables are reviewed every month." }
+        ],
+        libro: "📘 VOCABULARIO (EViU) Un. 94 (repaso) + Un. 38: Reason & result / The workplace. Lee, haz ejercicios, escribe 3 plantillas propias.",
+        grabacion: "Describe cómo se hace algo en tu trabajo usando pasiva. 90 segundos."
+      },
+      dom: {
+        nombre: "Domingo", tiempo: "60 min", tema: "Base semana siguiente + repaso",
+        libro: "📕 GRAMÁTICA (EGiU) base de la S12 → Study Guide (pág. 326): hazlo y apunta tus 2 unidades más difíciles; repásalas el lunes.",
+        grabacion: "GRABACIÓN LARGA (3-4 min): describe tu trabajo y un proceso completo usando pasiva."
+      }
+    }
+  },
+  {
+    n: 12,
+    tema: "Repaso general + simulación",
+    gramatica: "Repaso de todo el curso",
+    libroDom: "📕 GRAMÁTICA (domingo, EGiU): Study Guide + tus 5 unidades más difíciles",
+    satLibro: "📘 VOCABULARIO (sábado, EViU): Repasa tus unidades 35-40, 66 y 94",
+    podcast: "Cualquiera de los anteriores - repite uno",
+    video: { id: "gYq-ilAbxDM", titulo: "BOX SET: 55 English lessons in 55 minutes! Grammar & Vocabulary Mega-class" },
+    dias: {
+      lun: {
+        nombre: "Lunes", tiempo: "30 min", tema: "Repaso de rutina",
+        plantillas: [
+          { f: "Repasa las 3 plantillas de la Semana 1 (Lunes) en voz alta.", e: "In the morning, I usually ___ before ___." },
+          { f: "Repasa las 3 plantillas de la Semana 2 (Lunes) en voz alta.", e: "She's very ___ and quite ___." },
+          { f: "Crea 1 frase nueva combinando ambas.", e: "Crea tu propia frase mezclando las dos estructuras." }
+        ],
+        grabacion: "Elige un tema de la semana 1 y habla 2 minutos sin guion."
+      },
+      mar: {
+        nombre: "Martes", tiempo: "30 min", tema: "Repaso de historias",
+        plantillas: [
+          { f: "Repasa plantillas de Semanas 2 y 6 (historias).", e: "I was ___ when ___ / I had already ___ when ___." },
+          { f: "Repasa plantillas de Semana 10 (reportar).", e: "She said that ___." },
+          { f: "Crea 1 historia corta que use las tres.", e: "Inventa una mini-historia con las tres estructuras." }
+        ],
+        grabacion: "Cuenta una historia de 2 minutos usando pasado, pasivo y reporte."
+      },
+      mie: {
+        nombre: "Miércoles", tiempo: "30 min", tema: "Repaso de opiniones",
+        plantillas: [
+          { f: "Repasa plantillas de opinión (semanas 1, 3, 7, 9).", e: "In my opinion... / I might be wrong, but..." },
+          { f: "Repasa condicionales de la semana 9.", e: "If I had more money, I would ___." },
+          { f: "Da 1 opinión usando 3 estructuras distintas.", e: "Da tu opinión de 3 formas diferentes." }
+        ],
+        grabacion: "Opina sobre un tema durante 2 minutos usando 3 formas distintas de expresar opinión."
+      },
+      jue: {
+        nombre: "Jueves", tiempo: "30 min", tema: "Repaso de planes",
+        plantillas: [
+          { f: "Repasa plantillas de futuro (semanas 1, 5).", e: "I'm going to ___ / This time next week, I'll be ___." },
+          { f: "Repasa peticiones corteses (semana 8).", e: "Could you possibly ___?" },
+          { f: "Planea algo futuro y pide ayuda cortésmente.", e: "Planea algo y pide ayuda con cortesía." }
+        ],
+        grabacion: "Habla de tus planes del próximo mes y pide 2 favores cortésmente."
+      },
+      vie: {
+        nombre: "Viernes", tiempo: "30 min", tema: "Conversación completa",
+        plantillas: [
+          { f: "Elige 3 plantillas favoritas del curso.", e: "Las que más te han servido." },
+          { f: "Simula una conversación completa usándolas.", e: "Saluda, pregunta, opina, planea y despídete." },
+          { f: "GRÁBATE la conversación completa.", e: "2 minutos de conversación simulada." }
+        ],
+        grabacion: "Simula una conversación completa de 2 minutos mezclando todo lo aprendido."
+      },
+      sab: {
+        nombre: "Sábado", tiempo: "60 min", tema: "TRABAJO + simulación",
+        plantillas: [
+          { f: "Preséntate profesionalmente.", e: "I work as a ___ and I'm responsible for ___." },
+          { f: "Habla de un problema y su solución.", e: "We had a problem with ___ / We solved it by ___." },
+          { f: "Cierra con planes futuros.", e: "We're going to ___ next quarter." }
+        ],
+        libro: "📘 VOCABULARIO (EViU): Repasa tus unidades 35-40, 66 y 94. Escribe 3 plantillas propias con lo repasado.",
+        grabacion: "SIMULACIÓN FINAL (5 min): preséntate, resume tu trabajo, habla de un proyecto, un problema, tu opinión y tus planes."
+      },
+      dom: {
+        nombre: "Domingo", tiempo: "60 min", tema: "Cierre del ciclo",
+        libro: "📕 GRAMÁTICA (EGiU): Study Guide (pág. 326) + repasa tus 5 unidades más difíciles.",
+        grabacion: "GRABACIÓN LARGA (4-5 min): cuenta tu semana y qué has logrado en estas 12 semanas. Felicítate."
+      }
+    }
+  }
+];
+
+// ===================== RENDER =====================
+const WEEKS_IN_SITE = 12;
+
+function renderWeeks() {
+    const selector = document.getElementById('weekSelector');
+    selector.innerHTML = '';
+    for (let i = 1; i <= WEEKS_IN_SITE; i++) {
+        const btn = document.createElement('button');
+        btn.className = 'week-btn' + (i === 1 ? ' active' : '');
+        btn.textContent = 'S' + i;
+        btn.onclick = () => showWeek(i);
+        btn.id = 'weekBtn' + i;
+        selector.appendChild(btn);
+    }
+}
+
+function buildWeek(wk) {
+    const container = document.createElement('div');
+    container.className = 'week-content';
+    container.id = 'week' + wk.n;
+
+    const summary = document.createElement('div');
+    summary.className = 'summary-box';
+    summary.innerHTML = '<h3>Semana ' + wk.n + ' de 12</h3>'
+        + '<div class="theme">Tema: <b>' + wk.tema + '</b></div>'
+        + '<div class="focus">Gramática: ' + wk.gramatica + '</div>'
+        + '<div class="focus">' + wk.libroDom + '</div>'
+        + '<div class="focus">' + wk.satLibro + '</div>'
+        + '<div class="focus">Podcast shadowing: ' + wk.podcast + ' → <a href="' + PODCAST_URL + '" target="_blank" rel="noopener">Spotify</a> · <a href="' + YOUTUBE_URL + '" target="_blank" rel="noopener">YouTube</a> · <a href="' + GRAMMAR_PAGE + '" target="_blank" rel="noopener">6 Minute Grammar (BBC)</a></div>'
+        + '<div class="focus"><b>🎬 Vídeo de la semana:</b> <a href="' + VIDEO_URL + wk.video.id + '" target="_blank" rel="noopener">' + wk.video.titulo + '</a></div>'
+        + '<div class="progress-bar"><div class="progress-fill" id="progress' + wk.n + '" style="width:0%"></div></div>';
+    container.appendChild(summary);
+
+    const order = [['lun','Lunes'],['mar','Martes'],['mie','Miércoles'],['jue','Jueves'],['vie','Viernes'],['sab','Sábado'],['dom','Domingo']];
+    order.forEach(([key, label]) => {
+        const d = wk.dias[key];
+        const card = document.createElement('div');
+        card.className = 'day-card';
+        card.id = 'day-' + wk.n + '-' + key;
+
+        let html = '<div class="day-header"><span class="day-name">' + d.nombre + '</span><span class="day-time">' + d.tiempo + '</span></div>';
+
+        if (d.tema) html += '<div class="block"><div class="block-title">Tema: ' + d.tema + '</div></div>';
+
+        html += '<div class="block"><div class="block-title">1 · Shadowing (10 min)</div>'
+            + '<div class="task"><input type="checkbox" id="' + wk.n + '-' + key + '-shadow" onchange="updateProgress(' + wk.n + ')"><span class="task-text">Escucha "' + wk.podcast + '" y repite EN VOZ ALTA detrás del hablante. Vídeo de hoy: <a href="' + VIDEO_URL + wk.video.id + '" target="_blank" rel="noopener">' + wk.video.titulo + '</a> · Audio: <a href="' + PODCAST_URL + '" target="_blank" rel="noopener">Spotify</a> · <a href="' + YOUTUBE_URL + '" target="_blank" rel="noopener">Canal BBC (YouTube)</a>. Hazlo caminando, en el gym o de camino al trabajo.</span></div></div>';
+
+        if (d.plantillas) {
+            html += '<div class="block"><div class="block-title">2 · Plantillas (10 min) - memoriza 3 y crea 6 frases propias habladas</div>';
+            d.plantillas.forEach((p, i) => {
+                html += '<div class="plantilla"><div class="p-front">' + (i + 1) + '. ' + p.f + '</div><div class="p-ex">Ejemplo: ' + p.e + '</div></div>';
+            });
+            html += '<div class="task"><input type="checkbox" id="' + wk.n + '-' + key + '-plantillas" onchange="updateProgress(' + wk.n + ')"><span class="task-text">Dije las 3 plantillas + 6 frases propias EN VOZ ALTA</span></div></div>';
+        }
+
+        if (d.libro) {
+            html += '<div class="book-note"><strong>Libro:</strong> ' + d.libro + '</div>';
+            html += '<div class="task"><input type="checkbox" id="' + wk.n + '-' + key + '-libro" onchange="updateProgress(' + wk.n + ')"><span class="task-text">Terminé la unidad del libro y escribí 3 plantillas propias</span></div>';
+        }
+
+        html += '<div class="block"><div class="block-title">3 · Grabación (10 min)</div>'
+            + '<div class="grabacion"><strong>Pregunta:</strong> ' + d.grabacion + '</div>'
+            + '<div class="task"><input type="checkbox" id="' + wk.n + '-' + key + '-grabacion" onchange="updateProgress(' + wk.n + ')"><span class="task-text">Me grabé, me escuché y corregí 1 solo error</span></div></div>';
+
+        card.innerHTML = html;
+        container.appendChild(card);
+    });
+
+    const nav = document.createElement('div');
+    nav.className = 'week-nav';
+    const prev = document.createElement('button');
+    prev.className = 'nav-btn';
+    prev.textContent = '← Anterior';
+    prev.disabled = wk.n === 1;
+    prev.onclick = () => showWeek(wk.n - 1);
+    const next = document.createElement('button');
+    next.className = 'nav-btn';
+    next.textContent = 'Siguiente →';
+    next.disabled = wk.n === WEEKS_IN_SITE;
+    next.onclick = () => showWeek(wk.n + 1);
+    nav.appendChild(prev);
+    nav.appendChild(next);
+    container.appendChild(nav);
+
+    document.getElementById('weekContainer').appendChild(container);
+}
+
+function showWeek(n) {
+    document.querySelectorAll('.week-content').forEach(el => el.classList.add('hidden'));
+    const target = document.getElementById('week' + n);
+    if (target) target.classList.remove('hidden');
+    document.querySelectorAll('.week-btn').forEach((btn, i) => {
+        btn.classList.toggle('active', i + 1 === n);
+    });
+    window.scrollTo(0, 0);
+}
+
+function updateProgress(n) {
+    const tasks = document.querySelectorAll('#week' + n + ' .day-card input[type="checkbox"]');
+    let done = 0;
+    tasks.forEach(cb => {
+        const key = cb.id;
+        localStorage.setItem('gen-' + key, cb.checked ? '1' : '0');
+        if (cb.checked) done++;
+    });
+    const pct = tasks.length ? Math.round(done / tasks.length * 100) : 0;
+    const fill = document.getElementById('progress' + n);
+    if (fill) fill.style.width = pct + '%';
+    document.querySelectorAll('#week' + n + ' .day-card').forEach(card => {
+        const cbs = card.querySelectorAll('input[type="checkbox"]');
+        const all = cbs.length > 0 && Array.from(cbs).every(cb => cb.checked);
+        card.classList.toggle('completed', all);
+    });
+    updateOverview();
+}
+
+function loadState() {
+    document.querySelectorAll('.week-content .day-card input[type="checkbox"]').forEach(cb => {
+        const saved = localStorage.getItem('gen-' + cb.id);
+        if (saved === '1') cb.checked = true;
+    });
+    for (let i = 1; i <= WEEKS_IN_SITE; i++) updateProgress(i);
+}
+
+function highlightToday() {
+    const now = new Date();
+    const day = now.getDay();
+    const map = { 1: 'lun', 2: 'mar', 3: 'mie', 4: 'jue', 5: 'vie', 6: 'sab', 0: 'dom' };
+    const key = map[day];
+    if (!key) return;
+    const todayCard = document.querySelector('.week-content:not(.hidden) #day-' + 1 + '-' + key);
+    if (!todayCard) return;
+    todayCard.classList.add('today');
+}
+
+// ===================== PROGRESO GLOBAL =====================
+const DAY_ORDER = ['lun','mar','mie','jue','vie','sab','dom'];
+
+function renderOverview() {
+    const grid = document.getElementById('overviewGrid');
+    grid.innerHTML = '';
+    WEEKS.forEach(wk => {
+        const b = document.createElement('button');
+        b.className = 'overview-week';
+        b.id = 'ovWeek' + wk.n;
+        b.type = 'button';
+        b.onclick = () => showWeek(wk.n);
+        b.innerHTML = '<div class="ow-title">S' + wk.n + ' · ' + wk.tema + '</div>'
+            + '<div class="ow-pct" id="ovPct' + wk.n + '">0%</div>'
+            + '<div class="ow-bar"><div class="ow-fill" id="ovFill' + wk.n + '" style="width:0%"></div></div>';
+        grid.appendChild(b);
+    });
+}
+
+function weekDayTasks(wk) {
+    const out = [];
+    DAY_ORDER.forEach(key => {
+        const card = document.getElementById('day-' + wk.n + '-' + key);
+        if (!card) return;
+        const cbs = card.querySelectorAll('input[type="checkbox"]');
+        out.push({ done: Array.from(cbs).filter(cb => cb.checked).length, total: cbs.length });
+    });
+    return out;
+}
+
+function computeStats() {
+    const allDays = [];
+    let weeksDone = 0;
+    WEEKS.forEach(wk => {
+        const days = weekDayTasks(wk);
+        const doneDays = days.filter(d => d.total > 0 && d.done === d.total).length;
+        const complete = days.length > 0 && doneDays === days.length;
+        if (complete) weeksDone++;
+        const wkDone = days.reduce((s, d) => s + d.done, 0);
+        const wkTotal = days.reduce((s, d) => s + d.total, 0);
+        const pct = wkTotal ? Math.round(wkDone / wkTotal * 100) : 0;
+        const fill = document.getElementById('ovFill' + wk.n);
+        const pctEl = document.getElementById('ovPct' + wk.n);
+        const card = document.getElementById('ovWeek' + wk.n);
+        if (fill) fill.style.width = pct + '%';
+        if (pctEl) pctEl.textContent = pct + '%';
+        if (card) card.classList.toggle('ow-done', complete);
+        allDays.push(...days);
+    });
+    let lastCompleteIdx = -1;
+    for (let i = allDays.length - 1; i >= 0; i--) {
+        if (allDays[i].total > 0 && allDays[i].done === allDays[i].total) { lastCompleteIdx = i; break; }
+    }
+    let streak = 0;
+    for (let i = lastCompleteIdx; i >= 0; i--) {
+        if (allDays[i].total > 0 && allDays[i].done === allDays[i].total) streak++;
+        else break;
+    }
+    const completeDays = allDays.filter(d => d.total > 0 && d.done === d.total).length;
+    document.getElementById('ovDays').textContent = completeDays;
+    document.getElementById('ovStreak').textContent = streak;
+    document.getElementById('ovWeeks').textContent = weeksDone + '/' + WEEKS.length;
+}
+
+function updateOverview() { computeStats(); }
+
+// ===================== INIT =====================
+renderWeeks();
+WEEKS.forEach(wk => buildWeek(wk));
+loadState();
+renderOverview();
+updateOverview();
+highlightToday();
+</script>
+</body>
+</html>
