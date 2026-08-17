@@ -1,0 +1,2814 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Poliglota B1 - English Course</title>
+<style>
+:root{
+  --primary:#6c5ce7;--primary-dark:#5a4bd1;--secondary:#00cec9;--accent:#fd79a8;
+  --bg:#f8f9fa;--card-bg:#fff;--text:#2d3436;--text-light:#636e72;--border:#dfe6e9;
+  --success:#00b894;--danger:#d63031;--warning:#fdcb6e;--gradient:linear-gradient(135deg,#6c5ce7,#00cec9);
+  --shadow:0 4px 15px rgba(0,0,0,.1);--radius:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+a{text-decoration:none;color:var(--primary);}
+.hero{background:var(--gradient);color:#fff;padding:60px 20px 40px;text-align:center;position:relative;overflow:hidden;}
+.hero h1{font-size:2.5rem;margin-bottom:8px;text-shadow:0 2px 4px rgba(0,0,0,.2);}
+.hero p{font-size:1.1rem;opacity:.9;}
+.navbar{position:sticky;top:0;z-index:1000;background:var(--card-bg);box-shadow:0 2px 10px rgba(0,0,0,.08);padding:0 10px;overflow-x:auto;white-space:nowrap;}
+.navbar a{display:inline-block;padding:14px 16px;font-size:.9rem;font-weight:600;color:var(--text-light);transition:.2s;border-bottom:3px solid transparent;}
+.navbar a:hover,.navbar a.active{color:var(--primary);border-bottom-color:var(--primary);}
+.container{max-width:900px;margin:0 auto;padding:20px;}
+.hidden{display:none!important;}
+.session-header{background:var(--gradient);color:#fff;padding:30px;border-radius:var(--radius);margin-bottom:20px;}
+.session-header h2{font-size:1.8rem;}
+.session-header p{opacity:.9;margin-top:4px;}
+.tabs{display:flex;gap:4px;margin-bottom:20px;flex-wrap:wrap;}
+.tabs button{padding:10px 20px;border:2px solid var(--border);background:var(--card-bg);border-radius:var(--radius);cursor:pointer;font-weight:600;font-size:.9rem;transition:.2s;}
+.tabs button:hover{border-color:var(--primary);color:var(--primary);}
+.tabs button.active{background:var(--primary);color:#fff;border-color:var(--primary);}
+.tab-content{background:var(--card-bg);border-radius:var(--radius);padding:25px;box-shadow:var(--shadow);}
+.tab-content h3{color:var(--primary);margin-bottom:12px;font-size:1.3rem;}
+.tab-content h4{color:var(--text);margin:16px 0 8px;font-size:1.1rem;}
+.grammar-box{background:#f0ecfc;border-left:4px solid var(--primary);padding:16px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0;}
+.grammar-box code{background:rgba(108,92,231,.1);padding:2px 6px;border-radius:4px;font-weight:600;}
+.example{background:#e8f8f5;padding:10px 14px;border-radius:8px;margin:8px 0;font-style:italic;border-left:3px solid var(--secondary);}
+table{width:100%;border-collapse:collapse;margin:12px 0;}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+th{background:var(--primary);color:#fff;font-weight:600;}
+tr:hover{background:#f0ecfc;}
+.vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;margin:12px 0;}
+.vocab-item{background:#f8f9fa;padding:12px;border-radius:8px;border:1px solid var(--border);text-align:center;}
+.vocab-item .en{font-weight:700;color:var(--primary);font-size:1.05rem;}
+.vocab-item .es{color:var(--text-light);font-size:.9rem;margin-top:2px;}
+.exercise{background:#f8f9fa;padding:16px;border-radius:var(--radius);margin:12px 0;border:1px solid var(--border);}
+.exercise h4{margin-bottom:10px;}
+.exercise label{display:block;margin:6px 0;font-weight:500;}
+.exercise input[type="text"],.exercise select,.exercise textarea{width:100%;padding:10px;border:2px solid var(--border);border-radius:8px;font-size:.95rem;margin:4px 0 10px;transition:.2s;}
+.exercise input:focus,.exercise select:focus,.exercise textarea:focus{border-color:var(--primary);outline:none;}
+textarea{resize:vertical;min-height:80px;}
+.btn{padding:10px 24px;border:none;border-radius:var(--radius);font-weight:600;cursor:pointer;font-size:.95rem;transition:.2s;}
+.btn-primary{background:var(--primary);color:#fff;}
+.btn-primary:hover{background:var(--primary-dark);}
+.btn-success{background:var(--success);color:#fff;}
+.btn-danger{background:var(--danger);color:#fff;}
+.feedback{padding:10px;border-radius:8px;margin:8px 0;font-weight:600;}
+.feedback.correct{background:#d4edda;color:#155724;}
+.feedback.incorrect{background:#f8d7da;color:#721c24;}
+.warning-box{background:#fff3cd;border-left:4px solid var(--warning);padding:14px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0;font-weight:500;}
+.video-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--radius);margin:16px 0;}
+.video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0;border-radius:var(--radius);}
+.home-section{margin:20px 0;}
+.home-section h2{color:var(--primary);margin-bottom:16px;}
+.progress-bar-container{background:var(--border);border-radius:20px;height:12px;margin:8px 0 16px;overflow:hidden;}
+.progress-bar{height:100%;background:var(--gradient);border-radius:20px;transition:width .5s ease;width:0%;}
+.session-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;}
+.session-card{background:var(--card-bg);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);cursor:pointer;transition:.2s;border:2px solid transparent;}
+.session-card:hover{border-color:var(--primary);transform:translateY(-2px);}
+.session-card h3{color:var(--primary);margin-bottom:4px;}
+.session-card p{color:var(--text-light);font-size:.9rem;}
+.session-card .card-progress{margin-top:10px;}
+.session-card .card-progress span{font-size:.8rem;font-weight:600;color:var(--text-light);}
+.multi-choice{margin:8px 0;}
+.multi-choice option{padding:8px;}
+.warning{color:var(--danger);font-weight:600;font-size:.85rem;margin-top:4px;}
+.negative-box{background:#fff5f5;border-left:4px solid var(--danger);padding:14px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0;}
+.positive-box{background:#f0fff4;border-left:4px solid var(--success);padding:14px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0;}
+.tip{background:#eef9ff;border-left:4px solid var(--secondary);padding:12px;border-radius:0 var(--radius) var(--radius) 0;margin:10px 0;}
+.false-friends-table td:nth-child(2),.false-friends-table td:nth-child(4){font-weight:600;color:var(--danger);}
+.pronunciation-tip{background:#fdf2f8;border:1px solid #fbcfe8;border-radius:6px;padding:6px 10px;margin:4px 0;font-size:.82rem;color:#9d174d;}
+.speak-progress{font-size:.85rem;font-weight:600;color:var(--primary);margin:8px 0;}
+.exercise-group{margin:16px 0 8px;padding:8px 0;border-bottom:1px solid var(--border);}
+.exercise-group h4{color:var(--text-light);font-size:.95rem;margin-bottom:8px;}
+.classify-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:8px 0;}
+.classify-grid .item{background:var(--card-bg);padding:8px;border:2px solid var(--border);border-radius:8px;cursor:pointer;text-align:center;font-weight:500;transition:.2s;user-select:none;}
+.classify-grid .item.selected{border-color:var(--primary);background:#f0ecfc;}
+.classify-choices{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap;}
+.classify-choices .choice-btn{padding:8px 20px;border:2px solid var(--border);border-radius:var(--radius);background:var(--card-bg);font-weight:600;cursor:pointer;transition:.2s;}
+.classify-choices .choice-btn.selected{border-color:var(--primary);background:var(--primary);color:#fff;}
+@media(max-width:600px){
+  .hero h1{font-size:1.8rem;}
+  .session-cards{grid-template-columns:1fr;}
+  .vocab-grid{grid-template-columns:1fr;}
+  .tabs button{padding:8px 14px;font-size:.8rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Poliglota B1</h1>
+  <p>Intermediate English Course &mdash; 10 Sessions</p>
+</div>
+
+<nav class="navbar" id="navbar">
+  <a href="#" onclick="showSession('home')" class="active" id="nav-home">Inicio</a>
+  <a href="#" onclick="showSession(2)" id="nav-s2">S2</a>
+  <a href="#" onclick="showSession(3)" id="nav-s3">S3</a>
+  <a href="#" onclick="showSession(4)" id="nav-s4">S4</a>
+  <a href="#" onclick="showSession(5)" id="nav-s5">S5</a>
+  <a href="#" onclick="showSession(6)" id="nav-s6">S6</a>
+  <a href="#" onclick="showSession(7)" id="nav-s7">S7</a>
+  <a href="#" onclick="showSession(8)" id="nav-s8">S8</a>
+  <a href="#" onclick="showSession(9)" id="nav-s9">S9</a>
+  <a href="#" onclick="showSession(10)" id="nav-s10">S10</a>
+  <a href="#" onclick="showSession(11)" id="nav-s11">S11</a>
+</nav>
+
+<div class="container">
+
+<!-- ===================== HOME ===================== -->
+<div id="session-home" class="session">
+  <div class="home-section">
+    <h2>Tu Progreso</h2>
+    <div class="progress-bar-container"><div class="progress-bar" id="total-progress"></div></div>
+    <p id="progress-text">0% completado</p>
+  </div>
+  <div class="home-section">
+    <h2>Sesiones</h2>
+    <div class="session-cards" id="session-cards"></div>
+  </div>
+</div>
+
+<!-- ===================== S2 ===================== -->
+<div id="session-2" class="session hidden">
+  <div class="session-header"><h2>S2: Present Perfect I</h2><p>Presente perfecto &mdash; Estructura, verbos regulares e irregulares</p></div>
+  <div class="tabs"><button class="active" onclick="switchTab(this,'s2-gram')">Gramática</button><button onclick="switchTab(this,'s2-vocab')">Vocabulario</button><button onclick="switchTab(this,'s2-ex')">Ejercicios</button><button onclick="switchTab(this,'s2-speak')">Speaking</button></div>
+
+  <div id="s2-gram" class="tab-content">
+    <h3>Estructura</h3>
+    <div class="grammar-box">
+      <p><strong>Afirmativo:</strong> <code>Subject + have/has + past participle</code></p>
+      <p style="margin-top:8px;">Usamos el Present Perfect para hablar de experiencias de vida, acciones pasadas con relevancia presente, y acciones que comenzaron en el pasado y continúan.</p>
+    </div>
+    <div class="example">"I <strong>have played</strong> tennis for 2 years."</div>
+    <div class="example">"She <strong>has gone</strong> to the supermarket."</div>
+
+    <h3>Verbos Regulares</h3>
+    <p>Para los verbos regulares, simplemente agregamos <strong>-ed</strong> al final.</p>
+    <div class="example">"I <strong>have walked</strong> to school today."</div>
+    <div class="example">"They <strong>have studied</strong> English for 3 years."</div>
+
+    <h3>Participios Pasados Irregulares #1</h3>
+    <table>
+      <tr><th>Verbo en Base</th><th>Participio Pasado</th></tr>
+      <tr><td>BE</td><td>been</td></tr>
+      <tr><td>HAVE</td><td>had</td></tr>
+      <tr><td>BECOME</td><td>become</td></tr>
+      <tr><td>KNOW</td><td>known</td></tr>
+      <tr><td>BEGIN</td><td>begun</td></tr>
+      <tr><td>LEARN</td><td>learnt / learned</td></tr>
+      <tr><td>BUY</td><td>bought</td></tr>
+      <tr><td>LEAVE</td><td>left</td></tr>
+      <tr><td>COME</td><td>come</td></tr>
+      <tr><td>MAKE</td><td>made</td></tr>
+      <tr><td>DO</td><td>done</td></tr>
+      <tr><td>SAY</td><td>said</td></tr>
+      <tr><td>DRINK</td><td>drunk</td></tr>
+      <tr><td>SEE</td><td>seen</td></tr>
+      <tr><td>EAT</td><td>eaten</td></tr>
+      <tr><td>TAKE</td><td>taken</td></tr>
+      <tr><td>FIND</td><td>found</td></tr>
+      <tr><td>THINK</td><td>thought</td></tr>
+      <tr><td>GIVE</td><td>given</td></tr>
+      <tr><td>WRITE</td><td>written</td></tr>
+      <tr><td>GO</td><td>gone</td></tr>
+    </table>
+
+    <div class="video-container"><iframe src="https://www.youtube.com/embed/GxWJh9lN1rg" title="Present Perfect I" allowfullscreen></iframe></div>
+  </div>
+
+  <div id="s2-vocab" class="tab-content">
+    <h3>Vocabulario de la Sesión</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><div class="en">Played</div><div class="es">Jugó/deportó</div></div>
+      <div class="vocab-item"><div class="en">Gone</div><div class="es">Fue/ido</div></div>
+      <div class="vocab-item"><div class="en">Visited</div><div class="es">Visitó</div></div>
+      <div class="vocab-item"><div class="en">Eaten</div><div class="es">Comió</div></div>
+      <div class="vocab-item"><div class="en">Lived</div><div class="es">Vivió</div></div>
+      <div class="vocab-item"><div class="en">Experience</div><div class="es">Experiencia</div></div>
+      <div class="vocab-item"><div class="en">Supermarket</div><div class="es">Supermercado</div></div>
+      <div class="vocab-item"><div class="en">Tennis</div><div class="es">Tenis</div></div>
+      <div class="vocab-item"><div class="en">Regular verbs</div><div class="es">Verbos regulares (-ed)</div></div>
+      <div class="vocab-item"><div class="en">Irregular verbs</div><div class="es">Verbos irregulares (cambian forma)</div></div>
+    </div>
+    <div class="tip"><strong>Libros sugeridos:</strong> EGiU Units 7-10 (Present Perfect: afirmativas). EViU Units 1-3 (Experiencias y vida cotidiana).</div>
+  </div>
+
+  <div id="s2-ex" class="tab-content">
+    <h3>Ejercicio 1: Completa con have/has + participio pasado</h3>
+    <div class="exercise">
+      <label>1. I __________ (play) tennis for 2 years.
+        <input type="text" id="s2e1-1" data-answer="have played">
+      </label>
+      <label>2. She __________ (go) to the supermarket.
+        <input type="text" id="s2e1-2" data-answer="has gone">
+      </label>
+      <label>3. They __________ (be) to Paris three times.
+        <input type="text" id="s2e1-3" data-answer="have been">
+      </label>
+      <label>4. He __________ (eat) all the cake.
+        <input type="text" id="s2e1-4" data-answer="has eaten">
+      </label>
+      <label>5. We __________ (buy) a new car.
+        <input type="text" id="s2e1-5" data-answer="have bought">
+      </label>
+      <div id="s2e1-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS2Ex1()">Verificar</button>
+    </div>
+
+    <h3>Ejercicio 2: Clasifica el participio</h3>
+    <div class="exercise">
+      <p>Clasifica cada palabra como <strong>Regular</strong> o <strong>Irregular</strong>:</p>
+      <div id="s2e2-items">
+        <div class="classify-grid">
+          <div class="item" data-correct="regular" onclick="classifyItem(this)">played</div>
+          <div class="item" data-correct="irregular" onclick="classifyItem(this)">written</div>
+          <div class="item" data-correct="regular" onclick="classifyItem(this)">walked</div>
+          <div class="item" data-correct="irregular" onclick="classifyItem(this)">gone</div>
+          <div class="item" data-correct="regular" onclick="classifyItem(this)">studied</div>
+          <div class="item" data-correct="irregular" onclick="classifyItem(this)">been</div>
+          <div class="item" data-correct="regular" onclick="classifyItem(this)">cleaned</div>
+          <div class="item" data-correct="irregular" onclick="classifyItem(this)">made</div>
+        </div>
+        <div class="classify-choices" style="margin-top:12px;">
+          <button class="choice-btn" data-value="regular" onclick="selectClassifyGroup(this,'s2e2')">Regular</button>
+          <button class="choice-btn" data-value="irregular" onclick="selectClassifyGroup(this,'s2e2')">Irregular</button>
+        </div>
+      </div>
+      <div id="s2e2-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS2Ex2()">Verificar</button>
+    </div>
+  </div>
+
+  <div id="s2-speak" class="tab-content">
+    <h3>Práctica de Speaking</h3>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar oraciones con el Present Perfect</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa la oración: "I __________ (visit) the new restaurant downtown."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> vi-SI-ted / vi-SI-tings — /ˈvɪzɪtɪd/ — la sílaba fuerte es "SI"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "She __________ (eat) sushi many times in her life."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> e-A-ten / I-TN — /ˈiːtən/ — "ea" suena como /iː/ (largo)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "We __________ (play) tennis since last summer."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> PLAYD — /pleɪd/ — vocal larga /eɪ/, suena como "pleyd"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "They __________ (go) to the supermarket twice this week."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> GON — /ɡɒn/ — vocal corta, como "gon"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "He __________ (live) in Madrid for five years."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> LIvd — /lɪvd/ — la "e" de lived se pronuncia /ɪ/ (corta)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. Formación de preguntas</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Forma una pregunta: ¿Alguna vez han comido paella?</p>
+        <div class="pronunciation-tip"><strong>Contracción:</strong> "Have they" se pronuncia /ˈhæv ðeɪ/ — la "h" suena suave</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Forma una pregunta: ¿Ha ido usted al cine recientemente?</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> SIN-see — /ˈsɪnsli/ — "has" se reduce en preguntas</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Forma una pregunta: ¿Han vivido ustedes aquí mucho tiempo?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "Have you" suena como /ˈhæv jə/ — la "you" se reduce</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Forma una pregunta: ¿Has jugado algún deporte hoy?</p>
+        <div class="pronunciation-tip"><strong>Contracción:</strong> "Have you" → /ˈhæv jə/ o /ˈhævjə/ en inglés rápido</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Forma una pregunta: ¿Ha visitado él Europa antes?</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> EU-ropa /jʊˈroʊpə/ — sílaba fuerte en "ro"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma a negativa: "I have been to London."</p>
+        <div class="pronunciation-tip"><strong>Contracción:</strong> "haven't" se pronuncia /ˈhævənt/ — dos sílabas</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma a negativa: "She has eaten the cake."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> "hasn't" /ˈhæzənt/ — la "z" suena como /z/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: Estás en una fiesta. Pregúntale a alguien: ¿Ha viajado a Asia?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "travelled" /ˈtrævəld/ — dos sílabas, vocal corta en "tra"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: Un amigo no ha comido. Di: "You haven't eaten? That's terrible!"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "terrible" /ˈterəbəl/ — la "r" suena suave, 3 sílabas</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma a pregunta: "They have gone home."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> GONE home — /ɡɒn hoʊm/ — "gone" vocal corta, "home" vocal larga</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafíos</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: ¿Qué 3 cosas has hecho hoy que nunca habías hecho antes?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "never" /ˈnevər/ — 3 sílabas, vocal corta en "ne"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "Nunca he comido pizza italiana."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "Italian" /ɪˈtæljən/ — la "t" suena como "ch" suave</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Describe una foto: "Look at this picture. I __________ (be) to this beach and I __________ (play) volleyball there."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> vo-ley-BOL /voʊliˈbɔːl/ — sílaba fuerte en "BOL"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Opina: "Have you ever tried exotic food? In my opinion, everyone __________ (should try) sushi at least once."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "opinion" /əˈpɪnjən/ — 3 sílabas, la "o" se reduce a /ə/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversación usando el Present Perfect con un compañero: "Have you ever...?"</p>
+        <div class="pronunciation-tip"><strong>Contracción:</strong> "I've" se pronuncia /aɪv/ (una sola sílaba)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== S3 ===================== -->
+<div id="session-3" class="session hidden">
+  <div class="session-header"><h2>S3: Present Perfect II</h2><p>Negativas, preguntas, palabras temporales y FOR vs SINCE</p></div>
+  <div class="tabs"><button class="active" onclick="switchTab(this,'s3-gram')">Gramática</button><button onclick="switchTab(this,'s3-vocab')">Vocabulario</button><button onclick="switchTab(this,'s3-ex')">Ejercicios</button><button onclick="switchTab(this,'s3-speak')">Speaking</button></div>
+
+  <div id="s3-gram" class="tab-content">
+    <h3>Afirmativo, Negativas y Preguntas</h3>
+    <div class="grammar-box">
+      <p><strong>Afirmativo:</strong> <code>S + have/has + past participle</code></p>
+      <p style="margin-top:6px;"><strong>Pregunta:</strong> <code>Have/Has + S + [ever/never] + past participle?</code></p>
+      <p style="margin-top:6px;"><strong>Negativo:</strong> <code>S + have/has + not + [ever/never] + past participle</code></p>
+    </div>
+    <div class="example">"Have you ever been to London?" / "I have never eaten snails."</div>
+
+    <h3>Palabras Clave Temporales</h3>
+    <table>
+      <tr><th>Palabra</th><th>Uso</th><th>Ejemplo</th></tr>
+      <tr><td><strong>JUST</strong></td><td>Acción reciente</td><td>"I have just arrived."</td></tr>
+      <tr><td><strong>ALREADY</strong></td><td>Antes de lo esperado</td><td>"She has already finished."</td></tr>
+      <tr><td><strong>YET</strong></td><td>Pendiente (neg/questions)</td><td>"He hasn't arrived yet."</td></tr>
+      <tr><td><strong>STILL</strong></td><td>Continúa hasta el presente</td><td>"I still haven't eaten."</td></tr>
+    </table>
+
+    <div class="example">"The meeting has <strong>already</strong> started but Josephine <strong>still</strong> hasn't arrived. I have <strong>just</strong> sent her a message but she hasn't received it <strong>yet</strong>."</div>
+
+    <h3>FOR vs SINCE</h3>
+    <div class="grammar-box">
+      <p><strong>FOR</strong> = período de tiempo (for 2 years, for a long time)</p>
+      <p><strong>SINCE</strong> = momento específico (since 2015, since last Monday)</p>
+    </div>
+    <div class="example">"I have been vegan <strong>for</strong> a long time."</div>
+    <div class="example">"I have been vegan <strong>since</strong> 2015."</div>
+    <div class="grammar-box">
+      <p><strong>For how long</strong> have you been vegan?</p>
+      <p><strong>Since when</strong> have you been vegan?</p>
+    </div>
+
+    <h3>Participios Pasados Irregulares #2</h3>
+    <table>
+      <tr><th>Verbo en Base</th><th>Participio Pasado</th></tr>
+      <tr><td>BRING</td><td>brought</td></tr>
+      <tr><td>FLY</td><td>flown</td></tr>
+      <tr><td>BUILD</td><td>built</td></tr>
+      <tr><td>FORGET</td><td>forgotten</td></tr>
+      <tr><td>CATCH</td><td>caught</td></tr>
+      <tr><td>GET</td><td>got / gotten</td></tr>
+      <tr><td>CHOOSE</td><td>chosen</td></tr>
+      <tr><td>HEAR</td><td>heard</td></tr>
+      <tr><td>COST</td><td>cost</td></tr>
+      <tr><td>KEEP</td><td>kept</td></tr>
+      <tr><td>CUT</td><td>cut</td></tr>
+      <tr><td>LOSE</td><td>lost</td></tr>
+      <tr><td>DRIVE</td><td>driven</td></tr>
+      <tr><td>READ</td><td>read</td></tr>
+      <tr><td>FALL</td><td>fallen</td></tr>
+      <tr><td>SELL</td><td>sold</td></tr>
+      <tr><td>FEEL</td><td>felt</td></tr>
+      <tr><td>SEND</td><td>sent</td></tr>
+    </table>
+
+    <div class="video-container"><iframe src="https://www.youtube.com/embed/JP1zlNcWJ9c" title="Present Perfect II" allowfullscreen></iframe></div>
+  </div>
+
+  <div id="s3-vocab" class="tab-content">
+    <h3>Vocabulario de la Sesión</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><div class="en">Just</div><div class="es">Justo / recién</div></div>
+      <div class="vocab-item"><div class="en">Already</div><div class="es">Ya</div></div>
+      <div class="vocab-item"><div class="en">Yet</div><div class="es">Todavía (no)</div></div>
+      <div class="vocab-item"><div class="en">Still</div><div class="es">Aún / todavía</div></div>
+      <div class="vocab-item"><div class="en">For</div><div class="es">Durante (período)</div></div>
+      <div class="vocab-item"><div class="en">Since</div><div class="es">Desde (punto específico)</div></div>
+      <div class="vocab-item"><div class="en">Meeting</div><div class="es">Reunión</div></div>
+      <div class="vocab-item"><div class="en">Message</div><div class="es">Mensaje</div></div>
+      <div class="vocab-item"><div class="en">Vegan</div><div class="es">Vegano/a</div></div>
+      <div class="vocab-item"><div class="en">Arrive</div><div class="es">Llegar</div></div>
+    </div>
+  </div>
+
+  <div id="s3-ex" class="tab-content">
+    <h3>Ejercicio 1: Completa con for o since</h3>
+    <div class="exercise">
+      <label>1. I have lived here __________ 2019.
+        <select id="s3e1-1" data-answer="since"><option value="">--</option><option value="for">for</option><option value="since">since</option></select>
+      </label>
+      <label>2. She has been a teacher __________ ten years.
+        <select id="s3e1-2" data-answer="for"><option value="">--</option><option value="for">for</option><option value="since">since</option></select>
+      </label>
+      <label>3. We have known each other __________ last summer.
+        <select id="s3e1-3" data-answer="since"><option value="">--</option><option value="for">for</option><option value="since">since</option></select>
+      </label>
+      <label>4. He has worked there __________ a long time.
+        <select id="s3e1-4" data-answer="for"><option value="">--</option><option value="for">for</option><option value="since">since</option></select>
+      </label>
+      <label>5. I have been hungry __________ this morning.
+        <select id="s3e1-5" data-answer="since"><option value="">--</option><option value="for">for</option><option value="since">since</option></select>
+      </label>
+      <div id="s3e1-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS3Ex1()">Verificar</button>
+    </div>
+
+    <h3>Ejercicio 2: Completa con just, already, yet o still</h3>
+    <div class="exercise">
+      <label>1. I have __________ finished my homework. (before expected)
+        <select id="s3e2-1" data-answer="already"><option value="">--</option><option value="just">just</option><option value="already">already</option><option value="yet">yet</option><option value="still">still</option></select>
+      </label>
+      <label>2. She has __________ arrived. (recent action)
+        <select id="s3e2-2" data-answer="just"><option value="">--</option><option value="just">just</option><option value="already">already</option><option value="yet">yet</option><option value="still">still</option></select>
+      </label>
+      <label>3. Have you eaten __________? (pending, question)
+        <select id="s3e2-3" data-answer="yet"><option value="">--</option><option value="just">just</option><option value="already">already</option><option value="yet">yet</option><option value="still">still</option></select>
+      </label>
+      <label>4. He __________ hasn't called me. (continues to present)
+        <select id="s3e2-4" data-answer="still"><option value="">--</option><option value="just">just</option><option value="already">already</option><option value="yet">yet</option><option value="still">still</option></select>
+      </label>
+      <div id="s3e2-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS3Ex2()">Verificar</button>
+    </div>
+
+    <h3>Ejercicio 3: Clasifica el participio irregular #2</h3>
+    <div class="exercise">
+      <p>Escribe el participio pasado de cada verbo:</p>
+      <label>1. BRING → <input type="text" id="s3e3-1" data-answer="brought"></label>
+      <label>2. FLY → <input type="text" id="s3e3-2" data-answer="flown"></label>
+      <label>3. BUILD → <input type="text" id="s3e3-3" data-answer="built"></label>
+      <label>4. FORGET → <input type="text" id="s3e3-4" data-answer="forgotten"></label>
+      <label>5. CATCH → <input type="text" id="s3e3-5" data-answer="caught"></label>
+      <div id="s3e3-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS3Ex3()">Verificar</button>
+    </div>
+  </div>
+
+  <div id="s3-speak" class="tab-content">
+    <h3>Práctica de Speaking</h3>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con FOR/SINCE</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "I have lived here __________ three years."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "for" /fɔːr/ — vocal larga, como "for" en español pero más abierta</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "She has known him __________ 2010."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "since" /sɪns/ — vocal corta /ɪ/, como "sins"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "We have been friends __________ a very long time."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "a" /ə/ — se reduce en inglés rápido, suena como una "e" suave</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "He has worked there __________ last January."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> Ja-NUE-ary /ˈdʒænjuˌɛri/ — sílaba fuerte en "Ja"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "I have been hungry __________ this morning."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "hungry" /ˈhʌŋɡri/ — la "u" suena como /ʌ/ (sonido corto y abierto)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. Completar con JUST/ALREADY/YET/STILL</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Completa: "I have __________ finished my homework." (antes de lo esperado)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "already" /ɔːlˈrɛdi/ — 3 sílabas, sílaba fuerte en "RED"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Completa: "She has __________ arrived." (acción reciente)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "just" /dʒʌst/ — la "j" suena como "ch" + "s"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Completa: "Have you eaten __________?" (pendiente, pregunta)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "yet" /jɛt/ — vocal corta /ɛ/, suena como "yet"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Completa: "He __________ hasn't called me." (continúa hasta ahora)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "still" /stɪl/ — vocal corta, sonido "estil"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Completa: "They __________ haven't found their keys." (siguen sin)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "found" /faʊnd/ — diptongo /aʊ/, suena como "fawnd"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma a negativa: "I have already finished the report."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "report" /rɪˈpɔːrt/ — 2 sílabas, sílaba fuerte en "PORT"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma a pregunta: "She has just called the doctor."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "doctor" /ˈdɒktər/ — 2 sílabas, vocal corta en "doc"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: Tu amigo aún no ha llegado a la reunión. Di: "Josephine still hasn't arrived. I have just sent her a message."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "Josephine" /ˈdʒoʊzəfiːn/ — 3 sílabas</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: Estás en un restaurante. Pregunta: "Has the food arrived yet?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "arrived" /əˈraɪvd/ — diptongo /aɪ/ largo</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma: "I've been vegan for 10 years" a usando SINCE.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "vegan" /ˈviːɡən/ — 2 sílabas, la "e" suena como /iː/ largo</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafíos</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: ¿Cuánto tiempo llevas estudiando inglés? Usa FOR o SINCE.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "studying" /ˈstʌdiɪŋ/ — 3 sílabas, sílaba fuerte en "stu"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "Ya he comido pero todavía no he lavado los platos."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dishes" /ˈdɪʃɪz/ — 2 sílabas, la "sh" suena como "sh" en español</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Opina: "¿Qué es algo que todos deberían haber hecho antes de los 30 años?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "should" /ʃʊd/ — como "shud", vocal corta /ʊ/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Describe tu día: "Today I have already __________, I haven't __________ yet, and I have just __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "today" /təˈdeɪ/ — 2 sílabas, sílaba fuerte en "DAY"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversación: Pregunta a alguien cuánto tiempo ha estado haciendo su trabajo favorito.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "favourite" /ˈfeɪvərɪt/ — 3 sílabas, sílaba fuerte en "FAV"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== S4 ===================== -->
+<div id="session-4" class="session hidden">
+  <div class="session-header"><h2>S4: Reflexive Pronouns</h2><p>Pronombres reflexivos &mdash; Cuando el sujeto y el objeto son la misma persona</p></div>
+  <div class="tabs"><button class="active" onclick="switchTab(this,'s4-gram')">Gramática</button><button onclick="switchTab(this,'s4-vocab')">Vocabulario</button><button onclick="switchTab(this,'s4-ex')">Ejercicios</button><button onclick="switchTab(this,'s4-speak')">Speaking</button></div>
+
+  <div id="s4-gram" class="tab-content">
+    <h3>Pronombres Reflexivos</h3>
+    <div class="grammar-box">
+      <p>Los pronombres reflexivos se usan cuando el <strong>sujeto y el objeto son la misma persona</strong>, o para dar <strong>énfasis</strong>.</p>
+      <p style="margin-top:8px;">"She looked at <strong>herself</strong> in the mirror."</p>
+    </div>
+
+    <table>
+      <tr><th>Sujeto</th><th>Pronombre Reflexivo</th></tr>
+      <tr><td>I</td><td>myself</td></tr>
+      <tr><td>you</td><td>yourself</td></tr>
+      <tr><td>he</td><td>himself</td></tr>
+      <tr><td>she</td><td>herself</td></tr>
+      <tr><td>it</td><td>itself</td></tr>
+      <tr><td>we</td><td>ourselves</td></tr>
+      <tr><td>you (plural)</td><td>yourselves</td></tr>
+      <tr><td>they</td><td>themselves</td></tr>
+    </table>
+
+    <h4>Ejemplos</h4>
+    <div class="example">"I made this cake <strong>myself</strong>."</div>
+    <div class="example">"They enjoyed <strong>themselves</strong> at the party."</div>
+    <div class="example">"He taught <strong>himself</strong> to play guitar."</div>
+    <div class="example">"We should be proud of <strong>ourselves</strong>."</div>
+
+    <div class="video-container"><iframe src="https://www.youtube.com/embed/e6V5FuDkMG4" title="Reflexive Pronouns" allowfullscreen></iframe></div>
+  </div>
+
+  <div id="s4-vocab" class="tab-content">
+    <h3>Vocabulario</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><div class="en">Myself</div><div class="es">Yo mismo</div></div>
+      <div class="vocab-item"><div class="en">Yourself</div><div class="es">Tú mismo</div></div>
+      <div class="vocab-item"><div class="en">Himself</div><div class="es">Él mismo</div></div>
+      <div class="vocab-item"><div class="en">Herself</div><div class="es">Ella misma</div></div>
+      <div class="vocab-item"><div class="en">Itself</div><div class="es">Mismo (cosa)</div></div>
+      <div class="vocab-item"><div class="en">Ourselves</div><div class="es">Nosotros mismos</div></div>
+      <div class="vocab-item"><div class="en">Yourselves</div><div class="es">Ustedes mismos</div></div>
+      <div class="vocab-item"><div class="en">Themselves</div><div class="es">Ellos mismos</div></div>
+      <div class="vocab-item"><div class="en">Mirror</div><div class="es">Espejo</div></div>
+      <div class="vocab-item"><div class="en">Enjoy</div><div class="es">Disfrutar</div></div>
+    </div>
+  </div>
+
+  <div id="s4-ex" class="tab-content">
+    <h3>Ejercicio 1: Completa con el pronombre reflexivo correcto</h3>
+    <div class="exercise">
+      <label>1. She taught __________ to cook.
+        <select id="s4e1-1" data-answer="herself"><option value="">--</option><option value="myself">myself</option><option value="yourself">yourself</option><option value="himself">himself</option><option value="herself">herself</option><option value="itself">itself</option><option value="ourselves">ourselves</option><option value="yourselves">yourselves</option><option value="themselves">themselves</option></select>
+      </label>
+      <label>2. I made this project __________.
+        <select id="s4e1-2" data-answer="myself"><option value="">--</option><option value="myself">myself</option><option value="yourself">yourself</option><option value="himself">himself</option><option value="herself">herself</option><option value="itself">itself</option><option value="ourselves">ourselves</option><option value="yourselves">yourselves</option><option value="themselves">themselves</option></select>
+      </label>
+      <label>3. The cat cleaned __________.
+        <select id="s4e1-3" data-answer="itself"><option value="">--</option><option value="myself">myself</option><option value="yourself">yourself</option><option value="himself">himself</option><option value="herself">herself</option><option value="itself">itself</option><option value="ourselves">ourselves</option><option value="yourselves">yourselves</option><option value="themselves">themselves</option></select>
+      </label>
+      <label>4. We enjoyed __________ at the concert.
+        <select id="s4e1-4" data-answer="ourselves"><option value="">--</option><option value="myself">myself</option><option value="yourself">yourself</option><option value="himself">himself</option><option value="herself">herself</option><option value="itself">itself</option><option value="ourselves">ourselves</option><option value="yourselves">yourselves</option><option value="themselves">themselves</option></select>
+      </label>
+      <label>5. They built the house __________.
+        <select id="s4e1-5" data-answer="themselves"><option value="">--</option><option value="myself">myself</option><option value="yourself">yourself</option><option value="himself">himself</option><option value="herself">herself</option><option value="itself">itself</option><option value="ourselves">ourselves</option><option value="yourselves">yourselves</option><option value="themselves">themselves</option></select>
+      </label>
+      <div id="s4e1-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS4Ex1()">Verificar</button>
+    </div>
+
+    <h3>Ejercicio 2: Clasifica los pronombres</h3>
+    <div class="exercise">
+      <p>Clasifica cada pronombre como <strong>Singular</strong> o <strong>Plural</strong>:</p>
+      <div id="s4e2-items">
+        <div class="classify-grid">
+          <div class="item" data-correct="singular" onclick="classifyItem(this)">myself</div>
+          <div class="item" data-correct="plural" onclick="classifyItem(this)">ourselves</div>
+          <div class="item" data-correct="singular" onclick="classifyItem(this)">himself</div>
+          <div class="item" data-correct="plural" onclick="classifyItem(this)">yourselves</div>
+          <div class="item" data-correct="singular" onclick="classifyItem(this)">itself</div>
+          <div class="item" data-correct="plural" onclick="classifyItem(this)">themselves</div>
+          <div class="item" data-correct="singular" onclick="classifyItem(this)">herself</div>
+          <div class="item" data-correct="plural" onclick="classifyItem(this)">ourselves</div>
+        </div>
+        <div class="classify-choices" style="margin-top:12px;">
+          <button class="choice-btn" data-value="singular" onclick="selectClassifyGroup(this,'s4e2')">Singular</button>
+          <button class="choice-btn" data-value="plural" onclick="selectClassifyGroup(this,'s4e2')">Plural</button>
+        </div>
+      </div>
+      <div id="s4e2-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS4Ex2()">Verificar</button>
+    </div>
+  </div>
+
+  <div id="s4-speak" class="tab-content">
+    <h3>Práctica de Speaking</h3>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con pronombres reflexivos</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "She cut __________ while cooking dinner."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "herself" /hɜːrˈsɛlf/ — 2 sílabas, sílaba fuerte en "SELF"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "I made this cake __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "myself" /maɪˈsɛlf/ — 2 sílabas, diptongo /aɪ/ largo en "my"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "The cat cleaned __________ after eating."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "itself" /ɪtˈsɛlf/ — 2 sílabas, vocal corta /ɪ/ en "it"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "We taught __________ to play guitar."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "ourselves" /aʊərˈsɛlvz/ — 2 sílabas, diptongo /aʊ/ en "our"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "You should be proud of __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "yourself" /jɔːrˈsɛlf/ — 2 sílabas, sílaba fuerte en "SELF"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. Formación de preguntas con pronombres reflexivos</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Pregunta: ¿Preparaste la cena tú mismo/a?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "yourself" se pronuncia /jɔːrˈsɛlf/ — 2 sílabas</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Pregunta: ¿Se divirtieron ellos mismos en el concierto?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "themselves" /ðɛmˈsɛlvz/ — la "th" suena como /ð/ (sonido dental vibrante suave)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Pregunta: ¿Enseñó él a nadie a cocinar solo?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "himself" /hɪmˈsɛlf/ — 2 sílabas, vocal corta /ɪ/ en "him"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Pregunta: ¿Nosotros organizamos la fiesta nosotros mismos?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "organised" /ˈɔːrɡənaɪzd/ — 3 sílabas, diptongo /aɪ/ en "naised"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Pregunta: ¿La computadora se apagó sola?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "itself" /ɪtˈsɛlf/ — la "t" y "s" se pronuncian juntas</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma: "She enjoyed the party" a enfático: "She enjoyed the party __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "enjoyed" /ɪnˈdʒɔɪd/ — 2 sílabas, diptongo /ɔɪ/ en "joyed"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma: "I cooked dinner" a enfático: "I cooked dinner __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dinner" /ˈdɪnər/ — 2 sílabas, vocal corta en "din"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: Un amigo te pregunta quién hizo la comida. Responde: "I made it myself!"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "made" /meɪd/ — diptongo /eɪ/ largo, como "meid"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: Tu profesor pregunta quién hizo la tarea. Di: "I did it myself."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "did" /dɪd/ — vocal corta /ɪ/, sonido "did"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma: "They decorated the house" a enfático: "They decorated the house __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "decorated" /ˈdɛkəreɪtɪd/ — 4 sílabas, sílaba fuerte en "DEC"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafíos</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: ¿Qué haces tú mismo/a que otros podrían hacer por ti?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "yourself" /jɔːrˈsɛlf/ — sílaba fuerte en "SELF"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "Ella se miró en el espejo antes de salir."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "mirror" /ˈmɪrər/ — 2 sílabas, vocal corta en "mir"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Describe: "In the photo, the children are playing by __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "children" /ˈtʃɪldrən/ — 2 sílabas, la "ch" suena como "ch" en español</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Opina: "¿Es importante hacer las cosas uno mismo o es mejor pedir ayuda?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "important" /ɪmˈpɔːrtənt/ — 3 sílabas, sílaba fuerte en "POR"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversación: "What have you done __________ this week that made you proud?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "proud" /praʊd/ — diptongo /aʊ/ largo, suena como "prawd"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== S5 ===================== -->
+<div id="session-5" class="session hidden">
+  <div class="session-header"><h2>S5: Present Perfect Continuous</h2><p>Relación entre pasado y presente &mdash; Enfoque en duración y tiempo transcurrido</p></div>
+  <div class="tabs"><button class="active" onclick="switchTab(this,'s5-gram')">Gramática</button><button onclick="switchTab(this,'s5-vocab')">Vocabulario</button><button onclick="switchTab(this,'s5-ex')">Ejercicios</button><button onclick="switchTab(this,'s5-speak')">Speaking</button></div>
+
+  <div id="s5-gram" class="tab-content">
+    <h3>Present Perfect Continuous</h3>
+    <div class="grammar-box">
+      <p>Muestra la <strong>relación entre el pasado y el presente</strong>, con enfoque en la <strong>duración</strong> y el tiempo transcurrido.</p>
+      <p style="margin-top:8px;"><strong>Estructura:</strong> <code>Subject + has/have been + verb+ing + complement</code></p>
+    </div>
+    <div class="example">"This is the moment we <strong>have been waiting</strong> for."</div>
+    <div class="example">"This is the moment we <strong>haven't been waiting</strong> for."</div>
+    <div class="example">"What <strong>have</strong> we <strong>been waiting</strong> for?"</div>
+
+    <h4>Estructura de Preguntas</h4>
+    <div class="grammar-box">
+      <p><code>[wh] + have/has + subj. + been + verb+ing</code></p>
+    </div>
+    <div class="example">"<strong>How long have</strong> you <strong>been waiting</strong>?"</div>
+    <div class="example">"<strong>What has</strong> she <strong>been doing</strong>?"</div>
+
+    <div class="tip"><strong>Tip:</strong> Se usa cuando la acción es continua y queremos enfatizar cuánto tiempo ha durado, especialmente con "for" y "since".</div>
+
+    <div class="video-container"><iframe src="https://www.youtube.com/embed/IOQb__6tnPs" title="Present Perfect Continuous" allowfullscreen></iframe></div>
+  </div>
+
+  <div id="s5-vocab" class="tab-content">
+    <h3>Vocabulario</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><div class="en">Continuous</div><div class="es">Continuo</div></div>
+      <div class="vocab-item"><div class="en">Duration</div><div class="es">Duración</div></div>
+      <div class="vocab-item"><div class="en">Moment</div><div class="es">Momento</div></div>
+      <div class="vocab-item"><div class="en">Waiting</div><div class="es">Esperando</div></div>
+      <div class="vocab-item"><div class="en">Waiting for</div><div class="es">Esperar por</div></div>
+      <div class="vocab-item"><div class="en">How long</div><div class="es">Cuánto tiempo</div></div>
+    </div>
+  </div>
+
+  <div id="s5-ex" class="tab-content">
+    <h3>Ejercicio 1: Completa con Present Perfect Simple o Continuous</h3>
+    <div class="exercise">
+      <label>1. I __________ (study) English for 5 years.
+        <select id="s5e1-1" data-answer="have been studying"><option value="">--</option><option value="have studied">have studied</option><option value="have been studying">have been studying</option></select>
+      </label>
+      <label>2. She __________ (read) that book all day.
+        <select id="s5e1-2" data-answer="has been reading"><option value="">--</option><option value="has read">has read</option><option value="has been reading">has been reading</option></select>
+      </label>
+      <label>3. We __________ (wait) for two hours.
+        <select id="s5e1-3" data-answer="have been waiting"><option value="">--</option><option value="have waited">have waited</option><option value="have been waiting">have been waiting</option></select>
+      </label>
+      <label>4. They __________ (already/finish) the project.
+        <select id="s5e1-4" data-answer="have already finished"><option value="">--</option><option value="have already finished">have already finished</option><option value="have been already finishing">have been already finishing</option></select>
+      </label>
+      <div id="s5e1-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS5Ex1()">Verificar</button>
+    </div>
+
+    <h3>Ejercicio 2: Transforma a Present Perfect Continuous</h3>
+    <div class="exercise">
+      <label>1. I work → I __________ work since morning.
+        <input type="text" id="s5e2-1" data-answer="have been">
+      </label>
+      <label>2. It rains → It __________ rain all day.
+        <input type="text" id="s5e2-2" data-answer="has been">
+      </label>
+      <label>3. They wait → They __________ wait for 3 hours.
+        <input type="text" id="s5e2-3" data-answer="have been">
+      </label>
+      <div id="s5e2-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS5Ex2()">Verificar</button>
+    </div>
+  </div>
+
+  <div id="s5-speak" class="tab-content">
+    <h3>Práctica de Speaking</h3>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con Present Perfect Continuous</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "I __________ (study) English for five years now."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "studying" /ˈstʌdiɪŋ/ — 3 sílabas, sílaba fuerte en "STU"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "She __________ (read) that book all day long."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "reading" /ˈriːdɪŋ/ — 2 sílabas, la "ea" suena como /iː/ largo</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "We __________ (wait) for the bus since 8am."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "waiting" /ˈweɪtɪŋ/ — 2 sílabas, diptongo /eɪ/ en "way"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "They __________ (work) on the project all morning."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "working" /ˈwɜːrkɪŋ/ — 2 sílabas, vocal larga /ɜːr/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "It __________ (rain) all day today."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "raining" /ˈreɪnɪŋ/ — 2 sílabas, diptongo /eɪ/ largo</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. Formación de preguntas con HOW LONG</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Pregunta: ¿Cuánto tiempo llevas trabajando en esa empresa?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "company" /ˈkʌmpəni/ — 3 sílabas, sílaba fuerte en "CUM"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Pregunta: ¿Cuánto tiempo ha estado lloviendo?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "raining" /ˈreɪnɪŋ/ — la "ai" suena como /eɪ/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Pregunta: ¿Qué han estado haciendo tus amigos esta tarde?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "afternoon" /ˈæftərnuːn/ — 3 sílabas, sílaba fuerte en "AF"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Pregunta: ¿Cuánto tiempo llevas esperando el autobús?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "bus" /bʌs/ — vocal corta /ʌ/, como "bas"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Pregunta: ¿Qué has estado cocinando últimamente?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "cooking" /ˈkʊkɪŋ/ — 2 sílabas, vocal corta /ʊ/ como en "book"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma: "I study English" a Present Perfect Continuous con "since 2020".</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "English" /ˈɪŋɡlɪʃ/ — 2 sílabas, vocal corta en "In"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma: "It snows" a Present Perfect Continuous con "all day".</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "snowing" /ˈsnoʊɪŋ/ — 2 sílabas, diptongo /oʊ/ largo</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: Un amigo llega mojado. Di: "Wow, it's been raining! How long have you been walking in this weather?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "weather" /ˈwɛðər/ — 2 sílabas, la "th" suena como /ð/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: Estás en la oficina. Di: "I've been working on this report since this morning. I need a break!"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "break" /breɪk/ — diptongo /eɪ/ largo, como "breik"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma: "They exercise" a Present Perfect Continuous con "for two hours".</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "exercise" /ˈɛksərsaɪz/ — 3 sílabas, sílaba fuerte en "EX"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafíos</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: ¿Qué has estado haciendo durante las últimas 2 horas?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "hours" /ˈaʊərz/ — 1-2 sílabas, diptongo /aʊ/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "¿Cuánto tiempo llevas corriendo? Llevo corriendo desde las 6 de la mañana."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "running" /ˈrʌnɪŋ/ — 2 sílabas, vocal corta /ʌ/ en "run"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Describe: "Look, the children __________ (play) in the garden. They __________ (play) since noon."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "garden" /ˈɡɑːrdən/ — 2 sílabas, vocal larga /ɑːr/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Opina: "¿Es mejor usar Present Perfect Simple o Continuous para hablar del trabajo? ¿Por qué?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "better" /ˈbɛtər/ — 2 sílabas, sílaba fuerte en "BET"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversación: "What have you been doing lately that makes you happy?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "lately" /ˈleɪtli/ — 2 sílabas, diptongo /eɪ/ en "late"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== S6 ===================== -->
+<div id="session-6" class="session hidden">
+  <div class="session-header"><h2>S6: Modal Verbs II</h2><p>May, Might, Shall, Ought To &mdash; Posibilidad, sugerencia y consejo</p></div>
+  <div class="tabs"><button class="active" onclick="switchTab(this,'s6-gram')">Gramática</button><button onclick="switchTab(this,'s6-vocab')">Vocabulario</button><button onclick="switchTab(this,'s6-ex')">Ejercicios</button><button onclick="switchTab(this,'s6-speak')">Speaking</button></div>
+
+  <div id="s6-gram" class="tab-content">
+    <h3>Modales &mdash; Función General</h3>
+    <div class="grammar-box">
+      <p>Los modales modifican la intención del verbo: <strong>probabilidad, habilidad, permiso, obligación</strong>.</p>
+      <p style="margin-top:8px;"><strong>Regla:</strong> siempre seguidos por <code>BARE INFINITIVE</code> (sin "to").</p>
+    </div>
+
+    <h3>MAY &mdash; Posibilidad / Permiso formal</h3>
+    <div class="grammar-box">
+      <p><strong>MAY</strong> = posibilidad o permiso formal</p>
+    </div>
+    <div class="example">"You <strong>may</strong> say I'm a dreamer, but I'm not the only one." — John Lennon</div>
+    <div class="example">"It <strong>may</strong> rain tomorrow."</div>
+
+    <h3>MIGHT &mdash; Posibilidad</h3>
+    <div class="grammar-box">
+      <p><strong>MIGHT</strong> = posibilidad (menos probable que MAY)</p>
+    </div>
+    <div class="example">"I <strong>might</strong> be wrong."</div>
+    <div class="example">"She <strong>might</strong> come to the party."</div>
+
+    <h3>SHALL &mdash; Sugerencia</h3>
+    <div class="grammar-box">
+      <p><strong>SHALL</strong> = sugerencia (usado principalmente en inglés británico)</p>
+    </div>
+    <div class="example">"<strong>Shall</strong> we dance?"</div>
+    <div class="example">"<strong>Shall</strong> I open the window?"</div>
+
+    <h3>OUGHT TO &mdash; Consejo / Recomendación</h3>
+    <div class="grammar-box">
+      <p><strong>OUGHT TO</strong> = consejo/recomendación (más formal que "should")</p>
+    </div>
+    <div class="example">"You <strong>ought to</strong> know better."</div>
+    <div class="example">"We <strong>ought to</strong> respect the environment."</div>
+
+    <div class="video-container"><iframe src="https://www.youtube.com/embed/dDyGGAWRdGg" title="Modal Verbs II" allowfullscreen></iframe></div>
+  </div>
+
+  <div id="s6-vocab" class="tab-content">
+    <h3>Vocabulario</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><div class="en">May</div><div class="es">Puede (posibilidad/permiso)</div></div>
+      <div class="vocab-item"><div class="en">Might</div><div class="es">Podría (menos probable)</div></div>
+      <div class="vocab-item"><div class="en">Shall</div><div class="es">¿Shall? (sugerencia)</div></div>
+      <div class="vocab-item"><div class="en">Ought to</div><div class="es">Debería (consejo)</div></div>
+      <div class="vocab-item"><div class="en">Dreamer</div><div class="es">Soñador</div></div>
+      <div class="vocab-item"><div class="en">Bare infinitive</div><div class="es">Infinitivo sin "to"</div></div>
+      <div class="vocab-item"><div class="en">Permission</div><div class="es">Permiso</div></div>
+      <div class="vocab-item"><div class="en">Suggestion</div><div class="es">Sugerencia</div></div>
+    </div>
+  </div>
+
+  <div id="s6-ex" class="tab-content">
+    <h3>Ejercicio 1: Elige el modal correcto</h3>
+    <div class="exercise">
+      <label>1. It ______ rain later, so bring an umbrella. (posibilidad)
+        <select id="s6e1-1" data-answer="may"><option value="">--</option><option value="may">may</option><option value="might">might</option><option value="shall">shall</option><option value="ought to">ought to</option></select>
+      </label>
+      <label>2. ______ we go for a walk? (sugerencia)
+        <select id="s6e1-2" data-answer="shall"><option value="">--</option><option value="may">may</option><option value="might">might</option><option value="shall">shall</option><option value="ought to">ought to</option></select>
+      </label>
+      <label>3. You ______ study harder for the exam. (consejo)
+        <select id="s6e1-3" data-answer="ought to"><option value="">--</option><option value="may">may</option><option value="might">might</option><option value="shall">shall</option><option value="ought to">ought to</option></select>
+      </label>
+      <label>4. She ______ not come to the party. (menos probable)
+        <select id="s6e1-4" data-answer="might"><option value="">--</option><option value="may">may</option><option value="might">might</option><option value="shall">shall</option><option value="ought to">ought to</option></select>
+      </label>
+      <div id="s6e1-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS6Ex1()">Verificar</button>
+    </div>
+
+    <h3>Ejercicio 2: Completa con el modal correcto</h3>
+    <div class="exercise">
+      <label>1. You __________ (ought to / must) apologize for being late.
+        <select id="s6e2-1" data-answer="ought to"><option value="">--</option><option value="ought to">ought to</option><option value="must">must</option></select>
+      </label>
+      <label>2. I __________ (may / will) be a bit late tonight.
+        <select id="s6e2-2" data-answer="may"><option value="">--</option><option value="may">may</option><option value="will">will</option></select>
+      </label>
+      <label>3. __________ (Shall / Should) I help you with that?
+        <select id="s6e2-3" data-answer="shall"><option value="">--</option><option value="shall">shall</option><option value="should">should</option></select>
+      </label>
+      <div id="s6e2-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS6Ex2()">Verificar</button>
+    </div>
+  </div>
+
+  <div id="s6-speak" class="tab-content">
+    <h3>Práctica de Speaking</h3>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con MAY/MIGHT</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "It __________ rain later, so bring an umbrella."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "may" /meɪ/ — diptongo /eɪ/ largo, como "mei"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "She __________ not come to the party tonight."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "might" /maɪt/ — diptongo /aɪ/ largo, como "mait"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "I __________ be wrong, but I think he's lying."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "lying" /ˈlaɪɪŋ/ — 2 sílabas, diptongo /aɪ/ en "li"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "You __________ say that again! (permiso formal)"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "again" /əˈɡɛn/ — 2 sílabas, la "a" se reduce a /ə/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "They __________ have forgotten about the meeting."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "forgotten" /fərˈɡɒtən/ — 3 sílabas, sílaba fuerte en "GOT"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. Completar con SHALL/OUGHT TO</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Completa: "__________ we go for a walk?" (sugerencia)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "shall" /ʃæl/ — vocal corta /æ/, como "shal"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Completa: "You __________ study harder for the exam." (consejo)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "ought to" /ˈɔːt tuː/ — 2 sílabas, vocal larga /ɔːt/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Completa: "__________ I open the window for you?" (sugerencia cortés)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "window" /ˈwɪndoʊ/ — 2 sílabas, diptongo /oʊ/ largo en "dow"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Completa: "We __________ respect the environment." (recomendación)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "environment" /ɪnˈvaɪrənmənt/ — 4 sílabas, sílaba fuerte en "VIR"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Completa: "__________ we have dinner together?" (sugerencia)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "together" /təˈɡɛðər/ — 3 sílabas, la "th" suena como /ð/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma a MAY: "Perhaps it will be sunny tomorrow."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "sunny" /ˈsʌni/ — 2 sílabas, vocal corta /ʌ/ en "sun"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma a MIGHT: "She probably won't come."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "probably" /ˈprɒbəbli/ — 3 sílabas, sílaba fuerte en "PROB"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: Tu amigo está triste. Dale un consejo usando OUGHT TO: "You __________ talk to someone about it."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "someone" /ˈsʌmwʌn/ — 2 sílabas, vocal corta /ʌ/ en "some"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: Estás en una reunión. Sugiere con SHALL: "Shall we start the meeting?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "meeting" /ˈmiːtɪŋ/ — 2 sílabas, vocal larga /iː/ en "meet"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma: "It's possible she forgot" usando MIGHT.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "forgot" /fərˈɡɒt/ — 2 sílabas, la "o" suena como /ɒ/ (corta)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafíos</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: ¿Qué deberías hacer esta semana que no has hecho? Usa OUGHT TO.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "week" /wiːk/ — vocal larga /iː/, como "wik"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "Podría llover mañana, pero también podría hacer sol."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "sunny" /ˈsʌni/ — la "u" suena como /ʌ/ (sonido corto y abierto)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Opina: "¿Cuándo es mejor usar SHALL en vez de SHOULD?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "should" /ʃʊd/ — vocal corta /ʊ/, como "shud"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Describe: "I __________ (may) call you later, but I __________ (might) be busy. You __________ (ought to) not wait for me."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "busy" /ˈbɪzi/ — 2 sílabas, vocal corta /ɪ/ en "bu"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversación: "Shall we talk about what we might do this weekend?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "weekend" /ˈwiːkɛnd/ — 2 sílabas, vocal larga /iː/ en "week"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== S7 ===================== -->
+<div id="session-7" class="session hidden">
+  <div class="session-header"><h2>S7: Modals in the Past / Perfect</h2><p>Modales en tiempo pasado &mdash; Deducción, posibilidad y consejo retroactivo</p></div>
+  <div class="tabs"><button class="active" onclick="switchTab(this,'s7-gram')">Gramática</button><button onclick="switchTab(this,'s7-vocab')">Vocabulario</button><button onclick="switchTab(this,'s7-ex')">Ejercicios</button><button onclick="switchTab(this,'s7-speak')">Speaking</button></div>
+
+  <div id="s7-gram" class="tab-content">
+    <h3>Estructura</h3>
+    <div class="grammar-box">
+      <p><strong>Estructura:</strong> <code>Modal + have + past participle</code></p>
+    </div>
+
+    <h3>Formas y Usos</h3>
+    <table>
+      <tr><th>Modal Past</th><th>Uso</th></tr>
+      <tr><td><strong>MIGHT'VE / MAY'VE</strong></td><td>Posibilidades pasadas</td></tr>
+      <tr><td><strong>MUST'VE</strong></td><td>Deducción / suposición lógica</td></tr>
+      <tr><td><strong>WOULD'VE</strong></td><td>Condiciones pasadas</td></tr>
+      <tr><td><strong>COULD'VE</strong></td><td>Posibilidad / capacidad pasada</td></tr>
+      <tr><td><strong>SHOULD'VE</strong></td><td>Consejo pasado o arrepentimiento</td></tr>
+    </table>
+
+    <h4>Ejemplos</h4>
+    <div class="example">"It <strong>might have been</strong> my fault."</div>
+    <div class="example">"I <strong>may have seen</strong> him yesterday."</div>
+    <div class="example">"You <strong>must have called</strong> the wrong number."</div>
+    <div class="example">"<strong>Would you have done</strong> the same thing?"</div>
+    <div class="example">"What <strong>could you have done</strong> differently?"</div>
+    <div class="example">"He <strong>should not have said</strong> that."</div>
+
+    <div class="video-container"><iframe src="https://www.youtube.com/embed/IWLjWmgmgcE" title="Modals in the Past" allowfullscreen></iframe></div>
+  </div>
+
+  <div id="s7-vocab" class="tab-content">
+    <h3>Vocabulario</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><div class="en">Must've</div><div class="es">Debe haber</div></div>
+      <div class="vocab-item"><div class="en">Should've</div><div class="es">Debería haber</div></div>
+      <div class="vocab-item"><div class="en">Could've</div><div class="es">Podría haber</div></div>
+      <div class="vocab-item"><div class="en">Would've</div><div class="es">Habría</div></div>
+      <div class="vocab-item"><div class="en">Might've</div><div class="es">Podría haber (posible)</div></div>
+      <div class="vocab-item"><div class="en">May've</div><div class="es">Puede haber</div></div>
+      <div class="vocab-item"><div class="en">Fault</div><div class="es">Culpa / falta</div></div>
+      <div class="vocab-item"><div class="en">Differently</div><div class="es">Diferentemente</div></div>
+    </div>
+  </div>
+
+  <div id="s7-ex" class="tab-content">
+    <h3>Ejercicio 1: Completa con el modal pasado correcto</h3>
+    <div class="exercise">
+      <label>1. He looks tired. He __________ (must / should) have worked all night.
+        <select id="s7e1-1" data-answer="must"><option value="">--</option><option value="must">must</option><option value="should">should</option><option value="may">may</option><option value="could">could</option></select>
+      </label>
+      <label>2. She didn't come. She __________ (might / must) have forgotten.
+        <select id="s7e1-2" data-answer="might"><option value="">--</option><option value="must">must</option><option value="should">should</option><option value="might">might</option><option value="could">could</option></select>
+      </label>
+      <label>3. You __________ (should / must) have told me before.
+        <select id="s7e1-3" data-answer="should"><option value="">--</option><option value="must">must</option><option value="should">should</option><option value="may">may</option><option value="could">could</option></select>
+      </label>
+      <label>4. I __________ (would / should) have helped if you had asked.
+        <select id="s7e1-4" data-answer="would"><option value="">--</option><option value="must">must</option><option value="should">should</option><option value="would">would</option><option value="could">could</option></select>
+      </label>
+      <div id="s7e1-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS7Ex1()">Verificar</button>
+    </div>
+
+    <h3>Ejercicio 2: Transforma la oración</h3>
+    <div class="exercise">
+      <label>1. He is tired → He must __________ (work) all night.
+        <select id="s7e2-1" data-answer="have worked"><option value="">--</option><option value="have worked">have worked</option><option value="work">work</option><option value="be working">be working</option></select>
+      </label>
+      <label>2. It was a mistake → You shouldn't __________ (say) that.
+        <select id="s7e2-2" data-answer="have said"><option value="">--</option><option value="have said">have said</option><option value="say">say</option><option value="be saying">be saying</option></select>
+      </label>
+      <label>3. Maybe she forgot → She might __________ (leave) already.
+        <select id="s7e2-3" data-answer="have left"><option value="">--</option><option value="have left">have left</option><option value="leave">leave</option><option value="be leaving">be leaving</option></select>
+      </label>
+      <div id="s7e2-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS7Ex2()">Verificar</button>
+    </div>
+  </div>
+
+  <div id="s7-speak" class="tab-content">
+    <h3>Práctica de Speaking</h3>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con MUST'VE/SHOULD'VE</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "He looks tired. He __________ (must/have/work) all night."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "must've" /ˈmʌstəv/ — 2 sílabas, se reduce en inglés rápido a /ˈmʌsəv/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "You failed the exam. You __________ (should/have/study) more."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "should've" /ˈʃʊdəv/ — se reduce a /ˈʃʊdəv/ o /ˈʃʊdəv/ en habla rápida</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "She didn't come. She __________ (might/have/forgot) about it."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "might've" /ˈmaɪtəv/ — 2 sílabas, diptongo /aɪ/ en "might"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "He __________ (must/have/know) the answer. He's a genius."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "genius" /ˈdʒiːniəs/ — 3 sílabas, vocal larga /iː/ en "ge"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "I __________ (should/have/tell) you before. I'm sorry."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "sorry" /ˈsɒri/ — 2 sílabas, vocal corta /ɒ/ en "so"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. Completar con COULD'VE/WOULD'VE</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Completa: "I __________ (would/have/help) if you had asked me."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "would've" /ˈwʊdəv/ — 2 sílabas, se reduce en habla rápida</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Completa: "She __________ (could/have/be) a great singer if she had practiced."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "could've" /ˈkʊdəv/ — vocal corta /ʊ/ en "could"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Completa: "__________ you (would/have/do) the same thing in my position?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "position" /pəˈzɪʃən/ — 3 sílabas, sílaba fuerte en "ZI"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Completa: "What __________ you (could/have/done) differently?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "differently" /ˈdɪfrəntli/ — 4 sílabas, sílaba fuerte en "DIF"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Completa: "He __________ (could/have/be) at home, but he's not answering the phone."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "answering" /ˈɑːnsərɪŋ/ — 3 sílabas, sílaba fuerte en "AN"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma: "He is rich" a deducción pasada con MUST'VE.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "rich" /rɪtʃ/ — vocal corta /ɪ/, como "rich"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma: "She made a mistake" a arrepentimiento con SHOULD'VE.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "mistake" /mɪˈsteɪk/ — 2 sílabas, diptongo /eɪ/ en "steik"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: Tu amigo perdió su vuelo. Di: "You should have arrived earlier! You might have caught the plane."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "plane" /pleɪn/ — diptongo /eɪ/ largo, como "plein"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: No te invitaron a una fiesta. Di: "They must have forgotten about me."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "forgotten" /fərˈɡɒtən/ — 3 sílabas, sílaba fuerte en "GOT"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma: "Maybe he left" a deducción con MIGHT'VE.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "left" /lɛft/ — vocal corta /ɛ/, como "left"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafíos</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: ¿Qué habrías hecho diferente si hubieras estudiado más? Usa WOULD'VE.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "different" /ˈdɪfrənt/ — 3 sílabas, sílaba fuerte en "DIF"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "Debí haber estudiado más para el examen."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "exam" /ɪɡˈzæm/ — 2 sílabas, sílaba fuerte en "ZAM"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Opina: "Si pudieras volver al pasado, ¿qué habrías hecho diferente?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "back" /bæk/ — vocal corta /æ/, como "bak"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Describe: "Look at this empty plate. They __________ (must/have/eat) everything!"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "plate" /pleɪt/ — diptongo /eɪ/ largo, como "pleit"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversación: "What do you think someone should have done differently in a famous movie?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "famous" /ˈfeɪmiəs/ — 3 sílabas, sílaba fuerte en "FA"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== S8 ===================== -->
+<div id="session-8" class="session hidden">
+  <div class="session-header"><h2>S8: First and Second Conditional</h2><p>Primer y segundo condicional &mdash; Situaciones reales e irreales</p></div>
+  <div class="tabs"><button class="active" onclick="switchTab(this,'s8-gram')">Gramática</button><button onclick="switchTab(this,'s8-vocab')">Vocabulario</button><button onclick="switchTab(this,'s8-ex')">Ejercicios</button><button onclick="switchTab(this,'s8-speak')">Speaking</button></div>
+
+  <div id="s8-gram" class="tab-content">
+    <h3>First Conditional</h3>
+    <div class="grammar-box">
+      <p><strong>IF + Present Simple, WILL + Infinitive</strong></p>
+      <p style="margin-top:8px;">Causa-efecto, situaciones reales o posibles.</p>
+    </div>
+    <div class="example">"<strong>IF</strong> you pay in cash, you <strong>will</strong> receive a discount."</div>
+    <div class="negative-box">"IF you <strong>don't</strong> pay in cash, you <strong>will not</strong> receive a discount."</div>
+    <div class="grammar-box">
+      <p><strong>Pregunta:</strong> "IF I pay in cash, <strong>will</strong> I receive a discount?"</p>
+    </div>
+    <div class="example">"<strong>If</strong> you do what you love, you <strong>will</strong> never work a day in your life." — Marc Anthony</div>
+
+    <h3>Second Conditional</h3>
+    <div class="grammar-box">
+      <p><strong>IF + Simple Past, WOULD + Infinitive</strong></p>
+      <p style="margin-top:8px;">Situaciones irreales, sueños, hipótesis.</p>
+      <p style="margin-top:6px;"><strong>Cambios en IF clause:</strong> can → could, will → would, be → <strong>were</strong> (todos los pronombres)</p>
+    </div>
+    <div class="example">"<strong>IF</strong> I <strong>were</strong> a millionaire, I <strong>would</strong> quit my job."</div>
+    <div class="grammar-box">
+      <p><strong>Preguntas:</strong></p>
+      <p>"What <strong>would</strong> you do all day <strong>IF</strong> you didn't have a job?"</p>
+      "<strong>IF</strong> you <strong>could</strong> be anyone else for a day, who <strong>would</strong> you be?"</p>
+    </div>
+
+    <div class="video-container"><iframe src="https://www.youtube.com/embed/lNoGoOPKdS4" title="First and Second Conditional" allowfullscreen></iframe></div>
+  </div>
+
+  <div id="s8-vocab" class="tab-content">
+    <h3>Vocabulario</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><div class="en">Conditional</div><div class="es">Condicional</div></div>
+      <div class="vocab-item"><div class="en">If</div><div class="es">Si</div></div>
+      <div class="vocab-item"><div class="en">Discount</div><div class="es">Descuento</div></div>
+      <div class="vocab-item"><div class="en">Cash</div><div class="es">Efectivo</div></div>
+      <div class="vocab-item"><div class="en">Millionaire</div><div class="es">Millonario</div></div>
+      <div class="vocab-item"><div class="en">Quit</div><div class="es">Dejar (trabajo)</div></div>
+      <div class="vocab-item"><div class="en">Dream</div><div class="es">Sueño</div></div>
+      <div class="vocab-item"><div class="en">Hypothesis</div><div class="es">Hipótesis</div></div>
+    </div>
+  </div>
+
+  <div id="s8-ex" class="tab-content">
+    <h3>Ejercicio 1: Elige First o Second Conditional</h3>
+    <div class="exercise">
+      <label>1. If it rains, I __________ (will / would) stay at home.
+        <select id="s8e1-1" data-answer="will"><option value="">--</option><option value="will">will</option><option value="would">would</option></select>
+      </label>
+      <label>2. If I __________ (have / had) more money, I would travel the world.
+        <select id="s8e1-2" data-answer="had"><option value="">--</option><option value="have">have</option><option value="had">had</option></select>
+      </label>
+      <label>3. If she studies hard, she __________ (will / would) pass the exam.
+        <select id="s8e1-3" data-answer="will"><option value="">--</option><option value="will">will</option><option value="would">would</option></select>
+      </label>
+      <label>4. If I __________ (was / were) you, I would apologize.
+        <select id="s8e1-4" data-answer="were"><option value="">--</option><option value="was">was</option><option value="were">were</option></select>
+      </label>
+      <div id="s8e1-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS8Ex1()">Verificar</button>
+    </div>
+
+    <h3>Ejercicio 2: Completa la oración condicional</h3>
+    <div class="exercise">
+      <label>1. If I __________ (be) a bird, I would fly.
+        <select id="s8e2-1" data-answer="were"><option value="">--</option><option value="am">am</option><option value="was">was</option><option value="were">were</option></select>
+      </label>
+      <label>2. If you __________ (eat) too much, you will feel sick.
+        <select id="s8e2-2" data-answer="eat"><option value="">--</option><option value="eat">eat</option><option value="ate">ate</option><option value="would eat">would eat</option></select>
+      </label>
+      <label>3. If they __________ (come) to the party, we would be happy.
+        <select id="s8e2-3" data-answer="came"><option value="">--</option><option value="come">come</option><option value="came">came</option><option value="would come">would come</option></select>
+      </label>
+      <label>4. If I __________ (win) the lottery, I will buy a house.
+        <select id="s8e2-4" data-answer="win"><option value="">--</option><option value="win">win</option><option value="won">won</option><option value="would win">would win</option></select>
+      </label>
+      <div id="s8e2-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS8Ex2()">Verificar</button>
+    </div>
+  </div>
+
+  <div id="s8-speak" class="tab-content">
+    <h3>Práctica de Speaking</h3>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con First Conditional</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "If you __________ (pay) in cash, you __________ (will/receive) a discount."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "discount" /ˈdɪskaʊnt/ — 2 sílabas, diptongo /aʊ/ en "count"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "If it __________ (rain) tomorrow, we __________ (will/stay) at home."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "tomorrow" /təˈmɒroʊ/ — 3 sílabas, sílaba fuerte en "MOR"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "If she __________ (study) hard, she __________ (will/pass) the exam."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "exam" /ɪɡˈzæm/ — 2 sílabas, la "x" suena como /ɡz/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "If you __________ (not/hurry), you __________ (will/miss) the bus."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "hurry" /ˈhʌri/ — 2 sílabas, vocal corta /ʌ/ en "hur"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "If I __________ (see) her, I __________ (will/tell) her the news."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "news" /njuːz/ — 1 sílaba, suena como "nyus"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. Completar con Second Conditional</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Completa: "If I __________ (be) you, I __________ (would/apologize)."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "apologize" /əˈpɒlədʒaɪz/ — 4 sílabas, sílaba fuerte en "POL"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Completa: "If I __________ (have) more money, I __________ (would/travel) the world."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "travel" /ˈtrævəl/ — 2 sílabas, vocal corta /æ/ en "tra"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Completa: "If she __________ (speak) English, she __________ (would/get) a better job."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "English" /ˈɪŋɡlɪʃ/ — 2 sílabas, vocal corta /ɪ/ en "In"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Completa: "If I __________ (win) the lottery, I __________ (would/buy) a house."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "lottery" /ˈlɒtəri/ — 3 sílabas, sílaba fuerte en "LOT"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Completa: "If they __________ (not/be) so busy, they __________ (would/help) us."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "busy" /ˈbɪzi/ — 2 sílabas, vocal corta /ɪ/ en "bu"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma de First a Second Conditional: "If I study hard, I will pass." → Situación hipotética.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "hard" /hɑːrd/ — vocal larga /ɑːr/, como "jard"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma: "If it rains, I will stay home" a Second Conditional (situación menos probable).</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "home" /hoʊm/ — diptongo /oʊ/ largo, como "jom"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: Un amigo no sabe qué hacer. Di: "If I were you, I would talk to your boss about it."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "boss" /bɒs/ — vocal corta /ɒ/, como "bos"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: Hablando del clima: "If it doesn't rain, we will have the picnic outside."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "picnic" /ˈpɪknɪk/ — 2 sílabas, ambas vocales son /ɪ/ (cortas)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma: "If I had wings, I would fly" a First Conditional (situación posible).</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "wings" /wɪŋz/ — 1 sílaba, la "ng" suena como /ŋ/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafíos</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: ¿Qué harías si ganaras la lotería mañana? Usa Second Conditional.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "million" /ˈmɪljən/ — 2 sílabas, sílaba fuerte en "MIL"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "Si no llueve mañana, iré al parque."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "park" /pɑːrk/ — vocal larga /ɑːrk/, como "park"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Opina: "Si pudieras ser cualquier persona por un día, ¿quién serías y por qué?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "anyone" /ˈɛniwʌn/ — 3 sílabas, sílaba fuerte en "EN"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Describe: "If you __________ (could) live anywhere in the world, where __________ (would) you choose?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "choose" /tʃuːz/ — vocal larga /uː/, como "chus"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversación: "What would you do differently if you could go back to school?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "school" /skuːl/ — vocal larga /uː/, como "skul"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== S9 ===================== -->
+<div id="session-9" class="session hidden">
+  <div class="session-header"><h2>S9: Prepositions: in / on / at</h2><p>Preposiciones de lugar y tiempo &mdash; Diferencias clave</p></div>
+  <div class="tabs"><button class="active" onclick="switchTab(this,'s9-gram')">Gramática</button><button onclick="switchTab(this,'s9-vocab')">Vocabulario</button><button onclick="switchTab(this,'s9-ex')">Ejercicios</button><button onclick="switchTab(this,'s9-speak')">Speaking</button></div>
+
+  <div id="s9-gram" class="tab-content">
+    <h3>Lugar</h3>
+    <table>
+      <tr><th>AT</th><th>ON</th><th>IN</th></tr>
+      <tr><td>En un punto (puerta, semáforo, redonda)</td><td>Sobre una superficie (piso, cama, mesa)</td><td>Dentro de un espacio 3D (caja, bolsillo, refrigerador)</td></tr>
+      <tr><td>Top / bottom / end</td><td>Derecha / izquierda</td><td>Territorio (país, ciudad)</td></tr>
+      <tr><td>Actividades grupales</td><td>Transporte público</td><td>Carro / van</td></tr>
+      <tr><td>Tiendas</td><td>Medios (TV, radio)</td><td>Agua</td></tr>
+      <tr><td>Home / work</td><td>Material impreso</td><td>Libro / foto</td></tr>
+    </table>
+
+    <h3>Tiempo</h3>
+    <table>
+      <tr><th>IN</th><th>AT</th><th>ON</th></tr>
+      <tr><td>Meses, estaciones, años</td><td>Hora / tiempo específico</td><td>Días</td></tr>
+      <tr><td>Partes del día (in the morning)</td><td>Comidas (at lunchtime)</td><td>Fechas</td></tr>
+      <tr><td>Períodos largos</td><td>Feriados</td><td>Partes de días específicos</td></tr>
+      <tr><td></td><td>At night, at the moment</td><td></td></tr>
+    </table>
+
+    <div class="warning-box"><strong>¡CUIDADO!</strong> "Last" y "Next" NO llevan preposición: <strong>next weekend</strong>, <strong>last summer</strong> (NO "next the weekend").</div>
+
+    <div class="example">"I'll see you <strong>on</strong> Monday."</div>
+    <div class="example">"The meeting is <strong>at</strong> 3pm."</div>
+    <div class="example">"She was born <strong>in</strong> March."</div>
+    <div class="example">"I'll visit you <strong>next</strong> week." (sin preposición)</div>
+
+    <div class="video-container"><iframe src="https://www.youtube.com/embed/_zhw3BUysUA" title="Prepositions in on at" allowfullscreen></iframe></div>
+  </div>
+
+  <div id="s9-vocab" class="tab-content">
+    <h3>Vocabulario</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><div class="en">Preposition</div><div class="es">Preposición</div></div>
+      <div class="vocab-item"><div class="en">Surface</div><div class="es">Superficie</div></div>
+      <div class="vocab-item"><div class="en">Territory</div><div class="es">Territorio</div></div>
+      <div class="vocab-item"><div class="en">Roundabout</div><div class="es">Glorieta</div></div>
+      <div class="vocab-item"><div class="en">Public transport</div><div class="es">Transporte público</div></div>
+      <div class="vocab-item"><div class="en">Printed material</div><div class="es">Material impreso</div></div>
+      <div class="vocab-item"><div class="en">Holiday</div><div class="es">Feriado / vacaciones</div></div>
+      <div class="vocab-item"><div class="en">Period</div><div class="es">Período</div></div>
+    </div>
+  </div>
+
+  <div id="s9-ex" class="tab-content">
+    <h3>Ejercicio 1: Elige in, on o at (lugar)</h3>
+    <div class="exercise">
+      <label>1. The book is __________ the table.
+        <select id="s9e1-1" data-answer="on"><option value="">--</option><option value="in">in</option><option value="on">on</option><option value="at">at</option></select>
+      </label>
+      <label>2. I'll meet you __________ the bus stop.
+        <select id="s9e1-2" data-answer="at"><option value="">--</option><option value="in">in</option><option value="on">on</option><option value="at">at</option></select>
+      </label>
+      <label>3. She lives __________ France.
+        <select id="s9e1-3" data-answer="in"><option value="">--</option><option value="in">in</option><option value="on">on</option><option value="at">at</option></select>
+      </label>
+      <label>4. The keys are __________ my pocket.
+        <select id="s9e1-4" data-answer="in"><option value="">--</option><option value="in">in</option><option value="on">on</option><option value="at">at</option></select>
+      </label>
+      <label>5. We are __________ home right now.
+        <select id="s9e1-5" data-answer="at"><option value="">--</option><option value="in">in</option><option value="on">on</option><option value="at">at</option></select>
+      </label>
+      <div id="s9e1-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS9Ex1()">Verificar</button>
+    </div>
+
+    <h3>Ejercicio 2: Elige in, on o at (tiempo)</h3>
+    <div class="exercise">
+      <label>1. I was born __________ 1995.
+        <select id="s9e2-1" data-answer="in"><option value="">--</option><option value="in">in</option><option value="on">on</option><option value="at">at</option></select>
+      </label>
+      <label>2. The class starts __________ 9am.
+        <select id="s9e2-2" data-answer="at"><option value="">--</option><option value="in">in</option><option value="on">on</option><option value="at">at</option></select>
+      </label>
+      <label>3. We have a meeting __________ Friday.
+        <select id="s9e2-3" data-answer="on"><option value="">--</option><option value="in">in</option><option value="on">on</option><option value="at">at</option></select>
+      </label>
+      <label>4. I love swimming __________ summer.
+        <select id="s9e2-4" data-answer="in"><option value="">--</option><option value="in">in</option><option value="on">on</option><option value="at">at</option></select>
+      </label>
+      <label>5. I'll see you __________ the weekend.
+        <select id="s9e2-5" data-answer="at"><option value="">--</option><option value="in">in</option><option value="on">on</option><option value="at">at</option></select>
+      </label>
+      <div id="s9e2-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS9Ex2()">Verificar</button>
+    </div>
+
+    <h3>Ejercicio 3: ¿Necesita preposición? (Last / Next)</h3>
+    <div class="exercise">
+      <label>1. I'll travel __________ (next / next the) summer.
+        <select id="s9e3-1" data-answer="next"><option value="">--</option><option value="next">next</option><option value="next the">next the</option></select>
+      </label>
+      <label>2. __________ (Last / Last the) winter was very cold.
+        <select id="s9e3-2" data-answer="Last"><option value="">--</option><option value="Last">Last</option><option value="Last the">Last the</option></select>
+      </label>
+      <label>3. I'll see you __________ (next / next the) Monday.
+        <select id="s9e3-3" data-answer="next"><option value="">--</option><option value="next">next</option><option value="next the">next the</option></select>
+      </label>
+      <div id="s9e3-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS9Ex3()">Verificar</button>
+    </div>
+  </div>
+
+  <div id="s9-speak" class="tab-content">
+    <h3>Práctica de Speaking</h3>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con IN/ON/AT (lugar)</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "I'll meet you __________ the cafe __________ 3pm."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "cafe" /ˈkæfeɪ/ — 2 sílabas, diptongo /eɪ/ al final, como "café"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "The book is __________ the table."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "table" /ˈteɪbəl/ — 2 sílabas, diptongo /eɪ/ en "ta"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "She lives __________ France."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "France" /fræns/ — vocal corta /æ/, como "frans"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "The keys are __________ my pocket."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "pocket" /ˈpɒkɪt/ — 2 sílabas, vocal corta /ɒ/ en "po"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "We are __________ home right now."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "right" /raɪt/ — diptongo /aɪ/ largo, como "rait"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. Completar con IN/ON/AT (tiempo)</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Completa: "I was born __________ 1995."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "born" /bɔːrn/ — vocal larga /ɔːr/, como "born"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Completa: "The class starts __________ 9am."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "class" /klæs/ — vocal corta /æ/, como "clas"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Completa: "We have a meeting __________ Friday."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "Friday" /ˈfraɪdeɪ/ — 2 sílabas, diptongo /aɪ/ en "Fri"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Completa: "I love swimming __________ summer."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "summer" /ˈsʌmər/ — 2 sílabas, vocal corta /ʌ/ en "sum"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Completa: "I'll see you __________ the weekend."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "weekend" /ˈwiːkɛnd/ — 2 sílabas, vocal larga /iː/ en "week"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Corrige el error: "I'll travel next the summer."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "next" /nɛkst/ — vocal corta /ɛ/, como "nekst"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Corrige: "The meeting is in 3pm."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "meeting" /ˈmiːtɪŋ/ — 2 sílabas, vocal larga /iː/ en "meet"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: Estás en una tienda. Pregunta: "Excuse me, where is the checkout? Is it on the first floor or the second floor?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "floor" /flɔːr/ — vocal larga /ɔːr/, como "flor"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: Pregunta por la hora: "What time does the train leave? Is it at 5pm or at 6pm?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "train" /treɪn/ — diptongo /eɪ/ largo, como "trein"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Corrige: "I was born in Monday."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "Monday" /ˈmʌndeɪ/ — 2 sílabas, vocal corta /ʌ/ en "Mon"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafíos</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: Describe tu rutina diaria usando IN, ON y AT.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "routine" /ruːˈtiːn/ — 2 sílabas, vocales largas /uː/ y /iː/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "El lunes voy a Londres en tren. Llego a las 3 de la tarde."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "London" /ˈlʌndən/ — 2 sílabas, vocal corta /ʌ/ en "Lon"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Opina: "¿Es más fácil aprender preposiciones de lugar o de tiempo? ¿Por qué?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "easier" /ˈiːziər/ — 3 sílabas, sílaba fuerte en "EA"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Describe: "I was born __________ [mes], __________ [año]. I work __________ [lugar]. I have lunch __________ 1pm."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "lunch" /lʌntʃ/ — vocal corta /ʌ/, como "lanch"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversación: "What do you usually do on Saturday mornings?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "usually" /ˈjuːʒuəli/ — 4 sílabas, sílaba fuerte en "U"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== S10 ===================== -->
+<div id="session-10" class="session hidden">
+  <div class="session-header"><h2>S10: Future II</h2><p>Will, Going to, Present Continuous &mdash; Diferentes formas de hablar del futuro</p></div>
+  <div class="tabs"><button class="active" onclick="switchTab(this,'s10-gram')">Gramática</button><button onclick="switchTab(this,'s10-vocab')">Vocabulario</button><button onclick="switchTab(this,'s10-ex')">Ejercicios</button><button onclick="switchTab(this,'s10-speak')">Speaking</button></div>
+
+  <div id="s10-gram" class="tab-content">
+    <h3>WILL + verbo infinitivo</h3>
+    <div class="grammar-box">
+      <p>Decisiones espontáneas, predicciones, ofertas, promesas, compromisos.</p>
+    </div>
+    <div class="example">"I <strong>will</strong> start my diet tomorrow and I <strong>won't</strong> give up. <strong>Will</strong> you support me?"</div>
+
+    <h3>BE GOING TO + verbo</h3>
+    <div class="grammar-box">
+      <p>Plan/intención para el futuro, certeza de llevar a cabo.</p>
+    </div>
+    <div class="example">"I <strong>am going to</strong> start eating healthier."</div>
+    <div class="example">"I <strong>am not going to</strong> eat junk food anymore."</div>
+
+    <h3>Present Continuous (futuro cercano)</h3>
+    <div class="grammar-box">
+      <p>Planes concretos, acuerdos, preparaciones ya fijadas, futuro cercano.</p>
+    </div>
+    <div class="example">"I <strong>am seeing</strong> the nutritionist later today."</div>
+
+    <div class="tip"><strong>Resumen rápido:</strong><br>
+      • WILL = decisión espontánea / predicción<br>
+      • GOING TO = plan / intención<br>
+      • PRESENT CONTINUOUS = plan concreto / compromiso</div>
+
+    <div class="video-container"><iframe src="https://www.youtube.com/embed/Rc0oMvTch1I" title="Future Tenses" allowfullscreen></iframe></div>
+  </div>
+
+  <div id="s10-vocab" class="tab-content">
+    <h3>Vocabulario</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><div class="en">Spontaneous</div><div class="es">Espontáneo</div></div>
+      <div class="vocab-item"><div class="en">Prediction</div><div class="es">Predicción</div></div>
+      <div class="vocab-item"><div class="en">Offer</div><div class="es">Oferta</div></div>
+      <div class="vocab-item"><div class="en">Promise</div><div class="es">Promesa</div></div>
+      <div class="vocab-item"><div class="en">Commitment</div><div class="es">Compromiso</div></div>
+      <div class="vocab-item"><div class="en">Plan</div><div class="es">Plan</div></div>
+      <div class="vocab-item"><div class="en">Intention</div><div class="es">Intención</div></div>
+      <div class="vocab-item"><div class="en">Nutritionist</div><div class="es">Nutricionista</div></div>
+      <div class="vocab-item"><div class="en">Give up</div><div class="es">Rendirse</div></div>
+      <div class="vocab-item"><div class="en">Junk food</div><div class="es">Comida rápida/chatarra</div></div>
+    </div>
+  </div>
+
+  <div id="s10-ex" class="tab-content">
+    <h3>Ejercicio 1: Elige will, going to o present continuous</h3>
+    <div class="exercise">
+      <label>1. Look at those clouds! It __________ (will / is going to / is raining) rain.
+        <select id="s10e1-1" data-answer="is going to"><option value="">--</option><option value="will">will</option><option value="is going to">is going to</option><option value="is raining">is raining</option></select>
+      </label>
+      <label>2. I __________ (will / am going to / am meeting) my dentist at 3pm today. I already booked the appointment.
+        <select id="s10e1-2" data-answer="am meeting"><option value="">--</option><option value="will">will</option><option value="am going to">am going to</option><option value="am meeting">am meeting</option></select>
+      </label>
+      <label>3. "The phone is ringing!" — "I __________ (will / am going to / am getting) it!"
+        <select id="s10e1-3" data-answer="will"><option value="">--</option><option value="will">will</option><option value="am going to">am going to</option><option value="am getting">am getting</option></select>
+      </label>
+      <label>4. She __________ (will / is going to / is moving) to London next month. She already has the ticket.
+        <select id="s10e1-4" data-answer="is moving"><option value="">--</option><option value="will">will</option><option value="is going to">is going to</option><option value="is moving">is moving</option></select>
+      </label>
+      <div id="s10e1-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS10Ex1()">Verificar</button>
+    </div>
+
+    <h3>Ejercicio 2: Transforma al futuro correcto</h3>
+    <div class="exercise">
+      <label>1. (spontaneous decision) I see a puppy → I __________ (adopt) it!
+        <select id="s10e2-1" data-answer="will"><option value="">--</option><option value="will">will</option><option value="am going to">am going to</option><option value="am">am</option></select>
+      </label>
+      <label>2. (preparation made) I __________ (travel) to Spain next month. I already bought the tickets.
+        <select id="s10e2-2" data-answer="am travelling"><option value="">--</option><option value="will">will</option><option value="am going to">am going to</option><option value="am travelling">am travelling</option></select>
+      </label>
+      <label>3. (prediction) She's eaten too much — she __________ (feel) sick.
+        <select id="s10e2-3" data-answer="is going to"><option value="">--</option><option value="will">will</option><option value="is going to">is going to</option><option value="feels">feels</option></select>
+      </label>
+      <div id="s10e2-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS10Ex2()">Verificar</button>
+    </div>
+  </div>
+
+  <div id="s10-speak" class="tab-content">
+    <h3>Práctica de Speaking</h3>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con WILL</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "The phone is ringing! I __________ (will/get) it!"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "ringing" /ˈrɪŋɪŋ/ — 2 sílabas, vocal corta /ɪ/ en "ring"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "I __________ (will/help) you carry those bags."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "carry" /ˈkæri/ — 2 sílabas, vocal corta /æ/ en "car"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "Don't worry, I __________ (will/fix) the problem."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "problem" /ˈprɒbləm/ — 2 sílabas, sílaba fuerte en "PRO"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "I promise I __________ (will/not/forget) your birthday."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "promise" /ˈprɒmɪs/ — 2 sílabas, vocal corta /ɒ/ en "pro"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "I predict it __________ (will/be) a great year."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "predict" /prɪˈdɪkt/ — 2 sílabas, sílaba fuerte en "DICT"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. Completar con GOING TO / PRESENT CONTINUOUS</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Completa: "Look at those clouds! It __________ (is going to/rain)."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "clouds" /klaʊdz/ — diptongo /aʊ/ largo, como "klawds"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Completa: "I __________ (am going to/eat) healthier from now on."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "healthier" /ˈhɛlθiər/ — 3 sílabas, sílaba fuerte en "HEALTH"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Completa: "I __________ (am meeting) my dentist at 3pm. I already booked the appointment."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dentist" /ˈdɛntɪst/ — 2 sílabas, vocal corta /ɛ/ en "den"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Completa: "She __________ (is moving) to London next month. She has the ticket."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "moving" /ˈmuːvɪŋ/ — 2 sílabas, vocal larga /uː/ en "mov"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Completa: "We __________ (are not going to/eat) junk food anymore."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "anymore" /ˌɛnimɔːr/ — 3 sílabas, sílaba fuerte en "MO"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma a decisión espontánea (WILL): "Veo un cachorro → I __________ (adopt) it!"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "puppy" /ˈpʌpi/ — 2 sílabas, vocal corta /ʌ/ en "pup"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma a plan hecho (GOING TO): "I have the tickets → I __________ (travel) to Spain."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "tickets" /ˈtɪkɪts/ — 2 sílabas, vocal corta /ɪ/ en "tic"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: Estás en una tienda. Di: "I will take this one." (decisión espontánea)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "take" /teɪk/ — diptongo /eɪ/ largo, como "teik"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: Hablando de un plan: "I'm meeting my friends for dinner on Saturday." (acuerdo concreto)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "friends" /frɛndz/ — 1 sílaba, vocal corta /ɛ/ en "fren"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma a predicción (GOING TO): "Look at those dark clouds! It __________ (rain)."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dark" /dɑːrk/ — vocal larga /ɑːr/, como "dark"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafíos</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: ¿Qué vas a hacer este fin de semana? Usa las 3 formas de futuro.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "weekend" /ˈwiːkɛnd/ — 2 sílabas, vocal larga /iː/ en "week"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "Mañana voy a empezar una dieta y no voy a comer comida chatarra."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "diet" /ˈdaɪət/ — 2 sílabas, diptongo /aɪ/ en "di"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Opina: "¿Cuándo es mejor usar WILL en vez de GOING TO?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "spontaneous" /spɒnˈteɪniəs/ — 4 sílabas, sílaba fuerte en "TE"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Describe: "In five years, I __________ (will) be living in __________. I __________ (will/also) have learned __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "learned" /lɜːrnd/ — 1 sílaba, vocal larga /ɜːr/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversación: "What are your plans for the future? Will you stay in this city?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "future" /ˈfjuːtʃər/ — 2 sílabas, la "u" suena como /juː/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== S11 ===================== -->
+<div id="session-11" class="session hidden">
+  <div class="session-header"><h2>S11: Common Mistakes</h2><p>Errores comunes &mdash; Diferencias entre palabras similares y falsos amigos</p></div>
+  <div class="tabs"><button class="active" onclick="switchTab(this,'s11-gram')">Gramática</button><button onclick="switchTab(this,'s11-vocab')">Vocabulario</button><button onclick="switchTab(this,'s11-ex')">Ejercicios</button><button onclick="switchTab(this,'s11-speak')">Speaking</button></div>
+
+  <div id="s11-gram" class="tab-content">
+    <h3>DO vs MAKE</h3>
+    <div class="grammar-box">
+      <p><strong>MAKE</strong> = manual / creación (make breakfast)</p>
+      <p><strong>DO</strong> = actividades no vinculadas a la creación (do homework, do sport)</p>
+    </div>
+    <div class="example">"If I <strong>make</strong> breakfast, will you <strong>do</strong> the dishes?"</div>
+
+    <h3>SAY vs TELL</h3>
+    <div class="grammar-box">
+      <p><strong>SAY</strong> = se enfoca en lo que se dice (SAY something)</p>
+      <p><strong>TELL</strong> = se enfoca en quién lo dice, necesita objeto indirecto (TELL me/you/her + something)</p>
+    </div>
+    <div class="example">"He <strong>told</strong> me that you often <strong>say</strong> inappropriate things at the dinner table."</div>
+
+    <h3>OTHER vs ANOTHER</h3>
+    <div class="grammar-box">
+      <p><strong>ANOTHER</strong> = uno más</p>
+      <p><strong>OTHER</strong> = algo diferente</p>
+    </div>
+    <div class="example">"Are there any <strong>other</strong> cafes close by? I'd like to get <strong>another</strong> coffee."</div>
+
+    <h3>AS vs LIKE</h3>
+    <div class="grammar-box">
+      <p><strong>AS</strong> = en el rol de alguien</p>
+      <p><strong>LIKE</strong> = comparando con alguien/algo</p>
+    </div>
+    <div class="example">"<strong>As</strong> a friend, I feel I should tell you that you look exactly <strong>like</strong> your mother in that dress."</div>
+
+    <h3>Double Negative (Doble Negación)</h3>
+    <div class="negative-box">
+      <p>Dos negaciones se cancelan entre sí.</p>
+    </div>
+    <table>
+      <tr><th>Doble negación (INCORRECTO)</th><th>Correcto</th></tr>
+      <tr><td>"She hardly studies"</td><td>"She almost doesn't study."</td></tr>
+      <tr><td>"We have no siblings"</td><td>"We don't have any siblings."</td></tr>
+      <tr><td>"I saw nobody outside"</td><td>"I didn't see anybody outside."</td></tr>
+    </table>
+
+    <h3>Falsos Amigos</h3>
+    <table class="false-friends-table">
+      <tr><th>Español</th><th>En Inglés (significado real)</th><th>En Inglés (falso amigo)</th></tr>
+      <tr><td>Pariente</td><td>relative</td><td>parent = padre/madre</td></tr>
+      <tr><td>Sopa</td><td>soup</td><td>soap = jabón</td></tr>
+      <tr><td>Sensible</td><td>sensitive</td><td>sensible = sensato</td></tr>
+      <tr><td>Librería</td><td>bookstore</td><td>library = biblioteca</td></tr>
+      <tr><td>Actual</td><td>current</td><td>actual = real</td></tr>
+      <tr><td>Carpeta</td><td>folder</td><td>carpet = alfombra</td></tr>
+      <tr><td>Contestar</td><td>answer</td><td>contest = concurso</td></tr>
+      <tr><td>Embarazada</td><td>pregnant</td><td>embarrassed = avergonzada</td></tr>
+      <tr><td>Éxito</td><td>success</td><td>exit = salida</td></tr>
+      <tr><td>Fábrica</td><td>factory</td><td>fabric = tela</td></tr>
+      <tr><td>Largo</td><td>long</td><td>large = grande</td></tr>
+      <tr><td>Introducir</td><td>to insert</td><td>introduce = presentar a alguien</td></tr>
+      <tr><td>Realizar</td><td>carry out</td><td>realize = darse cuenta</td></tr>
+    </table>
+  </div>
+
+  <div id="s11-vocab" class="tab-content">
+    <h3>Vocabulario de Falsos Amigos</h3>
+    <div class="vocab-grid">
+      <div class="vocab-item"><div class="en">Relative</div><div class="es">Pariente</div></div>
+      <div class="vocab-item"><div class="en">Parent</div><div class="es">Padre / Madre</div></div>
+      <div class="vocab-item"><div class="en">Soup</div><div class="es">Sopa</div></div>
+      <div class="vocab-item"><div class="en">Soap</div><div class="es">Jabón</div></div>
+      <div class="vocab-item"><div class="en">Sensitive</div><div class="es">Sensible</div></div>
+      <div class="vocab-item"><div class="en">Bookstore</div><div class="es">Librería</div></div>
+      <div class="vocab-item"><div class="en">Library</div><div class="es">Biblioteca</div></div>
+      <div class="vocab-item"><div class="en">Current</div><div class="es">Actual (presente)</div></div>
+      <div class="vocab-item"><div class="en">Folder</div><div class="es">Carpeta</div></div>
+      <div class="vocab-item"><div class="en">Carpet</div><div class="es">Alfombra</div></div>
+      <div class="vocab-item"><div class="en">Answer</div><div class="es">Respuesta / contestar</div></div>
+      <div class="vocab-item"><div class="en">Contest</div><div class="es">Concurso</div></div>
+      <div class="vocab-item"><div class="en">Pregnant</div><div class="es">Embarazada</div></div>
+      <div class="vocab-item"><div class="en">Embarrassed</div><div class="es">Avergonzada/o</div></div>
+      <div class="vocab-item"><div class="en">Success</div><div class="es">Éxito</div></div>
+      <div class="vocab-item"><div class="en">Exit</div><div class="es">Salida</div></div>
+      <div class="vocab-item"><div class="en">Factory</div><div class="es">Fábrica</div></div>
+      <div class="vocab-item"><div class="en">Fabric</div><div class="es">Tela</div></div>
+      <div class="vocab-item"><div class="en">Long</div><div class="es">Largo</div></div>
+      <div class="vocab-item"><div class="en">Large</div><div class="es">Grande</div></div>
+      <div class="vocab-item"><div class="en">Realize</div><div class="es">Darse cuenta</div></div>
+      <div class="vocab-item"><div class="en">Introduce</div><div class="es">Presentar a alguien</div></div>
+    </div>
+  </div>
+
+  <div id="s11-ex" class="tab-content">
+    <h3>Ejercicio 1: DO o MAKE</h3>
+    <div class="exercise">
+      <label>1. I need to __________ my homework.
+        <select id="s11e1-1" data-answer="do"><option value="">--</option><option value="do">do</option><option value="make">make</option></select>
+      </label>
+      <label>2. She will __________ dinner tonight.
+        <select id="s11e1-2" data-answer="make"><option value="">--</option><option value="do">do</option><option value="make">make</option></select>
+      </label>
+      <label>3. Let's __________ exercise.
+        <select id="s11e1-3" data-answer="do"><option value="">--</option><option value="do">do</option><option value="make">make</option></select>
+      </label>
+      <label>4. He wants to __________ a phone call.
+        <select id="s11e1-4" data-answer="make"><option value="">--</option><option value="do">do</option><option value="make">make</option></select>
+      </label>
+      <div id="s11e1-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS11Ex1()">Verificar</button>
+    </div>
+
+    <h3>Ejercicio 2: Falsos Amigos</h3>
+    <div class="exercise">
+      <p>¿Cuál es la traducción correcta al inglés?</p>
+      <label>1. "Librería" se traduce como:
+        <select id="s11e2-1" data-answer="bookstore"><option value="">--</option><option value="library">library</option><option value="bookstore">bookstore</option></select>
+      </label>
+      <label>2. "Embarazada" se traduce como:
+        <select id="s11e2-2" data-answer="pregnant"><option value="">--</option><option value="embarrassed">embarrassed</option><option value="pregnant">pregnant</option></select>
+      </label>
+      <label>3. "Fábrica" se traduce como:
+        <select id="s11e2-3" data-answer="factory"><option value="">--</option><option value="fabric">fabric</option><option value="factory">factory</option></select>
+      </label>
+      <label>4. "Carpeta" se traduce como:
+        <select id="s11e2-4" data-answer="folder"><option value="">--</option><option value="carpet">carpet</option><option value="folder">folder</option></select>
+      </label>
+      <label>5. "Sensible" se traduce como:
+        <select id="s11e2-5" data-answer="sensitive"><option value="">--</option><option value="sensible">sensible</option><option value="sensitive">sensitive</option></select>
+      </label>
+      <div id="s11e2-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS11Ex2()">Verificar</button>
+    </div>
+
+    <h3>Ejercicio 3: SAY o TELL</h3>
+    <div class="exercise">
+      <label>1. He __________ me that he was tired.
+        <select id="s11e3-1" data-answer="told"><option value="">--</option><option value="said">said</option><option value="told">told</option></select>
+      </label>
+      <label>2. She __________ that she loved the gift.
+        <select id="s11e3-2" data-answer="said"><option value="">--</option><option value="said">said</option><option value="told">told</option></select>
+      </label>
+      <label>3. Can you __________ me the truth?
+        <select id="s11e3-3" data-answer="tell"><option value="">--</option><option value="say">say</option><option value="tell">tell</option></select>
+      </label>
+      <label>4. What did he __________ at the meeting?
+        <select id="s11e3-4" data-answer="say"><option value="">--</option><option value="say">say</option><option value="tell">tell</option></select>
+      </label>
+      <div id="s11e3-feedback"></div>
+      <button class="btn btn-primary" onclick="checkS11Ex3()">Verificar</button>
+    </div>
+  </div>
+
+  <div id="s11-speak" class="tab-content">
+    <h3>Práctica de Speaking</h3>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. DO/MAKE y SAY/TELL</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "I need to __________ (do/make) my homework."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "homework" /ˈhoʊmwɜːrk/ — 2 sílabas, diptongo /oʊ/ largo en "ho"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "She will __________ (do/make) dinner tonight."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dinner" /ˈdɪnər/ — 2 sílabas, vocal corta /ɪ/ en "din"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "He __________ (told/said) me that you often __________ (say/tell) inappropriate things."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "inappropriate" /ˌɪnəˈprəʊpriət/ — 5 sílabas, sílaba fuerte en "PRO"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "Can you __________ (tell/say) me the truth?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "truth" /truːθ/ — 1 sílaba, la "th" suena como /θ/ (sonido dental sin vibración)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "What did he __________ (say/tell) at the meeting?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "meeting" /ˈmiːtɪŋ/ — 2 sílabas, vocal larga /iː/ en "meet"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. OTHER/ANOTHER y AS/LIKE</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Completa: "Are there any __________ (other/another) cafes close by?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "other" /ˈʌðər/ — 2 sílabas, la "th" suena como /ð/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Completa: "I'd like to get __________ (other/another) coffee."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "coffee" /ˈkɒfi/ — 2 sílabas, vocal corta /ɒ/ en "cof"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Completa: "__________ (As/Like) a friend, I should tell you the truth."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "truth" /truːθ/ — vocal larga /uː/, la "th" dental</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Completa: "You look exactly __________ (as/like) your mother."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "exactly" /ɪɡˈzæktli/ — 3 sílabas, sílaba fuerte en "ZACT"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Completa: "Is there __________ (other/another) way to get there?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "way" /weɪ/ — diptongo /eɪ/ largo, como "wei"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Falsos amigos y doble negación</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Traduce correctamente: "Librería" (donde venden libros).</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "bookstore" /ˈbʊkstɔːr/ — 2 sílabas, vocal corta /ʊ/ en "book"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Traduce: "Embarazada" (pregnant).</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "pregnant" /ˈprɛɡnənt/ — 2 sílabas, sílaba fuerte en "PREG"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Corrige la doble negación: "I don't have no money."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "money" /ˈmʌni/ — 2 sílabas, vocal corta /ʌ/ en "mon"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Corrige: "I didn't see nobody outside."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "outside" /ˌaʊtˈsaɪd/ — 2 sílabas, diptongo /aʊ/ en "out"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Traduce: "Actual" (current, no actual).</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "current" /ˈkʌrənt/ — 2 sílabas, vocal corta /ʌ/ en "cur"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafíos</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: ¿Qué errores comunes de inglés has cometido? Usa DO/MAKE correctamente.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "mistake" /mɪˈsteɪk/ — 2 sílabas, diptongo /eɪ/ en "stake"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "Me dijo que dijiste algo inapropiado en la cena."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dinner" /ˈdɪnər/ — 2 sílabas, vocal corta /ɪ/ en "din"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Opina: "¿Cuál es el falso amigo más peligroso para los hispanohablantes?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dangerous" /ˈdeɪndʒərəs/ — 3 sílabas, sílaba fuerte en "DAN"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Describe: "I made breakfast, but I didn't do the dishes. She told me to do them."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dishes" /ˈdɪʃɪz/ — 2 sílabas, la "sh" suena como /ʃ/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversación: "What's the most embarrassing mistake you've ever made in English?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "embarrassing" /ɪmˈbærəsɪŋ/ — 4 sílabas, sílaba fuerte en "BAR"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+// ===== SESSION DATA =====
+var SESSIONS={
+  2:{title:"Present Perfect I",total:10},
+  3:{title:"Present Perfect II",total:15},
+  4:{title:"Reflexive Pronouns",total:10},
+  5:{title:"Present Perfect Continuous",total:10},
+  6:{title:"Modal Verbs II",total:8},
+  7:{title:"Modals in the Past",total:8},
+  8:{title:"First & Second Conditional",total:8},
+  9:{title:"Prepositions: in/on/at",total:13},
+  10:{title:"Future II",total:8},
+  11:{title:"Common Mistakes",total:12}
+};
+
+// ===== NAVIGATION =====
+function showSession(n){
+  var sessions=document.querySelectorAll('.session');
+  for(var i=0;i<sessions.length;i++){sessions[i].classList.add('hidden');}
+  var navItems=document.querySelectorAll('.navbar a');
+  for(var i=0;i<navItems.length;i++){navItems[i].classList.remove('active');}
+  if(n==='home'){
+    document.getElementById('session-home').classList.remove('hidden');
+    document.getElementById('nav-home').classList.add('active');
+    renderHome();
+  }else{
+    var el=document.getElementById('session-'+n);
+    if(el){el.classList.remove('hidden');}
+    var nav=document.getElementById('nav-s'+n);
+    if(nav){nav.classList.add('active');}
+  }
+  window.scrollTo(0,0);
+}
+
+function switchTab(btn,tabId){
+  var parent=btn.parentElement;
+  var tabs=parent.querySelectorAll('button');
+  for(var i=0;i<tabs.length;i++){tabs[i].classList.remove('active');}
+  btn.classList.add('active');
+  var container=parent.parentElement;
+  var contents=container.querySelectorAll('.tab-content');
+  for(var i=0;i<contents.length;i++){contents[i].style.display='none';}
+  document.getElementById(tabId).style.display='block';
+}
+
+// ===== CLASSIFICATION EXERCISES =====
+var classifySelections={};
+
+function selectClassifyGroup(btn,groupId){
+  var group=document.getElementById(groupId+'-items');
+  var buttons=group.querySelectorAll('.classify-choices .choice-btn');
+  for(var i=0;i<buttons.length;i++){buttons[i].classList.remove('selected');}
+  btn.classList.add('selected');
+  var value=btn.getAttribute('data-value');
+  var items=group.querySelectorAll('.classify-grid .item');
+  for(var i=0;i<items.length;i++){
+    if(items[i].classList.contains('selected')){
+      items[i].setAttribute('data-group',value);
+      items[i].style.background=value==='regular'?'#d4edda':value==='irregular'?'#f8d7da':value==='singular'?'#d4edda':'#f8d7da';
+    }
+  }
+}
+
+function classifyItem(item){
+  item.classList.toggle('selected');
+}
+
+// ===== PROGRESS TRACKING =====
+function getProgress(){
+  try{
+    var p=localStorage.getItem('poliglota-b1-progress');
+    return p?JSON.parse(p):{};
+  }catch(e){return {};}
+}
+
+function saveProgress(progress){
+  try{localStorage.setItem('poliglota-b1-progress',JSON.stringify(progress));}catch(e){}
+}
+
+function markExerciseComplete(sessionId,exerciseId){
+  var progress=getProgress();
+  if(!progress[sessionId])progress[sessionId]={};
+  if(!progress[sessionId].exercises)progress[sessionId].exercises={};
+  progress[sessionId].exercises[exerciseId]=true;
+  saveProgress(progress);
+  updateSessionProgress(sessionId);
+}
+
+function getSessionPercent(sessionId){
+  var progress=getProgress();
+  if(!progress[sessionId])return 0;
+  var total=SESSIONS[sessionId]?SESSIONS[sessionId].total:10;
+  var done=0;
+  if(progress[sessionId].exercises){
+    var keys=Object.keys(progress[sessionId].exercises);
+    for(var i=0;i<keys.length;i++){
+      if(progress[sessionId].exercises[keys[i]])done++;
+    }
+  }
+  return Math.min(100,Math.round((done/total)*100));
+}
+
+function updateSessionProgress(sessionId){
+  // Update card on home if visible
+  var card=document.getElementById('card-s'+sessionId);
+  if(card){
+    var pct=getSessionPercent(sessionId);
+    var bar=card.querySelector('.progress-bar');
+    if(bar)bar.style.width=pct+'%';
+    var txt=card.querySelector('span');
+    if(txt)txt.textContent=pct+'% completado';
+  }
+}
+
+function renderHome(){
+  var container=document.getElementById('session-cards');
+  container.innerHTML='';
+  var totalSessions=10;
+  var totalPct=0;
+  for(var s=2;s<=11;s++){
+    var pct=getSessionPercent(s);
+    totalPct+=pct;
+    var card=document.createElement('div');
+    card.className='session-card';
+    card.id='card-s'+s;
+    card.onclick=(function(num){return function(){showSession(num);};})(s);
+    card.innerHTML='<h3>S'+s+': '+SESSIONS[s].title+'</h3><p>Sesión '+((s-1))+' de 10</p><div class="card-progress"><div class="progress-bar-container"><div class="progress-bar" style="width:'+pct+'%"></div></div><span>'+pct+'% completado</span></div>';
+    container.appendChild(card);
+  }
+  var avgPct=Math.round(totalPct/totalSessions);
+  document.getElementById('total-progress').style.width=avgPct+'%';
+  document.getElementById('progress-text').textContent=avgPct+'% completado';
+}
+
+// ===== FEEDBACK HELPERS =====
+function showFeedback(id,correctCount,totalCount){
+  var el=document.getElementById(id);
+  if(correctCount===totalCount){
+    el.innerHTML='<div class="feedback correct">¡Correcto! '+correctCount+'/'+totalCount+'</div>';
+  }else{
+    el.innerHTML='<div class="feedback incorrect">Incorrecto. '+correctCount+'/'+totalCount+'. Intenta de nuevo.</div>';
+  }
+}
+
+function checkSelectGroup(prefix,start,end,sessionId,feedbackId){
+  var correct=0;
+  var total=0;
+  for(var i=start;i<=end;i++){
+    var sel=document.getElementById(prefix+'-'+i);
+    if(sel){
+      total++;
+      var val=sel.value.toLowerCase().trim();
+      var ans=sel.getAttribute('data-answer').toLowerCase().trim();
+      if(val===ans){correct++;sel.style.borderColor='var(--success)';}
+      else{sel.style.borderColor='var(--danger)';}
+    }
+  }
+  showFeedback(feedbackId,correct,total);
+  if(correct===total)markExerciseComplete(sessionId,feedbackId);
+}
+
+function checkInputGroup(prefix,start,end,sessionId,feedbackId){
+  var correct=0;
+  var total=0;
+  for(var i=start;i<=end;i++){
+    var inp=document.getElementById(prefix+'-'+i);
+    if(inp){
+      total++;
+      var val=inp.value.toLowerCase().trim();
+      var ans=inp.getAttribute('data-answer').toLowerCase().trim();
+      if(val===ans){correct++;inp.style.borderColor='var(--success)';}
+      else{inp.style.borderColor='var(--danger)';}
+    }
+  }
+  showFeedback(feedbackId,correct,total);
+  if(correct===total)markExerciseComplete(sessionId,feedbackId);
+}
+
+// ===== EXERCISE CHECKERS =====
+function checkS2Ex1(){checkInputGroup('s2e1',1,5,2,'s2e1-feedback');}
+function checkS2Ex2(){
+  var correct=0;var total=0;
+  var items=document.querySelectorAll('#s2e2-items .classify-grid .item');
+  for(var i=0;i<items.length;i++){
+    total++;
+    if(items[i].getAttribute('data-group')===items[i].getAttribute('data-correct')){
+      correct++;items[i].style.borderColor='var(--success)';
+    }else{
+      items[i].style.borderColor='var(--danger)';
+    }
+  }
+  showFeedback('s2e2-feedback',correct,total);
+  if(correct===total)markExerciseComplete(2,'s2e2-feedback');
+}
+
+function checkS3Ex1(){checkSelectGroup('s3e1',1,5,3,'s3e1-feedback');}
+function checkS3Ex2(){checkSelectGroup('s3e2',1,4,3,'s3e2-feedback');}
+function checkS3Ex3(){checkInputGroup('s3e3',1,5,3,'s3e3-feedback');}
+
+function checkS4Ex1(){checkSelectGroup('s4e1',1,5,4,'s4e1-feedback');}
+function checkS4Ex2(){
+  var correct=0;var total=0;
+  var items=document.querySelectorAll('#s4e2-items .classify-grid .item');
+  for(var i=0;i<items.length;i++){
+    total++;
+    if(items[i].getAttribute('data-group')===items[i].getAttribute('data-correct')){
+      correct++;items[i].style.borderColor='var(--success)';
+    }else{
+      items[i].style.borderColor='var(--danger)';
+    }
+  }
+  showFeedback('s4e2-feedback',correct,total);
+  if(correct===total)markExerciseComplete(4,'s4e2-feedback');
+}
+
+function checkS5Ex1(){checkSelectGroup('s5e1',1,4,5,'s5e1-feedback');}
+function checkS5Ex2(){checkInputGroup('s5e2',1,3,5,'s5e2-feedback');}
+
+function checkS6Ex1(){checkSelectGroup('s6e1',1,4,6,'s6e1-feedback');}
+function checkS6Ex2(){checkSelectGroup('s6e2',1,3,6,'s6e2-feedback');}
+
+function checkS7Ex1(){checkSelectGroup('s7e1',1,4,7,'s7e1-feedback');}
+function checkS7Ex2(){checkSelectGroup('s7e2',1,3,7,'s7e2-feedback');}
+
+function checkS8Ex1(){checkSelectGroup('s8e1',1,4,8,'s8e1-feedback');}
+function checkS8Ex2(){checkSelectGroup('s8e2',1,4,8,'s8e2-feedback');}
+
+function checkS9Ex1(){checkSelectGroup('s9e1',1,5,9,'s9e1-feedback');}
+function checkS9Ex2(){checkSelectGroup('s9e2',1,5,9,'s9e2-feedback');}
+function checkS9Ex3(){checkSelectGroup('s9e3',1,3,9,'s9e3-feedback');}
+
+function checkS10Ex1(){checkSelectGroup('s10e1',1,4,10,'s10e1-feedback');}
+function checkS10Ex2(){checkSelectGroup('s10e2',1,3,10,'s10e2-feedback');}
+
+function checkS11Ex1(){checkSelectGroup('s11e1',1,4,11,'s11e1-feedback');}
+function checkS11Ex2(){checkSelectGroup('s11e2',1,5,11,'s11e2-feedback');}
+function checkS11Ex3(){checkSelectGroup('s11e3',1,4,11,'s11e3-feedback');}
+
+// ===== INIT =====
+showSession('home');
+</script>
+</body>
+</html>
