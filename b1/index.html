@@ -78,6 +78,10 @@ textarea{resize:vertical;min-height:80px;}
 .positive-box{background:#f0fff4;border-left:4px solid var(--success);padding:14px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0;}
 .tip{background:#eef9ff;border-left:4px solid var(--secondary);padding:12px;border-radius:0 var(--radius) var(--radius) 0;margin:10px 0;}
 .false-friends-table td:nth-child(2),.false-friends-table td:nth-child(4){font-weight:600;color:var(--danger);}
+.pronunciation-tip{background:#fdf2f8;border:1px solid #fbcfe8;border-radius:6px;padding:6px 10px;margin:4px 0;font-size:.82rem;color:#9d174d;}
+.speak-progress{font-size:.85rem;font-weight:600;color:var(--primary);margin:8px 0;}
+.exercise-group{margin:16px 0 8px;padding:8px 0;border-bottom:1px solid var(--border);}
+.exercise-group h4{color:var(--text-light);font-size:.95rem;margin-bottom:8px;}
 .classify-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:8px 0;}
 .classify-grid .item{background:var(--card-bg);padding:8px;border:2px solid var(--border);border-radius:8px;cursor:pointer;text-align:center;font-weight:500;transition:.2s;user-select:none;}
 .classify-grid .item.selected{border-color:var(--primary);background:#f0ecfc;}
@@ -179,14 +183,18 @@ textarea{resize:vertical;min-height:80px;}
   <div id="s2-vocab" class="tab-content">
     <h3>Vocabulario de la SesiÃ³n</h3>
     <div class="vocab-grid">
-      <div class="vocab-item"><div class="en">Present Perfect</div><div class="es">Presente perfecto</div></div>
-      <div class="vocab-item"><div class="en">Past participle</div><div class="es">Participio pasado</div></div>
-      <div class="vocab-item"><div class="en">Regular verbs</div><div class="es">Verbos regulares</div></div>
-      <div class="vocab-item"><div class="en">Irregular verbs</div><div class="es">Verbos irregulares</div></div>
+      <div class="vocab-item"><div class="en">Played</div><div class="es">JugÃ³/deportÃ³</div></div>
+      <div class="vocab-item"><div class="en">Gone</div><div class="es">Fue/ido</div></div>
+      <div class="vocab-item"><div class="en">Visited</div><div class="es">VisitÃ³</div></div>
+      <div class="vocab-item"><div class="en">Eaten</div><div class="es">ComiÃ³</div></div>
+      <div class="vocab-item"><div class="en">Lived</div><div class="es">ViviÃ³</div></div>
       <div class="vocab-item"><div class="en">Experience</div><div class="es">Experiencia</div></div>
-      <div class="vocab-item"><div class="en">Tennis</div><div class="es">Tenis</div></div>
       <div class="vocab-item"><div class="en">Supermarket</div><div class="es">Supermercado</div></div>
+      <div class="vocab-item"><div class="en">Tennis</div><div class="es">Tenis</div></div>
+      <div class="vocab-item"><div class="en">Regular verbs</div><div class="es">Verbos regulares (-ed)</div></div>
+      <div class="vocab-item"><div class="en">Irregular verbs</div><div class="es">Verbos irregulares (cambian forma)</div></div>
     </div>
+    <div class="tip"><strong>Libros sugeridos:</strong> EGiU Units 7-10 (Present Perfect: afirmativas). EViU Units 1-3 (Experiencias y vida cotidiana).</div>
   </div>
 
   <div id="s2-ex" class="tab-content">
@@ -237,10 +245,142 @@ textarea{resize:vertical;min-height:80px;}
 
   <div id="s2-speak" class="tab-content">
     <h3>PrÃ¡ctica de Speaking</h3>
-    <div class="exercise">
-      <label>Escribe 5 oraciones sobre experiencias de vida usando el Present Perfect. Piensa en viajes, comidas, actividades, etc.</label>
-      <textarea id="s2-speak1" rows="6" placeholder="Ej: I have visited Japan. / I have eaten sushi many times."></textarea>
-      <button class="btn btn-primary" onclick="alert('Â¡Buen trabajo! Revisa que uses have/has + participio pasado.')">Revisar</button>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar oraciones con el Present Perfect</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa la oraciÃ³n: "I __________ (visit) the new restaurant downtown."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> vi-SI-ted / vi-SI-tings â€” /ËˆvÉªzÉªtÉªd/ â€” la sÃ­laba fuerte es "SI"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "She __________ (eat) sushi many times in her life."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> e-A-ten / I-TN â€” /ËˆiËtÉ™n/ â€” "ea" suena como /iË/ (largo)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "We __________ (play) tennis since last summer."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> PLAYD â€” /pleÉªd/ â€” vocal larga /eÉª/, suena como "pleyd"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "They __________ (go) to the supermarket twice this week."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> GON â€” /É¡É’n/ â€” vocal corta, como "gon"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "He __________ (live) in Madrid for five years."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> LIvd â€” /lÉªvd/ â€” la "e" de lived se pronuncia /Éª/ (corta)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. FormaciÃ³n de preguntas</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Forma una pregunta: Â¿Alguna vez han comido paella?</p>
+        <div class="pronunciation-tip"><strong>ContracciÃ³n:</strong> "Have they" se pronuncia /ËˆhÃ¦v Ã°eÉª/ â€” la "h" suena suave</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Forma una pregunta: Â¿Ha ido usted al cine recientemente?</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> SIN-see â€” /ËˆsÉªnsli/ â€” "has" se reduce en preguntas</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Forma una pregunta: Â¿Han vivido ustedes aquÃ­ mucho tiempo?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "Have you" suena como /ËˆhÃ¦v jÉ™/ â€” la "you" se reduce</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Forma una pregunta: Â¿Has jugado algÃºn deporte hoy?</p>
+        <div class="pronunciation-tip"><strong>ContracciÃ³n:</strong> "Have you" â†’ /ËˆhÃ¦v jÉ™/ o /ËˆhÃ¦vjÉ™/ en inglÃ©s rÃ¡pido</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Forma una pregunta: Â¿Ha visitado Ã©l Europa antes?</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> EU-ropa /jÊŠËˆroÊŠpÉ™/ â€” sÃ­laba fuerte en "ro"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma a negativa: "I have been to London."</p>
+        <div class="pronunciation-tip"><strong>ContracciÃ³n:</strong> "haven't" se pronuncia /ËˆhÃ¦vÉ™nt/ â€” dos sÃ­labas</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma a negativa: "She has eaten the cake."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> "hasn't" /ËˆhÃ¦zÉ™nt/ â€” la "z" suena como /z/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: EstÃ¡s en una fiesta. PregÃºntale a alguien: Â¿Ha viajado a Asia?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "travelled" /ËˆtrÃ¦vÉ™ld/ â€” dos sÃ­labas, vocal corta en "tra"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: Un amigo no ha comido. Di: "You haven't eaten? That's terrible!"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "terrible" /ËˆterÉ™bÉ™l/ â€” la "r" suena suave, 3 sÃ­labas</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma a pregunta: "They have gone home."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> GONE home â€” /É¡É’n hoÊŠm/ â€” "gone" vocal corta, "home" vocal larga</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafÃ­os</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: Â¿QuÃ© 3 cosas has hecho hoy que nunca habÃ­as hecho antes?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "never" /ËˆnevÉ™r/ â€” 3 sÃ­labas, vocal corta en "ne"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "Nunca he comido pizza italiana."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "Italian" /ÉªËˆtÃ¦ljÉ™n/ â€” la "t" suena como "ch" suave</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Describe una foto: "Look at this picture. I __________ (be) to this beach and I __________ (play) volleyball there."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> vo-ley-BOL /voÊŠliËˆbÉ”Ël/ â€” sÃ­laba fuerte en "BOL"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Opina: "Have you ever tried exotic food? In my opinion, everyone __________ (should try) sushi at least once."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "opinion" /É™ËˆpÉªnjÉ™n/ â€” 3 sÃ­labas, la "o" se reduce a /É™/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversaciÃ³n usando el Present Perfect con un compaÃ±ero: "Have you ever...?"</p>
+        <div class="pronunciation-tip"><strong>ContracciÃ³n:</strong> "I've" se pronuncia /aÉªv/ (una sola sÃ­laba)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
     </div>
   </div>
 </div>
@@ -379,14 +519,142 @@ textarea{resize:vertical;min-height:80px;}
 
   <div id="s3-speak" class="tab-content">
     <h3>PrÃ¡ctica de Speaking</h3>
-    <div class="exercise">
-      <label>Responde estas preguntas usando Present Perfect con for/since y just/already/yet/still:</label>
-      <p>1. How long have you been studying English?</p>
-      <textarea id="s3-speak1" rows="2" placeholder="Ej: I have been studying English for 3 years."></textarea>
-      <p>2. What have you already done today?</p>
-      <textarea id="s3-speak2" rows="2" placeholder="Ej: I have already eaten breakfast."></textarea>
-      <p>3. What haven't you done yet today?</p>
-      <textarea id="s3-speak3" rows="2" placeholder="Ej: I haven't exercised yet."></textarea>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con FOR/SINCE</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "I have lived here __________ three years."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "for" /fÉ”Ër/ â€” vocal larga, como "for" en espaÃ±ol pero mÃ¡s abierta</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "She has known him __________ 2010."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "since" /sÉªns/ â€” vocal corta /Éª/, como "sins"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "We have been friends __________ a very long time."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "a" /É™/ â€” se reduce en inglÃ©s rÃ¡pido, suena como una "e" suave</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "He has worked there __________ last January."</p>
+        <div class="pronunciation-tip"><strong>Stress:</strong> Ja-NUE-ary /ËˆdÊ’Ã¦njuËŒÉ›ri/ â€” sÃ­laba fuerte en "Ja"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "I have been hungry __________ this morning."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "hungry" /ËˆhÊŒÅ‹É¡ri/ â€” la "u" suena como /ÊŒ/ (sonido corto y abierto)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. Completar con JUST/ALREADY/YET/STILL</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Completa: "I have __________ finished my homework." (antes de lo esperado)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "already" /É”ËlËˆrÉ›di/ â€” 3 sÃ­labas, sÃ­laba fuerte en "RED"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Completa: "She has __________ arrived." (acciÃ³n reciente)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "just" /dÊ’ÊŒst/ â€” la "j" suena como "ch" + "s"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Completa: "Have you eaten __________?" (pendiente, pregunta)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "yet" /jÉ›t/ â€” vocal corta /É›/, suena como "yet"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Completa: "He __________ hasn't called me." (continÃºa hasta ahora)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "still" /stÉªl/ â€” vocal corta, sonido "estil"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Completa: "They __________ haven't found their keys." (siguen sin)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "found" /faÊŠnd/ â€” diptongo /aÊŠ/, suena como "fawnd"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma a negativa: "I have already finished the report."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "report" /rÉªËˆpÉ”Ërt/ â€” 2 sÃ­labas, sÃ­laba fuerte en "PORT"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma a pregunta: "She has just called the doctor."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "doctor" /ËˆdÉ’ktÉ™r/ â€” 2 sÃ­labas, vocal corta en "doc"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: Tu amigo aÃºn no ha llegado a la reuniÃ³n. Di: "Josephine still hasn't arrived. I have just sent her a message."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "Josephine" /ËˆdÊ’oÊŠzÉ™fiËn/ â€” 3 sÃ­labas</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: EstÃ¡s en un restaurante. Pregunta: "Has the food arrived yet?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "arrived" /É™ËˆraÉªvd/ â€” diptongo /aÉª/ largo</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma: "I've been vegan for 10 years" a usando SINCE.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "vegan" /ËˆviËÉ¡É™n/ â€” 2 sÃ­labas, la "e" suena como /iË/ largo</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafÃ­os</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: Â¿CuÃ¡nto tiempo llevas estudiando inglÃ©s? Usa FOR o SINCE.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "studying" /ËˆstÊŒdiÉªÅ‹/ â€” 3 sÃ­labas, sÃ­laba fuerte en "stu"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "Ya he comido pero todavÃ­a no he lavado los platos."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dishes" /ËˆdÉªÊƒÉªz/ â€” 2 sÃ­labas, la "sh" suena como "sh" en espaÃ±ol</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Opina: "Â¿QuÃ© es algo que todos deberÃ­an haber hecho antes de los 30 aÃ±os?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "should" /ÊƒÊŠd/ â€” como "shud", vocal corta /ÊŠ/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Describe tu dÃ­a: "Today I have already __________, I haven't __________ yet, and I have just __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "today" /tÉ™ËˆdeÉª/ â€” 2 sÃ­labas, sÃ­laba fuerte en "DAY"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversaciÃ³n: Pregunta a alguien cuÃ¡nto tiempo ha estado haciendo su trabajo favorito.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "favourite" /ËˆfeÉªvÉ™rÉªt/ â€” 3 sÃ­labas, sÃ­laba fuerte en "FAV"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
     </div>
   </div>
 </div>
@@ -488,9 +756,142 @@ textarea{resize:vertical;min-height:80px;}
 
   <div id="s4-speak" class="tab-content">
     <h3>PrÃ¡ctica de Speaking</h3>
-    <div class="exercise">
-      <label>Escribe 5 oraciones usando pronombres reflexivos sobre cosas que haces tÃº mismo/a o con amigos/familia.</label>
-      <textarea id="s4-speak1" rows="5" placeholder="Ej: I always cook dinner myself. / My friends made the decoration themselves."></textarea>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con pronombres reflexivos</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "She cut __________ while cooking dinner."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "herself" /hÉœËrËˆsÉ›lf/ â€” 2 sÃ­labas, sÃ­laba fuerte en "SELF"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "I made this cake __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "myself" /maÉªËˆsÉ›lf/ â€” 2 sÃ­labas, diptongo /aÉª/ largo en "my"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "The cat cleaned __________ after eating."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "itself" /ÉªtËˆsÉ›lf/ â€” 2 sÃ­labas, vocal corta /Éª/ en "it"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "We taught __________ to play guitar."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "ourselves" /aÊŠÉ™rËˆsÉ›lvz/ â€” 2 sÃ­labas, diptongo /aÊŠ/ en "our"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "You should be proud of __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "yourself" /jÉ”ËrËˆsÉ›lf/ â€” 2 sÃ­labas, sÃ­laba fuerte en "SELF"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. FormaciÃ³n de preguntas con pronombres reflexivos</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Pregunta: Â¿Preparaste la cena tÃº mismo/a?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "yourself" se pronuncia /jÉ”ËrËˆsÉ›lf/ â€” 2 sÃ­labas</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Pregunta: Â¿Se divirtieron ellos mismos en el concierto?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "themselves" /Ã°É›mËˆsÉ›lvz/ â€” la "th" suena como /Ã°/ (sonido dental vibrante suave)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Pregunta: Â¿EnseÃ±Ã³ Ã©l a nadie a cocinar solo?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "himself" /hÉªmËˆsÉ›lf/ â€” 2 sÃ­labas, vocal corta /Éª/ en "him"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Pregunta: Â¿Nosotros organizamos la fiesta nosotros mismos?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "organised" /ËˆÉ”ËrÉ¡É™naÉªzd/ â€” 3 sÃ­labas, diptongo /aÉª/ en "naised"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Pregunta: Â¿La computadora se apagÃ³ sola?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "itself" /ÉªtËˆsÉ›lf/ â€” la "t" y "s" se pronuncian juntas</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma: "She enjoyed the party" a enfÃ¡tico: "She enjoyed the party __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "enjoyed" /ÉªnËˆdÊ’É”Éªd/ â€” 2 sÃ­labas, diptongo /É”Éª/ en "joyed"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma: "I cooked dinner" a enfÃ¡tico: "I cooked dinner __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dinner" /ËˆdÉªnÉ™r/ â€” 2 sÃ­labas, vocal corta en "din"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: Un amigo te pregunta quiÃ©n hizo la comida. Responde: "I made it myself!"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "made" /meÉªd/ â€” diptongo /eÉª/ largo, como "meid"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: Tu profesor pregunta quiÃ©n hizo la tarea. Di: "I did it myself."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "did" /dÉªd/ â€” vocal corta /Éª/, sonido "did"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma: "They decorated the house" a enfÃ¡tico: "They decorated the house __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "decorated" /ËˆdÉ›kÉ™reÉªtÉªd/ â€” 4 sÃ­labas, sÃ­laba fuerte en "DEC"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafÃ­os</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: Â¿QuÃ© haces tÃº mismo/a que otros podrÃ­an hacer por ti?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "yourself" /jÉ”ËrËˆsÉ›lf/ â€” sÃ­laba fuerte en "SELF"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "Ella se mirÃ³ en el espejo antes de salir."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "mirror" /ËˆmÉªrÉ™r/ â€” 2 sÃ­labas, vocal corta en "mir"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Describe: "In the photo, the children are playing by __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "children" /ËˆtÊƒÉªldrÉ™n/ â€” 2 sÃ­labas, la "ch" suena como "ch" en espaÃ±ol</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Opina: "Â¿Es importante hacer las cosas uno mismo o es mejor pedir ayuda?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "important" /ÉªmËˆpÉ”ËrtÉ™nt/ â€” 3 sÃ­labas, sÃ­laba fuerte en "POR"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversaciÃ³n: "What have you done __________ this week that made you proud?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "proud" /praÊŠd/ â€” diptongo /aÊŠ/ largo, suena como "prawd"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
     </div>
   </div>
 </div>
@@ -571,9 +972,142 @@ textarea{resize:vertical;min-height:80px;}
 
   <div id="s5-speak" class="tab-content">
     <h3>PrÃ¡ctica de Speaking</h3>
-    <div class="exercise">
-      <label>Â¿QuÃ© has estado haciendo Ãºltimamente? Escribe 5 oraciones.</label>
-      <textarea id="s5-speak1" rows="5" placeholder="Ej: I have been working on a new project. / I have been learning to play piano."></textarea>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con Present Perfect Continuous</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "I __________ (study) English for five years now."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "studying" /ËˆstÊŒdiÉªÅ‹/ â€” 3 sÃ­labas, sÃ­laba fuerte en "STU"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "She __________ (read) that book all day long."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "reading" /ËˆriËdÉªÅ‹/ â€” 2 sÃ­labas, la "ea" suena como /iË/ largo</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "We __________ (wait) for the bus since 8am."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "waiting" /ËˆweÉªtÉªÅ‹/ â€” 2 sÃ­labas, diptongo /eÉª/ en "way"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "They __________ (work) on the project all morning."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "working" /ËˆwÉœËrkÉªÅ‹/ â€” 2 sÃ­labas, vocal larga /ÉœËr/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "It __________ (rain) all day today."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "raining" /ËˆreÉªnÉªÅ‹/ â€” 2 sÃ­labas, diptongo /eÉª/ largo</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. FormaciÃ³n de preguntas con HOW LONG</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Pregunta: Â¿CuÃ¡nto tiempo llevas trabajando en esa empresa?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "company" /ËˆkÊŒmpÉ™ni/ â€” 3 sÃ­labas, sÃ­laba fuerte en "CUM"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Pregunta: Â¿CuÃ¡nto tiempo ha estado lloviendo?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "raining" /ËˆreÉªnÉªÅ‹/ â€” la "ai" suena como /eÉª/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Pregunta: Â¿QuÃ© han estado haciendo tus amigos esta tarde?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "afternoon" /ËˆÃ¦ftÉ™rnuËn/ â€” 3 sÃ­labas, sÃ­laba fuerte en "AF"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Pregunta: Â¿CuÃ¡nto tiempo llevas esperando el autobÃºs?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "bus" /bÊŒs/ â€” vocal corta /ÊŒ/, como "bas"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Pregunta: Â¿QuÃ© has estado cocinando Ãºltimamente?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "cooking" /ËˆkÊŠkÉªÅ‹/ â€” 2 sÃ­labas, vocal corta /ÊŠ/ como en "book"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma: "I study English" a Present Perfect Continuous con "since 2020".</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "English" /ËˆÉªÅ‹É¡lÉªÊƒ/ â€” 2 sÃ­labas, vocal corta en "In"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma: "It snows" a Present Perfect Continuous con "all day".</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "snowing" /ËˆsnoÊŠÉªÅ‹/ â€” 2 sÃ­labas, diptongo /oÊŠ/ largo</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: Un amigo llega mojado. Di: "Wow, it's been raining! How long have you been walking in this weather?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "weather" /ËˆwÉ›Ã°É™r/ â€” 2 sÃ­labas, la "th" suena como /Ã°/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: EstÃ¡s en la oficina. Di: "I've been working on this report since this morning. I need a break!"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "break" /breÉªk/ â€” diptongo /eÉª/ largo, como "breik"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma: "They exercise" a Present Perfect Continuous con "for two hours".</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "exercise" /ËˆÉ›ksÉ™rsaÉªz/ â€” 3 sÃ­labas, sÃ­laba fuerte en "EX"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafÃ­os</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: Â¿QuÃ© has estado haciendo durante las Ãºltimas 2 horas?</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "hours" /ËˆaÊŠÉ™rz/ â€” 1-2 sÃ­labas, diptongo /aÊŠ/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "Â¿CuÃ¡nto tiempo llevas corriendo? Llevo corriendo desde las 6 de la maÃ±ana."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "running" /ËˆrÊŒnÉªÅ‹/ â€” 2 sÃ­labas, vocal corta /ÊŒ/ en "run"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Describe: "Look, the children __________ (play) in the garden. They __________ (play) since noon."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "garden" /ËˆÉ¡É‘ËrdÉ™n/ â€” 2 sÃ­labas, vocal larga /É‘Ër/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Opina: "Â¿Es mejor usar Present Perfect Simple o Continuous para hablar del trabajo? Â¿Por quÃ©?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "better" /ËˆbÉ›tÉ™r/ â€” 2 sÃ­labas, sÃ­laba fuerte en "BET"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversaciÃ³n: "What have you been doing lately that makes you happy?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "lately" /ËˆleÉªtli/ â€” 2 sÃ­labas, diptongo /eÉª/ en "late"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
     </div>
   </div>
 </div>
@@ -672,9 +1206,142 @@ textarea{resize:vertical;min-height:80px;}
 
   <div id="s6-speak" class="tab-content">
     <h3>PrÃ¡ctica de Speaking</h3>
-    <div class="exercise">
-      <label>Escribe 5 oraciones usando may, might, shall u ought to:</label>
-      <textarea id="s6-speak1" rows="5" placeholder="Ej: I may go to the cinema tonight. / Shall we have dinner together?"></textarea>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con MAY/MIGHT</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "It __________ rain later, so bring an umbrella."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "may" /meÉª/ â€” diptongo /eÉª/ largo, como "mei"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "She __________ not come to the party tonight."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "might" /maÉªt/ â€” diptongo /aÉª/ largo, como "mait"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "I __________ be wrong, but I think he's lying."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "lying" /ËˆlaÉªÉªÅ‹/ â€” 2 sÃ­labas, diptongo /aÉª/ en "li"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "You __________ say that again! (permiso formal)"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "again" /É™ËˆÉ¡É›n/ â€” 2 sÃ­labas, la "a" se reduce a /É™/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "They __________ have forgotten about the meeting."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "forgotten" /fÉ™rËˆÉ¡É’tÉ™n/ â€” 3 sÃ­labas, sÃ­laba fuerte en "GOT"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. Completar con SHALL/OUGHT TO</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Completa: "__________ we go for a walk?" (sugerencia)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "shall" /ÊƒÃ¦l/ â€” vocal corta /Ã¦/, como "shal"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Completa: "You __________ study harder for the exam." (consejo)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "ought to" /ËˆÉ”Ët tuË/ â€” 2 sÃ­labas, vocal larga /É”Ët/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Completa: "__________ I open the window for you?" (sugerencia cortÃ©s)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "window" /ËˆwÉªndoÊŠ/ â€” 2 sÃ­labas, diptongo /oÊŠ/ largo en "dow"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Completa: "We __________ respect the environment." (recomendaciÃ³n)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "environment" /ÉªnËˆvaÉªrÉ™nmÉ™nt/ â€” 4 sÃ­labas, sÃ­laba fuerte en "VIR"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Completa: "__________ we have dinner together?" (sugerencia)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "together" /tÉ™ËˆÉ¡É›Ã°É™r/ â€” 3 sÃ­labas, la "th" suena como /Ã°/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma a MAY: "Perhaps it will be sunny tomorrow."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "sunny" /ËˆsÊŒni/ â€” 2 sÃ­labas, vocal corta /ÊŒ/ en "sun"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma a MIGHT: "She probably won't come."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "probably" /ËˆprÉ’bÉ™bli/ â€” 3 sÃ­labas, sÃ­laba fuerte en "PROB"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: Tu amigo estÃ¡ triste. Dale un consejo usando OUGHT TO: "You __________ talk to someone about it."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "someone" /ËˆsÊŒmwÊŒn/ â€” 2 sÃ­labas, vocal corta /ÊŒ/ en "some"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: EstÃ¡s en una reuniÃ³n. Sugiere con SHALL: "Shall we start the meeting?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "meeting" /ËˆmiËtÉªÅ‹/ â€” 2 sÃ­labas, vocal larga /iË/ en "meet"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma: "It's possible she forgot" usando MIGHT.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "forgot" /fÉ™rËˆÉ¡É’t/ â€” 2 sÃ­labas, la "o" suena como /É’/ (corta)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafÃ­os</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: Â¿QuÃ© deberÃ­as hacer esta semana que no has hecho? Usa OUGHT TO.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "week" /wiËk/ â€” vocal larga /iË/, como "wik"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "PodrÃ­a llover maÃ±ana, pero tambiÃ©n podrÃ­a hacer sol."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "sunny" /ËˆsÊŒni/ â€” la "u" suena como /ÊŒ/ (sonido corto y abierto)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Opina: "Â¿CuÃ¡ndo es mejor usar SHALL en vez de SHOULD?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "should" /ÊƒÊŠd/ â€” vocal corta /ÊŠ/, como "shud"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Describe: "I __________ (may) call you later, but I __________ (might) be busy. You __________ (ought to) not wait for me."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "busy" /ËˆbÉªzi/ â€” 2 sÃ­labas, vocal corta /Éª/ en "bu"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversaciÃ³n: "Shall we talk about what we might do this weekend?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "weekend" /ËˆwiËkÉ›nd/ â€” 2 sÃ­labas, vocal larga /iË/ en "week"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
     </div>
   </div>
 </div>
@@ -762,9 +1429,142 @@ textarea{resize:vertical;min-height:80px;}
 
   <div id="s7-speak" class="tab-content">
     <h3>PrÃ¡ctica de Speaking</h3>
-    <div class="exercise">
-      <label>Piensa en algo que pasÃ³ ayer. Escribe 5 oraciones usando modales en pasado:</label>
-      <textarea id="s7-speak1" rows="5" placeholder="Ej: My friend must have forgotten about our meeting. I could have taken the bus."></textarea>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con MUST'VE/SHOULD'VE</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "He looks tired. He __________ (must/have/work) all night."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "must've" /ËˆmÊŒstÉ™v/ â€” 2 sÃ­labas, se reduce en inglÃ©s rÃ¡pido a /ËˆmÊŒsÉ™v/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "You failed the exam. You __________ (should/have/study) more."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "should've" /ËˆÊƒÊŠdÉ™v/ â€” se reduce a /ËˆÊƒÊŠdÉ™v/ o /ËˆÊƒÊŠdÉ™v/ en habla rÃ¡pida</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "She didn't come. She __________ (might/have/forgot) about it."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "might've" /ËˆmaÉªtÉ™v/ â€” 2 sÃ­labas, diptongo /aÉª/ en "might"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "He __________ (must/have/know) the answer. He's a genius."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "genius" /ËˆdÊ’iËniÉ™s/ â€” 3 sÃ­labas, vocal larga /iË/ en "ge"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "I __________ (should/have/tell) you before. I'm sorry."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "sorry" /ËˆsÉ’ri/ â€” 2 sÃ­labas, vocal corta /É’/ en "so"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. Completar con COULD'VE/WOULD'VE</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Completa: "I __________ (would/have/help) if you had asked me."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "would've" /ËˆwÊŠdÉ™v/ â€” 2 sÃ­labas, se reduce en habla rÃ¡pida</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Completa: "She __________ (could/have/be) a great singer if she had practiced."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "could've" /ËˆkÊŠdÉ™v/ â€” vocal corta /ÊŠ/ en "could"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Completa: "__________ you (would/have/do) the same thing in my position?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "position" /pÉ™ËˆzÉªÊƒÉ™n/ â€” 3 sÃ­labas, sÃ­laba fuerte en "ZI"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Completa: "What __________ you (could/have/done) differently?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "differently" /ËˆdÉªfrÉ™ntli/ â€” 4 sÃ­labas, sÃ­laba fuerte en "DIF"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Completa: "He __________ (could/have/be) at home, but he's not answering the phone."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "answering" /ËˆÉ‘ËnsÉ™rÉªÅ‹/ â€” 3 sÃ­labas, sÃ­laba fuerte en "AN"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma: "He is rich" a deducciÃ³n pasada con MUST'VE.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "rich" /rÉªtÊƒ/ â€” vocal corta /Éª/, como "rich"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma: "She made a mistake" a arrepentimiento con SHOULD'VE.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "mistake" /mÉªËˆsteÉªk/ â€” 2 sÃ­labas, diptongo /eÉª/ en "steik"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: Tu amigo perdiÃ³ su vuelo. Di: "You should have arrived earlier! You might have caught the plane."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "plane" /pleÉªn/ â€” diptongo /eÉª/ largo, como "plein"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: No te invitaron a una fiesta. Di: "They must have forgotten about me."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "forgotten" /fÉ™rËˆÉ¡É’tÉ™n/ â€” 3 sÃ­labas, sÃ­laba fuerte en "GOT"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma: "Maybe he left" a deducciÃ³n con MIGHT'VE.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "left" /lÉ›ft/ â€” vocal corta /É›/, como "left"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafÃ­os</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: Â¿QuÃ© habrÃ­as hecho diferente si hubieras estudiado mÃ¡s? Usa WOULD'VE.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "different" /ËˆdÉªfrÉ™nt/ â€” 3 sÃ­labas, sÃ­laba fuerte en "DIF"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "DebÃ­ haber estudiado mÃ¡s para el examen."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "exam" /ÉªÉ¡ËˆzÃ¦m/ â€” 2 sÃ­labas, sÃ­laba fuerte en "ZAM"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Opina: "Si pudieras volver al pasado, Â¿quÃ© habrÃ­as hecho diferente?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "back" /bÃ¦k/ â€” vocal corta /Ã¦/, como "bak"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Describe: "Look at this empty plate. They __________ (must/have/eat) everything!"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "plate" /pleÉªt/ â€” diptongo /eÉª/ largo, como "pleit"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversaciÃ³n: "What do you think someone should have done differently in a famous movie?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "famous" /ËˆfeÉªmiÉ™s/ â€” 3 sÃ­labas, sÃ­laba fuerte en "FA"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
     </div>
   </div>
 </div>
@@ -857,14 +1657,142 @@ textarea{resize:vertical;min-height:80px;}
 
   <div id="s8-speak" class="tab-content">
     <h3>PrÃ¡ctica de Speaking</h3>
-    <div class="exercise">
-      <label>Responde estas preguntas usando condicionales:</label>
-      <p>1. What would you do if you won the lottery?</p>
-      <textarea id="s8-speak1" rows="2" placeholder="Ej: If I won the lottery, I would travel the world."></textarea>
-      <p>2. What will you do if it rains tomorrow?</p>
-      <textarea id="s8-speak2" rows="2" placeholder="Ej: If it rains, I will stay home."></textarea>
-      <p>3. If you could be anyone else for a day, who would you be?</p>
-      <textarea id="s8-speak3" rows="2" placeholder="Ej: If I could be anyone, I would be a professional athlete."></textarea>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con First Conditional</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "If you __________ (pay) in cash, you __________ (will/receive) a discount."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "discount" /ËˆdÉªskaÊŠnt/ â€” 2 sÃ­labas, diptongo /aÊŠ/ en "count"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "If it __________ (rain) tomorrow, we __________ (will/stay) at home."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "tomorrow" /tÉ™ËˆmÉ’roÊŠ/ â€” 3 sÃ­labas, sÃ­laba fuerte en "MOR"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "If she __________ (study) hard, she __________ (will/pass) the exam."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "exam" /ÉªÉ¡ËˆzÃ¦m/ â€” 2 sÃ­labas, la "x" suena como /É¡z/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "If you __________ (not/hurry), you __________ (will/miss) the bus."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "hurry" /ËˆhÊŒri/ â€” 2 sÃ­labas, vocal corta /ÊŒ/ en "hur"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "If I __________ (see) her, I __________ (will/tell) her the news."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "news" /njuËz/ â€” 1 sÃ­laba, suena como "nyus"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. Completar con Second Conditional</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Completa: "If I __________ (be) you, I __________ (would/apologize)."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "apologize" /É™ËˆpÉ’lÉ™dÊ’aÉªz/ â€” 4 sÃ­labas, sÃ­laba fuerte en "POL"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Completa: "If I __________ (have) more money, I __________ (would/travel) the world."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "travel" /ËˆtrÃ¦vÉ™l/ â€” 2 sÃ­labas, vocal corta /Ã¦/ en "tra"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Completa: "If she __________ (speak) English, she __________ (would/get) a better job."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "English" /ËˆÉªÅ‹É¡lÉªÊƒ/ â€” 2 sÃ­labas, vocal corta /Éª/ en "In"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Completa: "If I __________ (win) the lottery, I __________ (would/buy) a house."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "lottery" /ËˆlÉ’tÉ™ri/ â€” 3 sÃ­labas, sÃ­laba fuerte en "LOT"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Completa: "If they __________ (not/be) so busy, they __________ (would/help) us."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "busy" /ËˆbÉªzi/ â€” 2 sÃ­labas, vocal corta /Éª/ en "bu"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma de First a Second Conditional: "If I study hard, I will pass." â†’ SituaciÃ³n hipotÃ©tica.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "hard" /hÉ‘Ërd/ â€” vocal larga /É‘Ër/, como "jard"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma: "If it rains, I will stay home" a Second Conditional (situaciÃ³n menos probable).</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "home" /hoÊŠm/ â€” diptongo /oÊŠ/ largo, como "jom"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: Un amigo no sabe quÃ© hacer. Di: "If I were you, I would talk to your boss about it."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "boss" /bÉ’s/ â€” vocal corta /É’/, como "bos"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: Hablando del clima: "If it doesn't rain, we will have the picnic outside."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "picnic" /ËˆpÉªknÉªk/ â€” 2 sÃ­labas, ambas vocales son /Éª/ (cortas)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma: "If I had wings, I would fly" a First Conditional (situaciÃ³n posible).</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "wings" /wÉªÅ‹z/ â€” 1 sÃ­laba, la "ng" suena como /Å‹/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafÃ­os</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: Â¿QuÃ© harÃ­as si ganaras la loterÃ­a maÃ±ana? Usa Second Conditional.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "million" /ËˆmÉªljÉ™n/ â€” 2 sÃ­labas, sÃ­laba fuerte en "MIL"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "Si no llueve maÃ±ana, irÃ© al parque."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "park" /pÉ‘Ërk/ â€” vocal larga /É‘Ërk/, como "park"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Opina: "Si pudieras ser cualquier persona por un dÃ­a, Â¿quiÃ©n serÃ­as y por quÃ©?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "anyone" /ËˆÉ›niwÊŒn/ â€” 3 sÃ­labas, sÃ­laba fuerte en "EN"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Describe: "If you __________ (could) live anywhere in the world, where __________ (would) you choose?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "choose" /tÊƒuËz/ â€” vocal larga /uË/, como "chus"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversaciÃ³n: "What would you do differently if you could go back to school?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "school" /skuËl/ â€” vocal larga /uË/, como "skul"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
     </div>
   </div>
 </div>
@@ -979,9 +1907,142 @@ textarea{resize:vertical;min-height:80px;}
 
   <div id="s9-speak" class="tab-content">
     <h3>PrÃ¡ctica de Speaking</h3>
-    <div class="exercise">
-      <label>Escribe 5 oraciones describiendo tu rutina diaria usando in, on y at.</label>
-      <textarea id="s9-speak1" rows="5" placeholder="Ej: I wake up at 7am. I work in an office. I have lunch on Monday with my friend."></textarea>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con IN/ON/AT (lugar)</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "I'll meet you __________ the cafe __________ 3pm."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "cafe" /ËˆkÃ¦feÉª/ â€” 2 sÃ­labas, diptongo /eÉª/ al final, como "cafÃ©"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "The book is __________ the table."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "table" /ËˆteÉªbÉ™l/ â€” 2 sÃ­labas, diptongo /eÉª/ en "ta"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "She lives __________ France."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "France" /frÃ¦ns/ â€” vocal corta /Ã¦/, como "frans"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "The keys are __________ my pocket."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "pocket" /ËˆpÉ’kÉªt/ â€” 2 sÃ­labas, vocal corta /É’/ en "po"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "We are __________ home right now."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "right" /raÉªt/ â€” diptongo /aÉª/ largo, como "rait"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. Completar con IN/ON/AT (tiempo)</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Completa: "I was born __________ 1995."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "born" /bÉ”Ërn/ â€” vocal larga /É”Ër/, como "born"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Completa: "The class starts __________ 9am."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "class" /klÃ¦s/ â€” vocal corta /Ã¦/, como "clas"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Completa: "We have a meeting __________ Friday."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "Friday" /ËˆfraÉªdeÉª/ â€” 2 sÃ­labas, diptongo /aÉª/ en "Fri"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Completa: "I love swimming __________ summer."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "summer" /ËˆsÊŒmÉ™r/ â€” 2 sÃ­labas, vocal corta /ÊŒ/ en "sum"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Completa: "I'll see you __________ the weekend."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "weekend" /ËˆwiËkÉ›nd/ â€” 2 sÃ­labas, vocal larga /iË/ en "week"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Corrige el error: "I'll travel next the summer."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "next" /nÉ›kst/ â€” vocal corta /É›/, como "nekst"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Corrige: "The meeting is in 3pm."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "meeting" /ËˆmiËtÉªÅ‹/ â€” 2 sÃ­labas, vocal larga /iË/ en "meet"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: EstÃ¡s en una tienda. Pregunta: "Excuse me, where is the checkout? Is it on the first floor or the second floor?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "floor" /flÉ”Ër/ â€” vocal larga /É”Ër/, como "flor"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: Pregunta por la hora: "What time does the train leave? Is it at 5pm or at 6pm?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "train" /treÉªn/ â€” diptongo /eÉª/ largo, como "trein"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Corrige: "I was born in Monday."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "Monday" /ËˆmÊŒndeÉª/ â€” 2 sÃ­labas, vocal corta /ÊŒ/ en "Mon"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafÃ­os</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: Describe tu rutina diaria usando IN, ON y AT.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "routine" /ruËËˆtiËn/ â€” 2 sÃ­labas, vocales largas /uË/ y /iË/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "El lunes voy a Londres en tren. Llego a las 3 de la tarde."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "London" /ËˆlÊŒndÉ™n/ â€” 2 sÃ­labas, vocal corta /ÊŒ/ en "Lon"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Opina: "Â¿Es mÃ¡s fÃ¡cil aprender preposiciones de lugar o de tiempo? Â¿Por quÃ©?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "easier" /ËˆiËziÉ™r/ â€” 3 sÃ­labas, sÃ­laba fuerte en "EA"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Describe: "I was born __________ [mes], __________ [aÃ±o]. I work __________ [lugar]. I have lunch __________ 1pm."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "lunch" /lÊŒntÊƒ/ â€” vocal corta /ÊŒ/, como "lanch"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversaciÃ³n: "What do you usually do on Saturday mornings?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "usually" /ËˆjuËÊ’uÉ™li/ â€” 4 sÃ­labas, sÃ­laba fuerte en "U"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
     </div>
   </div>
 </div>
@@ -1072,9 +2133,142 @@ textarea{resize:vertical;min-height:80px;}
 
   <div id="s10-speak" class="tab-content">
     <h3>PrÃ¡ctica de Speaking</h3>
-    <div class="exercise">
-      <label>Escribe 5 oraciones sobre tus planes futuros usando las tres formas:</label>
-      <textarea id="s10-speak1" rows="5" placeholder="Ej: I will study more this semester. / I am going to learn to cook. / I am visiting my parents this weekend."></textarea>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. Completar con WILL</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "The phone is ringing! I __________ (will/get) it!"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "ringing" /ËˆrÉªÅ‹ÉªÅ‹/ â€” 2 sÃ­labas, vocal corta /Éª/ en "ring"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "I __________ (will/help) you carry those bags."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "carry" /ËˆkÃ¦ri/ â€” 2 sÃ­labas, vocal corta /Ã¦/ en "car"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "Don't worry, I __________ (will/fix) the problem."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "problem" /ËˆprÉ’blÉ™m/ â€” 2 sÃ­labas, sÃ­laba fuerte en "PRO"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "I promise I __________ (will/not/forget) your birthday."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "promise" /ËˆprÉ’mÉªs/ â€” 2 sÃ­labas, vocal corta /É’/ en "pro"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "I predict it __________ (will/be) a great year."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "predict" /prÉªËˆdÉªkt/ â€” 2 sÃ­labas, sÃ­laba fuerte en "DICT"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. Completar con GOING TO / PRESENT CONTINUOUS</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Completa: "Look at those clouds! It __________ (is going to/rain)."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "clouds" /klaÊŠdz/ â€” diptongo /aÊŠ/ largo, como "klawds"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Completa: "I __________ (am going to/eat) healthier from now on."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "healthier" /ËˆhÉ›lÎ¸iÉ™r/ â€” 3 sÃ­labas, sÃ­laba fuerte en "HEALTH"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Completa: "I __________ (am meeting) my dentist at 3pm. I already booked the appointment."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dentist" /ËˆdÉ›ntÉªst/ â€” 2 sÃ­labas, vocal corta /É›/ en "den"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Completa: "She __________ (is moving) to London next month. She has the ticket."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "moving" /ËˆmuËvÉªÅ‹/ â€” 2 sÃ­labas, vocal larga /uË/ en "mov"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Completa: "We __________ (are not going to/eat) junk food anymore."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "anymore" /ËŒÉ›nimÉ”Ër/ â€” 3 sÃ­labas, sÃ­laba fuerte en "MO"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Transformaciones yrole play</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Transforma a decisiÃ³n espontÃ¡nea (WILL): "Veo un cachorro â†’ I __________ (adopt) it!"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "puppy" /ËˆpÊŒpi/ â€” 2 sÃ­labas, vocal corta /ÊŒ/ en "pup"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Transforma a plan hecho (GOING TO): "I have the tickets â†’ I __________ (travel) to Spain."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "tickets" /ËˆtÉªkÉªts/ â€” 2 sÃ­labas, vocal corta /Éª/ en "tic"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Role play: EstÃ¡s en una tienda. Di: "I will take this one." (decisiÃ³n espontÃ¡nea)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "take" /teÉªk/ â€” diptongo /eÉª/ largo, como "teik"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Role play: Hablando de un plan: "I'm meeting my friends for dinner on Saturday." (acuerdo concreto)</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "friends" /frÉ›ndz/ â€” 1 sÃ­laba, vocal corta /É›/ en "fren"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Transforma a predicciÃ³n (GOING TO): "Look at those dark clouds! It __________ (rain)."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dark" /dÉ‘Ërk/ â€” vocal larga /É‘Ër/, como "dark"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafÃ­os</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: Â¿QuÃ© vas a hacer este fin de semana? Usa las 3 formas de futuro.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "weekend" /ËˆwiËkÉ›nd/ â€” 2 sÃ­labas, vocal larga /iË/ en "week"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "MaÃ±ana voy a empezar una dieta y no voy a comer comida chatarra."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "diet" /ËˆdaÉªÉ™t/ â€” 2 sÃ­labas, diptongo /aÉª/ en "di"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Opina: "Â¿CuÃ¡ndo es mejor usar WILL en vez de GOING TO?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "spontaneous" /spÉ’nËˆteÉªniÉ™s/ â€” 4 sÃ­labas, sÃ­laba fuerte en "TE"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Describe: "In five years, I __________ (will) be living in __________. I __________ (will/also) have learned __________."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "learned" /lÉœËrnd/ â€” 1 sÃ­laba, vocal larga /ÉœËr/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversaciÃ³n: "What are your plans for the future? Will you stay in this city?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "future" /ËˆfjuËtÊƒÉ™r/ â€” 2 sÃ­labas, la "u" suena como /juË/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
     </div>
   </div>
 </div>
@@ -1233,9 +2427,142 @@ textarea{resize:vertical;min-height:80px;}
 
   <div id="s11-speak" class="tab-content">
     <h3>PrÃ¡ctica de Speaking</h3>
-    <div class="exercise">
-      <label>Escribe 5 oraciones usando correctamente las diferencias de vocabulario de esta sesiÃ³n:</label>
-      <textarea id="s11-speak1" rows="5" placeholder="Ej: I made breakfast and did my homework. / She told me to say sorry."></textarea>
+    <p class="speak-progress">0/20 completados</p>
+
+    <div class="exercise-group">
+      <h4>A. DO/MAKE y SAY/TELL</h4>
+
+      <div class="exercise">
+        <p><strong>1.</strong> Completa: "I need to __________ (do/make) my homework."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "homework" /ËˆhoÊŠmwÉœËrk/ â€” 2 sÃ­labas, diptongo /oÊŠ/ largo en "ho"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>2.</strong> Completa: "She will __________ (do/make) dinner tonight."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dinner" /ËˆdÉªnÉ™r/ â€” 2 sÃ­labas, vocal corta /Éª/ en "din"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>3.</strong> Completa: "He __________ (told/said) me that you often __________ (say/tell) inappropriate things."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "inappropriate" /ËŒÉªnÉ™ËˆprÉ™ÊŠpriÉ™t/ â€” 5 sÃ­labas, sÃ­laba fuerte en "PRO"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>4.</strong> Completa: "Can you __________ (tell/say) me the truth?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "truth" /truËÎ¸/ â€” 1 sÃ­laba, la "th" suena como /Î¸/ (sonido dental sin vibraciÃ³n)</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>5.</strong> Completa: "What did he __________ (say/tell) at the meeting?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "meeting" /ËˆmiËtÉªÅ‹/ â€” 2 sÃ­labas, vocal larga /iË/ en "meet"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>B. OTHER/ANOTHER y AS/LIKE</h4>
+
+      <div class="exercise">
+        <p><strong>6.</strong> Completa: "Are there any __________ (other/another) cafes close by?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "other" /ËˆÊŒÃ°É™r/ â€” 2 sÃ­labas, la "th" suena como /Ã°/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>7.</strong> Completa: "I'd like to get __________ (other/another) coffee."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "coffee" /ËˆkÉ’fi/ â€” 2 sÃ­labas, vocal corta /É’/ en "cof"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>8.</strong> Completa: "__________ (As/Like) a friend, I should tell you the truth."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "truth" /truËÎ¸/ â€” vocal larga /uË/, la "th" dental</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>9.</strong> Completa: "You look exactly __________ (as/like) your mother."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "exactly" /ÉªÉ¡ËˆzÃ¦ktli/ â€” 3 sÃ­labas, sÃ­laba fuerte en "ZACT"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>10.</strong> Completa: "Is there __________ (other/another) way to get there?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "way" /weÉª/ â€” diptongo /eÉª/ largo, como "wei"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>C. Falsos amigos y doble negaciÃ³n</h4>
+
+      <div class="exercise">
+        <p><strong>11.</strong> Traduce correctamente: "LibrerÃ­a" (donde venden libros).</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "bookstore" /ËˆbÊŠkstÉ”Ër/ â€” 2 sÃ­labas, vocal corta /ÊŠ/ en "book"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>12.</strong> Traduce: "Embarazada" (pregnant).</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "pregnant" /ËˆprÉ›É¡nÉ™nt/ â€” 2 sÃ­labas, sÃ­laba fuerte en "PREG"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>13.</strong> Corrige la doble negaciÃ³n: "I don't have no money."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "money" /ËˆmÊŒni/ â€” 2 sÃ­labas, vocal corta /ÊŒ/ en "mon"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>14.</strong> Corrige: "I didn't see nobody outside."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "outside" /ËŒaÊŠtËˆsaÉªd/ â€” 2 sÃ­labas, diptongo /aÊŠ/ en "out"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>15.</strong> Traduce: "Actual" (current, no actual).</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "current" /ËˆkÊŒrÉ™nt/ â€” 2 sÃ­labas, vocal corta /ÊŒ/ en "cur"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+    </div>
+
+    <div class="exercise-group">
+      <h4>D. Respuestas personales y desafÃ­os</h4>
+
+      <div class="exercise">
+        <p><strong>16.</strong> Responde: Â¿QuÃ© errores comunes de inglÃ©s has cometido? Usa DO/MAKE correctamente.</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "mistake" /mÉªËˆsteÉªk/ â€” 2 sÃ­labas, diptongo /eÉª/ en "stake"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>17.</strong> Traduce: "Me dijo que dijiste algo inapropiado en la cena."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dinner" /ËˆdÉªnÉ™r/ â€” 2 sÃ­labas, vocal corta /Éª/ en "din"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>18.</strong> Opina: "Â¿CuÃ¡l es el falso amigo mÃ¡s peligroso para los hispanohablantes?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dangerous" /ËˆdeÉªndÊ’É™rÉ™s/ â€” 3 sÃ­labas, sÃ­laba fuerte en "DAN"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>19.</strong> Describe: "I made breakfast, but I didn't do the dishes. She told me to do them."</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "dishes" /ËˆdÉªÊƒÉªz/ â€” 2 sÃ­labas, la "sh" suena como /Êƒ/</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
+
+      <div class="exercise">
+        <p><strong>20.</strong> Inicia una conversaciÃ³n: "What's the most embarrassing mistake you've ever made in English?"</p>
+        <div class="pronunciation-tip"><strong>Sound:</strong> "embarrassing" /ÉªmËˆbÃ¦rÉ™sÉªÅ‹/ â€” 4 sÃ­labas, sÃ­laba fuerte en "BAR"</div>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquÃ­..."></textarea>
+      </div>
     </div>
   </div>
 </div>
