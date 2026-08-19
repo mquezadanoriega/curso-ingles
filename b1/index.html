@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -88,11 +88,56 @@ textarea{resize:vertical;min-height:80px;}
 .classify-choices{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap;}
 .classify-choices .choice-btn{padding:8px 20px;border:2px solid var(--border);border-radius:var(--radius);background:var(--card-bg);font-weight:600;cursor:pointer;transition:.2s;}
 .classify-choices .choice-btn.selected{border-color:var(--primary);background:var(--primary);color:#fff;}
+/* ===== DARK MODE ===== */
+body.dark{--bg:#1a1a2e;--card-bg:#16213e;--text:#e0e0e0;--text-light:#a0a0a0;--border:#2a2a4a;--success:#00b894;--danger:#ff6b6b;--warning:#fdcb6e;}
+body.dark .hero{background:linear-gradient(135deg,#4a3f8a,#00897b);}
+body.dark .navbar{background:#16213e;box-shadow:0 2px 10px rgba(0,0,0,.3);}
+body.dark .grammar-box{background:#1e2a4a;border-left-color:#7c6fe0;}
+body.dark .example{background:#1a2e3e;border-left-color:#00897b;}
+body.dark .exercise{background:#1e2a4a;border-color:#2a2a4a;}
+body.dark .vocab-item{background:#1e2a4a;border-color:#2a2a4a;}
+body.dark .warning-box{background:#3a3020;border-left-color:#fdcb6e;color:#e0d080;}
+body.dark .negative-box{background:#3a1a1a;border-left-color:#ff6b6b;color:#ffb0b0;}
+body.dark .positive-box{background:#1a3a2a;border-left-color:#00b894;color:#a0e0c0;}
+body.dark .tip{background:#1a2e3e;border-left-color:#00897b;}
+body.dark .pronunciation-tip{background:#2a1a2e;border-color:#6a3a6e;color:#e0a0e0;}
+body.dark table tr:hover{background:#1e2a4a;}
+body.dark .classify-grid .item{background:#1e2a4a;border-color:#2a2a4a;}
+body.dark .classify-grid .item.selected{border-color:#7c6fe0;background:#2a2a5a;}
+body.dark .classify-choices .choice-btn{background:#1e2a4a;border-color:#2a2a4a;color:#e0e0e0;}
+body.dark .classify-choices .choice-btn.selected{background:#7c6fe0;border-color:#7c6fe0;}
+body.dark .feedback.correct{background:#1a3a2a;color:#a0e0c0;}
+body.dark .feedback.incorrect{background:#3a1a1a;color:#ffb0b0;}
+body.dark .dark-toggle{color:#e0e0e0;border-color:#4a4a6a;}
+body.dark .dark-toggle:hover{border-color:#7c6fe0;color:#7c6fe0;}
+.dark-toggle{padding:6px 12px;border:2px solid var(--border);background:transparent;border-radius:var(--radius);cursor:pointer;font-size:.85rem;color:var(--text-light);transition:.2s;margin-left:auto;}
+.dark-toggle:hover{border-color:var(--primary);color:var(--primary);}
+.reset-btn{background:var(--danger);color:#fff;padding:8px 16px;border:none;border-radius:var(--radius);cursor:pointer;font-weight:600;font-size:.85rem;transition:.2s;margin-top:8px;}
+.reset-btn:hover{opacity:.85;}
+.quiz-section{background:var(--card-bg);border-radius:var(--radius);padding:25px;box-shadow:var(--shadow);margin-top:12px;}
+.quiz-section h3{color:var(--accent);margin-bottom:12px;}
+.quiz-question{background:#f8f9fa;padding:14px;border-radius:8px;margin:10px 0;border:1px solid var(--border);}
+.quiz-question p{font-weight:600;margin-bottom:8px;}
+.quiz-options{display:flex;flex-direction:column;gap:6px;}
+.quiz-options label{padding:8px 12px;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:.2s;}
+.quiz-options label:hover{border-color:var(--primary);background:#f0ecfc;}
+.quiz-options input[type="radio"]{margin-right:8px;}
+body.dark .quiz-question{background:#1e2a4a;border-color:#2a2a4a;}
+body.dark .quiz-options label:hover{border-color:#7c6fe0;background:#2a2a5a;}
+.correct-answer-reveal{color:var(--success);font-weight:600;font-size:.85rem;margin-top:2px;}
 @media(max-width:600px){
   .hero h1{font-size:1.8rem;}
   .session-cards{grid-template-columns:1fr;}
   .vocab-grid{grid-template-columns:1fr;}
   .tabs button{padding:8px 14px;font-size:.8rem;}
+}
+@media print{
+  .navbar,.hero,.tabs,.btn,.dark-toggle,.reset-btn,.video-container,.exercise textarea,.classify-grid,.classify-choices{display:none!important;}
+  .session{display:block!important;}
+  .session.hidden{display:block!important;}
+  .tab-content{display:block!important;page-break-inside:avoid;margin-bottom:20px;box-shadow:none;border:1px solid #ccc;}
+  .session-header{background:#6c5ce7!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  body{font-size:11pt;}
 }
 </style>
 </head>
@@ -115,6 +160,7 @@ textarea{resize:vertical;min-height:80px;}
   <a href="#" onclick="showSession(9)" id="nav-s9">S9</a>
   <a href="#" onclick="showSession(10)" id="nav-s10">S10</a>
   <a href="#" onclick="showSession(11)" id="nav-s11">S11</a>
+  <button class="dark-toggle" onclick="toggleDark()" id="dark-btn">Modo oscuro</button>
 </nav>
 
 <div class="container">
@@ -125,6 +171,7 @@ textarea{resize:vertical;min-height:80px;}
     <h2>Tu Progreso</h2>
     <div class="progress-bar-container"><div class="progress-bar" id="total-progress"></div></div>
     <p id="progress-text">0% completado</p>
+    <button class="reset-btn" onclick="resetProgress()">Borrar todo el progreso</button>
   </div>
   <div class="home-section">
     <h2>Sesiones</h2>
@@ -253,31 +300,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>1.</strong> Completa la oración: "I __________ (visit) the new restaurant downtown."</p>
         <div class="pronunciation-tip"><strong>Stress:</strong> vi-SI-ted / vi-SI-tings — /ˈvɪzɪtɪd/ — la sílaba fuerte es "SI"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="1" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>2.</strong> Completa: "She __________ (eat) sushi many times in her life."</p>
         <div class="pronunciation-tip"><strong>Stress:</strong> e-A-ten / I-TN — /ˈiːtən/ — "ea" suena como /iː/ (largo)</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="2" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>3.</strong> Completa: "We __________ (play) tennis since last summer."</p>
         <div class="pronunciation-tip"><strong>Stress:</strong> PLAYD — /pleɪd/ — vocal larga /eɪ/, suena como "pleyd"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="3" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>4.</strong> Completa: "They __________ (go) to the supermarket twice this week."</p>
         <div class="pronunciation-tip"><strong>Stress:</strong> GON — /ɡɒn/ — vocal corta, como "gon"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="4" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>5.</strong> Completa: "He __________ (live) in Madrid for five years."</p>
         <div class="pronunciation-tip"><strong>Stress:</strong> LIvd — /lɪvd/ — la "e" de lived se pronuncia /ɪ/ (corta)</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="5" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -287,65 +334,65 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>6.</strong> Forma una pregunta: ¿Alguna vez han comido paella?</p>
         <div class="pronunciation-tip"><strong>Contracción:</strong> "Have they" se pronuncia /ˈhæv ðeɪ/ — la "h" suena suave</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="6" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>7.</strong> Forma una pregunta: ¿Ha ido usted al cine recientemente?</p>
         <div class="pronunciation-tip"><strong>Stress:</strong> SIN-see — /ˈsɪnsli/ — "has" se reduce en preguntas</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="7" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>8.</strong> Forma una pregunta: ¿Han vivido ustedes aquí mucho tiempo?</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "Have you" suena como /ˈhæv jə/ — la "you" se reduce</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="8" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>9.</strong> Forma una pregunta: ¿Has jugado algún deporte hoy?</p>
         <div class="pronunciation-tip"><strong>Contracción:</strong> "Have you" → /ˈhæv jə/ o /ˈhævjə/ en inglés rápido</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="9" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>10.</strong> Forma una pregunta: ¿Ha visitado él Europa antes?</p>
         <div class="pronunciation-tip"><strong>Stress:</strong> EU-ropa /jʊˈroʊpə/ — sílaba fuerte en "ro"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="10" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
     <div class="exercise-group">
-      <h4>C. Transformaciones yrole play</h4>
+      <h4>C. Transformaciones y role play</h4>
 
       <div class="exercise">
         <p><strong>11.</strong> Transforma a negativa: "I have been to London."</p>
         <div class="pronunciation-tip"><strong>Contracción:</strong> "haven't" se pronuncia /ˈhævənt/ — dos sílabas</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="11" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>12.</strong> Transforma a negativa: "She has eaten the cake."</p>
         <div class="pronunciation-tip"><strong>Stress:</strong> "hasn't" /ˈhæzənt/ — la "z" suena como /z/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="12" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>13.</strong> Role play: Estás en una fiesta. Pregúntale a alguien: ¿Ha viajado a Asia?</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "travelled" /ˈtrævəld/ — dos sílabas, vocal corta en "tra"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="13" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>14.</strong> Role play: Un amigo no ha comido. Di: "You haven't eaten? That's terrible!"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "terrible" /ˈterəbəl/ — la "r" suena suave, 3 sílabas</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="14" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>15.</strong> Transforma a pregunta: "They have gone home."</p>
         <div class="pronunciation-tip"><strong>Stress:</strong> GONE home — /ɡɒn hoʊm/ — "gone" vocal corta, "home" vocal larga</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="15" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -355,31 +402,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>16.</strong> Responde: ¿Qué 3 cosas has hecho hoy que nunca habías hecho antes?</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "never" /ˈnevər/ — 3 sílabas, vocal corta en "ne"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="16" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>17.</strong> Traduce: "Nunca he comido pizza italiana."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "Italian" /ɪˈtæljən/ — la "t" suena como "ch" suave</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="17" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>18.</strong> Describe una foto: "Look at this picture. I __________ (be) to this beach and I __________ (play) volleyball there."</p>
         <div class="pronunciation-tip"><strong>Stress:</strong> vo-ley-BOL /voʊliˈbɔːl/ — sílaba fuerte en "BOL"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="18" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>19.</strong> Opina: "Have you ever tried exotic food? In my opinion, everyone __________ (should try) sushi at least once."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "opinion" /əˈpɪnjən/ — 3 sílabas, la "o" se reduce a /ə/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="19" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>20.</strong> Inicia una conversación usando el Present Perfect con un compañero: "Have you ever...?"</p>
         <div class="pronunciation-tip"><strong>Contracción:</strong> "I've" se pronuncia /aɪv/ (una sola sílaba)</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="2" data-exercise="20" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
   </div>
@@ -528,31 +575,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>1.</strong> Completa: "I have lived here __________ three years."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "for" /fɔːr/ — vocal larga, como "for" en español pero más abierta</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="1" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>2.</strong> Completa: "She has known him __________ 2010."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "since" /sɪns/ — vocal corta /ɪ/, como "sins"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="2" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>3.</strong> Completa: "We have been friends __________ a very long time."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "a" /ə/ — se reduce en inglés rápido, suena como una "e" suave</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="3" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>4.</strong> Completa: "He has worked there __________ last January."</p>
         <div class="pronunciation-tip"><strong>Stress:</strong> Ja-NUE-ary /ˈdʒænjuˌɛri/ — sílaba fuerte en "Ja"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="4" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>5.</strong> Completa: "I have been hungry __________ this morning."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "hungry" /ˈhʌŋɡri/ — la "u" suena como /ʌ/ (sonido corto y abierto)</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="5" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -562,65 +609,65 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>6.</strong> Completa: "I have __________ finished my homework." (antes de lo esperado)</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "already" /ɔːlˈrɛdi/ — 3 sílabas, sílaba fuerte en "RED"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="6" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>7.</strong> Completa: "She has __________ arrived." (acción reciente)</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "just" /dʒʌst/ — la "j" suena como "ch" + "s"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="7" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>8.</strong> Completa: "Have you eaten __________?" (pendiente, pregunta)</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "yet" /jɛt/ — vocal corta /ɛ/, suena como "yet"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="8" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>9.</strong> Completa: "He __________ hasn't called me." (continúa hasta ahora)</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "still" /stɪl/ — vocal corta, sonido "estil"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="9" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>10.</strong> Completa: "They __________ haven't found their keys." (siguen sin)</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "found" /faʊnd/ — diptongo /aʊ/, suena como "fawnd"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="10" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
     <div class="exercise-group">
-      <h4>C. Transformaciones yrole play</h4>
+      <h4>C. Transformaciones y role play</h4>
 
       <div class="exercise">
         <p><strong>11.</strong> Transforma a negativa: "I have already finished the report."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "report" /rɪˈpɔːrt/ — 2 sílabas, sílaba fuerte en "PORT"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="11" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>12.</strong> Transforma a pregunta: "She has just called the doctor."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "doctor" /ˈdɒktər/ — 2 sílabas, vocal corta en "doc"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="12" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>13.</strong> Role play: Tu amigo aún no ha llegado a la reunión. Di: "Josephine still hasn't arrived. I have just sent her a message."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "Josephine" /ˈdʒoʊzəfiːn/ — 3 sílabas</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="13" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>14.</strong> Role play: Estás en un restaurante. Pregunta: "Has the food arrived yet?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "arrived" /əˈraɪvd/ — diptongo /aɪ/ largo</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="14" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>15.</strong> Transforma: "I've been vegan for 10 years" a usando SINCE.</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "vegan" /ˈviːɡən/ — 2 sílabas, la "e" suena como /iː/ largo</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="15" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -630,31 +677,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>16.</strong> Responde: ¿Cuánto tiempo llevas estudiando inglés? Usa FOR o SINCE.</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "studying" /ˈstʌdiɪŋ/ — 3 sílabas, sílaba fuerte en "stu"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="16" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>17.</strong> Traduce: "Ya he comido pero todavía no he lavado los platos."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "dishes" /ˈdɪʃɪz/ — 2 sílabas, la "sh" suena como "sh" en español</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="17" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>18.</strong> Opina: "¿Qué es algo que todos deberían haber hecho antes de los 30 años?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "should" /ʃʊd/ — como "shud", vocal corta /ʊ/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="18" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>19.</strong> Describe tu día: "Today I have already __________, I haven't __________ yet, and I have just __________."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "today" /təˈdeɪ/ — 2 sílabas, sílaba fuerte en "DAY"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="19" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>20.</strong> Inicia una conversación: Pregunta a alguien cuánto tiempo ha estado haciendo su trabajo favorito.</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "favourite" /ˈfeɪvərɪt/ — 3 sílabas, sílaba fuerte en "FAV"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="3" data-exercise="20" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
   </div>
@@ -766,31 +813,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>1.</strong> Completa: "She cut __________ while cooking dinner."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "herself" /hɜːrˈsɛlf/ — 2 sílabas, sílaba fuerte en "SELF"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="1" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>2.</strong> Completa: "I made this cake __________."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "myself" /maɪˈsɛlf/ — 2 sílabas, diptongo /aɪ/ largo en "my"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="2" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>3.</strong> Completa: "The cat cleaned __________ after eating."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "itself" /ɪtˈsɛlf/ — 2 sílabas, vocal corta /ɪ/ en "it"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="3" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>4.</strong> Completa: "We taught __________ to play guitar."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "ourselves" /aʊərˈsɛlvz/ — 2 sílabas, diptongo /aʊ/ en "our"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="4" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>5.</strong> Completa: "You should be proud of __________."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "yourself" /jɔːrˈsɛlf/ — 2 sílabas, sílaba fuerte en "SELF"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="5" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -800,65 +847,65 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>6.</strong> Pregunta: ¿Preparaste la cena tú mismo/a?</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "yourself" se pronuncia /jɔːrˈsɛlf/ — 2 sílabas</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="6" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>7.</strong> Pregunta: ¿Se divirtieron ellos mismos en el concierto?</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "themselves" /ðɛmˈsɛlvz/ — la "th" suena como /ð/ (sonido dental vibrante suave)</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="7" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>8.</strong> Pregunta: ¿Enseñó él a nadie a cocinar solo?</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "himself" /hɪmˈsɛlf/ — 2 sílabas, vocal corta /ɪ/ en "him"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="8" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>9.</strong> Pregunta: ¿Nosotros organizamos la fiesta nosotros mismos?</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "organised" /ˈɔːrɡənaɪzd/ — 3 sílabas, diptongo /aɪ/ en "naised"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="9" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>10.</strong> Pregunta: ¿La computadora se apagó sola?</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "itself" /ɪtˈsɛlf/ — la "t" y "s" se pronuncian juntas</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="10" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
     <div class="exercise-group">
-      <h4>C. Transformaciones yrole play</h4>
+      <h4>C. Transformaciones y role play</h4>
 
       <div class="exercise">
         <p><strong>11.</strong> Transforma: "She enjoyed the party" a enfático: "She enjoyed the party __________."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "enjoyed" /ɪnˈdʒɔɪd/ — 2 sílabas, diptongo /ɔɪ/ en "joyed"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="11" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>12.</strong> Transforma: "I cooked dinner" a enfático: "I cooked dinner __________."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "dinner" /ˈdɪnər/ — 2 sílabas, vocal corta en "din"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="12" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>13.</strong> Role play: Un amigo te pregunta quién hizo la comida. Responde: "I made it myself!"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "made" /meɪd/ — diptongo /eɪ/ largo, como "meid"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="13" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>14.</strong> Role play: Tu profesor pregunta quién hizo la tarea. Di: "I did it myself."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "did" /dɪd/ — vocal corta /ɪ/, sonido "did"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="14" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>15.</strong> Transforma: "They decorated the house" a enfático: "They decorated the house __________."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "decorated" /ˈdɛkəreɪtɪd/ — 4 sílabas, sílaba fuerte en "DEC"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="15" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -868,31 +915,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>16.</strong> Responde: ¿Qué haces tú mismo/a que otros podrían hacer por ti?</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "yourself" /jɔːrˈsɛlf/ — sílaba fuerte en "SELF"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="16" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>17.</strong> Traduce: "Ella se miró en el espejo antes de salir."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "mirror" /ˈmɪrər/ — 2 sílabas, vocal corta en "mir"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="17" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>18.</strong> Describe: "In the photo, the children are playing by __________."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "children" /ˈtʃɪldrən/ — 2 sílabas, la "ch" suena como "ch" en español</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="18" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>19.</strong> Opina: "¿Es importante hacer las cosas uno mismo o es mejor pedir ayuda?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "important" /ɪmˈpɔːrtənt/ — 3 sílabas, sílaba fuerte en "POR"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="19" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>20.</strong> Inicia una conversación: "What have you done __________ this week that made you proud?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "proud" /praʊd/ — diptongo /aʊ/ largo, suena como "prawd"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="4" data-exercise="20" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
   </div>
@@ -983,31 +1030,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>1.</strong> Completa: "I __________ (study) English for five years now."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "studying" /ˈstʌdiɪŋ/ — 3 sílabas, sílaba fuerte en "STU"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="1" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>2.</strong> Completa: "She __________ (read) that book all day long."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "reading" /ˈriːdɪŋ/ — 2 sílabas, la "ea" suena como /iː/ largo</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="2" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>3.</strong> Completa: "We __________ (wait) for the bus since 8am."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "waiting" /ˈweɪtɪŋ/ — 2 sílabas, diptongo /eɪ/ en "way"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="3" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>4.</strong> Completa: "They __________ (work) on the project all morning."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "working" /ˈwɜːrkɪŋ/ — 2 sílabas, vocal larga /ɜːr/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="4" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>5.</strong> Completa: "It __________ (rain) all day today."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "raining" /ˈreɪnɪŋ/ — 2 sílabas, diptongo /eɪ/ largo</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="5" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -1017,65 +1064,65 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>6.</strong> Pregunta: ¿Cuánto tiempo llevas trabajando en esa empresa?</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "company" /ˈkʌmpəni/ — 3 sílabas, sílaba fuerte en "CUM"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="6" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>7.</strong> Pregunta: ¿Cuánto tiempo ha estado lloviendo?</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "raining" /ˈreɪnɪŋ/ — la "ai" suena como /eɪ/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="7" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>8.</strong> Pregunta: ¿Qué han estado haciendo tus amigos esta tarde?</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "afternoon" /ˈæftərnuːn/ — 3 sílabas, sílaba fuerte en "AF"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="8" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>9.</strong> Pregunta: ¿Cuánto tiempo llevas esperando el autobús?</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "bus" /bʌs/ — vocal corta /ʌ/, como "bas"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="9" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>10.</strong> Pregunta: ¿Qué has estado cocinando últimamente?</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "cooking" /ˈkʊkɪŋ/ — 2 sílabas, vocal corta /ʊ/ como en "book"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="10" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
     <div class="exercise-group">
-      <h4>C. Transformaciones yrole play</h4>
+      <h4>C. Transformaciones y role play</h4>
 
       <div class="exercise">
         <p><strong>11.</strong> Transforma: "I study English" a Present Perfect Continuous con "since 2020".</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "English" /ˈɪŋɡlɪʃ/ — 2 sílabas, vocal corta en "In"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="11" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>12.</strong> Transforma: "It snows" a Present Perfect Continuous con "all day".</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "snowing" /ˈsnoʊɪŋ/ — 2 sílabas, diptongo /oʊ/ largo</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="12" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>13.</strong> Role play: Un amigo llega mojado. Di: "Wow, it's been raining! How long have you been walking in this weather?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "weather" /ˈwɛðər/ — 2 sílabas, la "th" suena como /ð/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="13" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>14.</strong> Role play: Estás en la oficina. Di: "I've been working on this report since this morning. I need a break!"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "break" /breɪk/ — diptongo /eɪ/ largo, como "breik"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="14" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>15.</strong> Transforma: "They exercise" a Present Perfect Continuous con "for two hours".</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "exercise" /ˈɛksərsaɪz/ — 3 sílabas, sílaba fuerte en "EX"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="15" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -1085,31 +1132,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>16.</strong> Responde: ¿Qué has estado haciendo durante las últimas 2 horas?</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "hours" /ˈaʊərz/ — 1-2 sílabas, diptongo /aʊ/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="16" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>17.</strong> Traduce: "¿Cuánto tiempo llevas corriendo? Llevo corriendo desde las 6 de la mañana."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "running" /ˈrʌnɪŋ/ — 2 sílabas, vocal corta /ʌ/ en "run"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="17" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>18.</strong> Describe: "Look, the children __________ (play) in the garden. They __________ (play) since noon."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "garden" /ˈɡɑːrdən/ — 2 sílabas, vocal larga /ɑːr/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="18" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>19.</strong> Opina: "¿Es mejor usar Present Perfect Simple o Continuous para hablar del trabajo? ¿Por qué?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "better" /ˈbɛtər/ — 2 sílabas, sílaba fuerte en "BET"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="19" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>20.</strong> Inicia una conversación: "What have you been doing lately that makes you happy?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "lately" /ˈleɪtli/ — 2 sílabas, diptongo /eɪ/ en "late"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="5" data-exercise="20" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
   </div>
@@ -1218,31 +1265,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>1.</strong> Completa: "It __________ rain later, so bring an umbrella."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "may" /meɪ/ — diptongo /eɪ/ largo, como "mei"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="1" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>2.</strong> Completa: "She __________ not come to the party tonight."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "might" /maɪt/ — diptongo /aɪ/ largo, como "mait"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="2" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>3.</strong> Completa: "I __________ be wrong, but I think he's lying."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "lying" /ˈlaɪɪŋ/ — 2 sílabas, diptongo /aɪ/ en "li"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="3" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>4.</strong> Completa: "You __________ say that again! (permiso formal)"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "again" /əˈɡɛn/ — 2 sílabas, la "a" se reduce a /ə/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="4" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>5.</strong> Completa: "They __________ have forgotten about the meeting."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "forgotten" /fərˈɡɒtən/ — 3 sílabas, sílaba fuerte en "GOT"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="5" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -1252,65 +1299,65 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>6.</strong> Completa: "__________ we go for a walk?" (sugerencia)</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "shall" /ʃæl/ — vocal corta /æ/, como "shal"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="6" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>7.</strong> Completa: "You __________ study harder for the exam." (consejo)</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "ought to" /ˈɔːt tuː/ — 2 sílabas, vocal larga /ɔːt/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="7" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>8.</strong> Completa: "__________ I open the window for you?" (sugerencia cortés)</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "window" /ˈwɪndoʊ/ — 2 sílabas, diptongo /oʊ/ largo en "dow"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="8" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>9.</strong> Completa: "We __________ respect the environment." (recomendación)</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "environment" /ɪnˈvaɪrənmənt/ — 4 sílabas, sílaba fuerte en "VIR"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="9" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>10.</strong> Completa: "__________ we have dinner together?" (sugerencia)</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "together" /təˈɡɛðər/ — 3 sílabas, la "th" suena como /ð/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="10" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
     <div class="exercise-group">
-      <h4>C. Transformaciones yrole play</h4>
+      <h4>C. Transformaciones y role play</h4>
 
       <div class="exercise">
         <p><strong>11.</strong> Transforma a MAY: "Perhaps it will be sunny tomorrow."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "sunny" /ˈsʌni/ — 2 sílabas, vocal corta /ʌ/ en "sun"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="11" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>12.</strong> Transforma a MIGHT: "She probably won't come."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "probably" /ˈprɒbəbli/ — 3 sílabas, sílaba fuerte en "PROB"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="12" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>13.</strong> Role play: Tu amigo está triste. Dale un consejo usando OUGHT TO: "You __________ talk to someone about it."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "someone" /ˈsʌmwʌn/ — 2 sílabas, vocal corta /ʌ/ en "some"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="13" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>14.</strong> Role play: Estás en una reunión. Sugiere con SHALL: "Shall we start the meeting?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "meeting" /ˈmiːtɪŋ/ — 2 sílabas, vocal larga /iː/ en "meet"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="14" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>15.</strong> Transforma: "It's possible she forgot" usando MIGHT.</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "forgot" /fərˈɡɒt/ — 2 sílabas, la "o" suena como /ɒ/ (corta)</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="15" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -1320,31 +1367,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>16.</strong> Responde: ¿Qué deberías hacer esta semana que no has hecho? Usa OUGHT TO.</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "week" /wiːk/ — vocal larga /iː/, como "wik"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="16" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>17.</strong> Traduce: "Podría llover mañana, pero también podría hacer sol."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "sunny" /ˈsʌni/ — la "u" suena como /ʌ/ (sonido corto y abierto)</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="17" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>18.</strong> Opina: "¿Cuándo es mejor usar SHALL en vez de SHOULD?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "should" /ʃʊd/ — vocal corta /ʊ/, como "shud"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="18" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>19.</strong> Describe: "I __________ (may) call you later, but I __________ (might) be busy. You __________ (ought to) not wait for me."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "busy" /ˈbɪzi/ — 2 sílabas, vocal corta /ɪ/ en "bu"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="19" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>20.</strong> Inicia una conversación: "Shall we talk about what we might do this weekend?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "weekend" /ˈwiːkɛnd/ — 2 sílabas, vocal larga /iː/ en "week"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="6" data-exercise="20" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
   </div>
@@ -1442,31 +1489,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>1.</strong> Completa: "He looks tired. He __________ (must/have/work) all night."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "must've" /ˈmʌstəv/ — 2 sílabas, se reduce en inglés rápido a /ˈmʌsəv/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="1" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>2.</strong> Completa: "You failed the exam. You __________ (should/have/study) more."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "should've" /ˈʃʊdəv/ — se reduce a /ˈʃʊdəv/ o /ˈʃʊdəv/ en habla rápida</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="2" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>3.</strong> Completa: "She didn't come. She __________ (might/have/forgot) about it."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "might've" /ˈmaɪtəv/ — 2 sílabas, diptongo /aɪ/ en "might"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="3" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>4.</strong> Completa: "He __________ (must/have/know) the answer. He's a genius."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "genius" /ˈdʒiːniəs/ — 3 sílabas, vocal larga /iː/ en "ge"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="4" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>5.</strong> Completa: "I __________ (should/have/tell) you before. I'm sorry."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "sorry" /ˈsɒri/ — 2 sílabas, vocal corta /ɒ/ en "so"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="5" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -1476,65 +1523,65 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>6.</strong> Completa: "I __________ (would/have/help) if you had asked me."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "would've" /ˈwʊdəv/ — 2 sílabas, se reduce en habla rápida</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="6" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>7.</strong> Completa: "She __________ (could/have/be) a great singer if she had practiced."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "could've" /ˈkʊdəv/ — vocal corta /ʊ/ en "could"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="7" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>8.</strong> Completa: "__________ you (would/have/do) the same thing in my position?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "position" /pəˈzɪʃən/ — 3 sílabas, sílaba fuerte en "ZI"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="8" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>9.</strong> Completa: "What __________ you (could/have/done) differently?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "differently" /ˈdɪfrəntli/ — 4 sílabas, sílaba fuerte en "DIF"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="9" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>10.</strong> Completa: "He __________ (could/have/be) at home, but he's not answering the phone."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "answering" /ˈɑːnsərɪŋ/ — 3 sílabas, sílaba fuerte en "AN"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="10" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
     <div class="exercise-group">
-      <h4>C. Transformaciones yrole play</h4>
+      <h4>C. Transformaciones y role play</h4>
 
       <div class="exercise">
         <p><strong>11.</strong> Transforma: "He is rich" a deducción pasada con MUST'VE.</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "rich" /rɪtʃ/ — vocal corta /ɪ/, como "rich"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="11" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>12.</strong> Transforma: "She made a mistake" a arrepentimiento con SHOULD'VE.</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "mistake" /mɪˈsteɪk/ — 2 sílabas, diptongo /eɪ/ en "steik"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="12" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>13.</strong> Role play: Tu amigo perdió su vuelo. Di: "You should have arrived earlier! You might have caught the plane."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "plane" /pleɪn/ — diptongo /eɪ/ largo, como "plein"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="13" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>14.</strong> Role play: No te invitaron a una fiesta. Di: "They must have forgotten about me."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "forgotten" /fərˈɡɒtən/ — 3 sílabas, sílaba fuerte en "GOT"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="14" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>15.</strong> Transforma: "Maybe he left" a deducción con MIGHT'VE.</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "left" /lɛft/ — vocal corta /ɛ/, como "left"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="15" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -1544,31 +1591,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>16.</strong> Responde: ¿Qué habrías hecho diferente si hubieras estudiado más? Usa WOULD'VE.</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "different" /ˈdɪfrənt/ — 3 sílabas, sílaba fuerte en "DIF"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="16" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>17.</strong> Traduce: "Debí haber estudiado más para el examen."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "exam" /ɪɡˈzæm/ — 2 sílabas, sílaba fuerte en "ZAM"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="17" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>18.</strong> Opina: "Si pudieras volver al pasado, ¿qué habrías hecho diferente?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "back" /bæk/ — vocal corta /æ/, como "bak"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="18" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>19.</strong> Describe: "Look at this empty plate. They __________ (must/have/eat) everything!"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "plate" /pleɪt/ — diptongo /eɪ/ largo, como "pleit"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="19" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>20.</strong> Inicia una conversación: "What do you think someone should have done differently in a famous movie?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "famous" /ˈfeɪmiəs/ — 3 sílabas, sílaba fuerte en "FA"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="7" data-exercise="20" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
   </div>
@@ -1671,31 +1718,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>1.</strong> Completa: "If you __________ (pay) in cash, you __________ (will/receive) a discount."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "discount" /ˈdɪskaʊnt/ — 2 sílabas, diptongo /aʊ/ en "count"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="1" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>2.</strong> Completa: "If it __________ (rain) tomorrow, we __________ (will/stay) at home."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "tomorrow" /təˈmɒroʊ/ — 3 sílabas, sílaba fuerte en "MOR"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="2" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>3.</strong> Completa: "If she __________ (study) hard, she __________ (will/pass) the exam."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "exam" /ɪɡˈzæm/ — 2 sílabas, la "x" suena como /ɡz/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="3" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>4.</strong> Completa: "If you __________ (not/hurry), you __________ (will/miss) the bus."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "hurry" /ˈhʌri/ — 2 sílabas, vocal corta /ʌ/ en "hur"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="4" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>5.</strong> Completa: "If I __________ (see) her, I __________ (will/tell) her the news."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "news" /njuːz/ — 1 sílaba, suena como "nyus"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="5" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -1705,65 +1752,65 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>6.</strong> Completa: "If I __________ (be) you, I __________ (would/apologize)."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "apologize" /əˈpɒlədʒaɪz/ — 4 sílabas, sílaba fuerte en "POL"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="6" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>7.</strong> Completa: "If I __________ (have) more money, I __________ (would/travel) the world."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "travel" /ˈtrævəl/ — 2 sílabas, vocal corta /æ/ en "tra"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="7" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>8.</strong> Completa: "If she __________ (speak) English, she __________ (would/get) a better job."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "English" /ˈɪŋɡlɪʃ/ — 2 sílabas, vocal corta /ɪ/ en "In"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="8" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>9.</strong> Completa: "If I __________ (win) the lottery, I __________ (would/buy) a house."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "lottery" /ˈlɒtəri/ — 3 sílabas, sílaba fuerte en "LOT"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="9" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>10.</strong> Completa: "If they __________ (not/be) so busy, they __________ (would/help) us."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "busy" /ˈbɪzi/ — 2 sílabas, vocal corta /ɪ/ en "bu"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="10" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
     <div class="exercise-group">
-      <h4>C. Transformaciones yrole play</h4>
+      <h4>C. Transformaciones y role play</h4>
 
       <div class="exercise">
         <p><strong>11.</strong> Transforma de First a Second Conditional: "If I study hard, I will pass." → Situación hipotética.</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "hard" /hɑːrd/ — vocal larga /ɑːr/, como "jard"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="11" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>12.</strong> Transforma: "If it rains, I will stay home" a Second Conditional (situación menos probable).</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "home" /hoʊm/ — diptongo /oʊ/ largo, como "jom"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="12" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>13.</strong> Role play: Un amigo no sabe qué hacer. Di: "If I were you, I would talk to your boss about it."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "boss" /bɒs/ — vocal corta /ɒ/, como "bos"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="13" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>14.</strong> Role play: Hablando del clima: "If it doesn't rain, we will have the picnic outside."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "picnic" /ˈpɪknɪk/ — 2 sílabas, ambas vocales son /ɪ/ (cortas)</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="14" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>15.</strong> Transforma: "If I had wings, I would fly" a First Conditional (situación posible).</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "wings" /wɪŋz/ — 1 sílaba, la "ng" suena como /ŋ/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="15" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -1773,31 +1820,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>16.</strong> Responde: ¿Qué harías si ganaras la lotería mañana? Usa Second Conditional.</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "million" /ˈmɪljən/ — 2 sílabas, sílaba fuerte en "MIL"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="16" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>17.</strong> Traduce: "Si no llueve mañana, iré al parque."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "park" /pɑːrk/ — vocal larga /ɑːrk/, como "park"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="17" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>18.</strong> Opina: "Si pudieras ser cualquier persona por un día, ¿quién serías y por qué?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "anyone" /ˈɛniwʌn/ — 3 sílabas, sílaba fuerte en "EN"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="18" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>19.</strong> Describe: "If you __________ (could) live anywhere in the world, where __________ (would) you choose?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "choose" /tʃuːz/ — vocal larga /uː/, como "chus"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="19" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>20.</strong> Inicia una conversación: "What would you do differently if you could go back to school?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "school" /skuːl/ — vocal larga /uː/, como "skul"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="8" data-exercise="20" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
   </div>
@@ -1922,31 +1969,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>1.</strong> Completa: "I'll meet you __________ the cafe __________ 3pm."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "cafe" /ˈkæfeɪ/ — 2 sílabas, diptongo /eɪ/ al final, como "café"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="1" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>2.</strong> Completa: "The book is __________ the table."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "table" /ˈteɪbəl/ — 2 sílabas, diptongo /eɪ/ en "ta"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="2" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>3.</strong> Completa: "She lives __________ France."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "France" /fræns/ — vocal corta /æ/, como "frans"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="3" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>4.</strong> Completa: "The keys are __________ my pocket."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "pocket" /ˈpɒkɪt/ — 2 sílabas, vocal corta /ɒ/ en "po"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="4" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>5.</strong> Completa: "We are __________ home right now."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "right" /raɪt/ — diptongo /aɪ/ largo, como "rait"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="5" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -1956,65 +2003,65 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>6.</strong> Completa: "I was born __________ 1995."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "born" /bɔːrn/ — vocal larga /ɔːr/, como "born"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="6" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>7.</strong> Completa: "The class starts __________ 9am."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "class" /klæs/ — vocal corta /æ/, como "clas"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="7" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>8.</strong> Completa: "We have a meeting __________ Friday."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "Friday" /ˈfraɪdeɪ/ — 2 sílabas, diptongo /aɪ/ en "Fri"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="8" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>9.</strong> Completa: "I love swimming __________ summer."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "summer" /ˈsʌmər/ — 2 sílabas, vocal corta /ʌ/ en "sum"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="9" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>10.</strong> Completa: "I'll see you __________ the weekend."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "weekend" /ˈwiːkɛnd/ — 2 sílabas, vocal larga /iː/ en "week"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="10" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
     <div class="exercise-group">
-      <h4>C. Transformaciones yrole play</h4>
+      <h4>C. Transformaciones y role play</h4>
 
       <div class="exercise">
         <p><strong>11.</strong> Corrige el error: "I'll travel next the summer."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "next" /nɛkst/ — vocal corta /ɛ/, como "nekst"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="11" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>12.</strong> Corrige: "The meeting is in 3pm."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "meeting" /ˈmiːtɪŋ/ — 2 sílabas, vocal larga /iː/ en "meet"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="12" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>13.</strong> Role play: Estás en una tienda. Pregunta: "Excuse me, where is the checkout? Is it on the first floor or the second floor?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "floor" /flɔːr/ — vocal larga /ɔːr/, como "flor"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="13" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>14.</strong> Role play: Pregunta por la hora: "What time does the train leave? Is it at 5pm or at 6pm?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "train" /treɪn/ — diptongo /eɪ/ largo, como "trein"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="14" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>15.</strong> Corrige: "I was born in Monday."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "Monday" /ˈmʌndeɪ/ — 2 sílabas, vocal corta /ʌ/ en "Mon"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="15" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -2024,31 +2071,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>16.</strong> Responde: Describe tu rutina diaria usando IN, ON y AT.</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "routine" /ruːˈtiːn/ — 2 sílabas, vocales largas /uː/ y /iː/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="16" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>17.</strong> Traduce: "El lunes voy a Londres en tren. Llego a las 3 de la tarde."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "London" /ˈlʌndən/ — 2 sílabas, vocal corta /ʌ/ en "Lon"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="17" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>18.</strong> Opina: "¿Es más fácil aprender preposiciones de lugar o de tiempo? ¿Por qué?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "easier" /ˈiːziər/ — 3 sílabas, sílaba fuerte en "EA"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="18" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>19.</strong> Describe: "I was born __________ [mes], __________ [año]. I work __________ [lugar]. I have lunch __________ 1pm."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "lunch" /lʌntʃ/ — vocal corta /ʌ/, como "lanch"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="19" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>20.</strong> Inicia una conversación: "What do you usually do on Saturday mornings?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "usually" /ˈjuːʒuəli/ — 4 sílabas, sílaba fuerte en "U"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="9" data-exercise="20" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
   </div>
@@ -2149,31 +2196,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>1.</strong> Completa: "The phone is ringing! I __________ (will/get) it!"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "ringing" /ˈrɪŋɪŋ/ — 2 sílabas, vocal corta /ɪ/ en "ring"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="1" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>2.</strong> Completa: "I __________ (will/help) you carry those bags."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "carry" /ˈkæri/ — 2 sílabas, vocal corta /æ/ en "car"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="2" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>3.</strong> Completa: "Don't worry, I __________ (will/fix) the problem."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "problem" /ˈprɒbləm/ — 2 sílabas, sílaba fuerte en "PRO"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="3" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>4.</strong> Completa: "I promise I __________ (will/not/forget) your birthday."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "promise" /ˈprɒmɪs/ — 2 sílabas, vocal corta /ɒ/ en "pro"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="4" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>5.</strong> Completa: "I predict it __________ (will/be) a great year."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "predict" /prɪˈdɪkt/ — 2 sílabas, sílaba fuerte en "DICT"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="5" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -2183,65 +2230,65 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>6.</strong> Completa: "Look at those clouds! It __________ (is going to/rain)."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "clouds" /klaʊdz/ — diptongo /aʊ/ largo, como "klawds"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="6" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>7.</strong> Completa: "I __________ (am going to/eat) healthier from now on."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "healthier" /ˈhɛlθiər/ — 3 sílabas, sílaba fuerte en "HEALTH"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="7" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>8.</strong> Completa: "I __________ (am meeting) my dentist at 3pm. I already booked the appointment."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "dentist" /ˈdɛntɪst/ — 2 sílabas, vocal corta /ɛ/ en "den"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="8" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>9.</strong> Completa: "She __________ (is moving) to London next month. She has the ticket."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "moving" /ˈmuːvɪŋ/ — 2 sílabas, vocal larga /uː/ en "mov"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="9" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>10.</strong> Completa: "We __________ (are not going to/eat) junk food anymore."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "anymore" /ˌɛnimɔːr/ — 3 sílabas, sílaba fuerte en "MO"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="10" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
     <div class="exercise-group">
-      <h4>C. Transformaciones yrole play</h4>
+      <h4>C. Transformaciones y role play</h4>
 
       <div class="exercise">
         <p><strong>11.</strong> Transforma a decisión espontánea (WILL): "Veo un cachorro → I __________ (adopt) it!"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "puppy" /ˈpʌpi/ — 2 sílabas, vocal corta /ʌ/ en "pup"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="11" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>12.</strong> Transforma a plan hecho (GOING TO): "I have the tickets → I __________ (travel) to Spain."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "tickets" /ˈtɪkɪts/ — 2 sílabas, vocal corta /ɪ/ en "tic"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="12" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>13.</strong> Role play: Estás en una tienda. Di: "I will take this one." (decisión espontánea)</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "take" /teɪk/ — diptongo /eɪ/ largo, como "teik"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="13" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>14.</strong> Role play: Hablando de un plan: "I'm meeting my friends for dinner on Saturday." (acuerdo concreto)</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "friends" /frɛndz/ — 1 sílaba, vocal corta /ɛ/ en "fren"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="14" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>15.</strong> Transforma a predicción (GOING TO): "Look at those dark clouds! It __________ (rain)."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "dark" /dɑːrk/ — vocal larga /ɑːr/, como "dark"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="15" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -2251,31 +2298,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>16.</strong> Responde: ¿Qué vas a hacer este fin de semana? Usa las 3 formas de futuro.</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "weekend" /ˈwiːkɛnd/ — 2 sílabas, vocal larga /iː/ en "week"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="16" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>17.</strong> Traduce: "Mañana voy a empezar una dieta y no voy a comer comida chatarra."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "diet" /ˈdaɪət/ — 2 sílabas, diptongo /aɪ/ en "di"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="17" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>18.</strong> Opina: "¿Cuándo es mejor usar WILL en vez de GOING TO?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "spontaneous" /spɒnˈteɪniəs/ — 4 sílabas, sílaba fuerte en "TE"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="18" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>19.</strong> Describe: "In five years, I __________ (will) be living in __________. I __________ (will/also) have learned __________."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "learned" /lɜːrnd/ — 1 sílaba, vocal larga /ɜːr/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="19" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>20.</strong> Inicia una conversación: "What are your plans for the future? Will you stay in this city?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "future" /ˈfjuːtʃər/ — 2 sílabas, la "u" suena como /juː/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="10" data-exercise="20" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
   </div>
@@ -2444,31 +2491,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>1.</strong> Completa: "I need to __________ (do/make) my homework."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "homework" /ˈhoʊmwɜːrk/ — 2 sílabas, diptongo /oʊ/ largo en "ho"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="1" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>2.</strong> Completa: "She will __________ (do/make) dinner tonight."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "dinner" /ˈdɪnər/ — 2 sílabas, vocal corta /ɪ/ en "din"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="2" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>3.</strong> Completa: "He __________ (told/said) me that you often __________ (say/tell) inappropriate things."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "inappropriate" /ˌɪnəˈprəʊpriət/ — 5 sílabas, sílaba fuerte en "PRO"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="3" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>4.</strong> Completa: "Can you __________ (tell/say) me the truth?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "truth" /truːθ/ — 1 sílaba, la "th" suena como /θ/ (sonido dental sin vibración)</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="4" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>5.</strong> Completa: "What did he __________ (say/tell) at the meeting?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "meeting" /ˈmiːtɪŋ/ — 2 sílabas, vocal larga /iː/ en "meet"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="5" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -2478,31 +2525,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>6.</strong> Completa: "Are there any __________ (other/another) cafes close by?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "other" /ˈʌðər/ — 2 sílabas, la "th" suena como /ð/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="6" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>7.</strong> Completa: "I'd like to get __________ (other/another) coffee."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "coffee" /ˈkɒfi/ — 2 sílabas, vocal corta /ɒ/ en "cof"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="7" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>8.</strong> Completa: "__________ (As/Like) a friend, I should tell you the truth."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "truth" /truːθ/ — vocal larga /uː/, la "th" dental</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="8" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>9.</strong> Completa: "You look exactly __________ (as/like) your mother."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "exactly" /ɪɡˈzæktli/ — 3 sílabas, sílaba fuerte en "ZACT"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="9" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>10.</strong> Completa: "Is there __________ (other/another) way to get there?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "way" /weɪ/ — diptongo /eɪ/ largo, como "wei"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="10" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -2512,31 +2559,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>11.</strong> Traduce correctamente: "Librería" (donde venden libros).</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "bookstore" /ˈbʊkstɔːr/ — 2 sílabas, vocal corta /ʊ/ en "book"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="11" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>12.</strong> Traduce: "Embarazada" (pregnant).</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "pregnant" /ˈprɛɡnənt/ — 2 sílabas, sílaba fuerte en "PREG"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="12" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>13.</strong> Corrige la doble negación: "I don't have no money."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "money" /ˈmʌni/ — 2 sílabas, vocal corta /ʌ/ en "mon"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="13" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>14.</strong> Corrige: "I didn't see nobody outside."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "outside" /ˌaʊtˈsaɪd/ — 2 sílabas, diptongo /aʊ/ en "out"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="14" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>15.</strong> Traduce: "Actual" (current, no actual).</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "current" /ˈkʌrənt/ — 2 sílabas, vocal corta /ʌ/ en "cur"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="15" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
 
@@ -2546,31 +2593,31 @@ textarea{resize:vertical;min-height:80px;}
       <div class="exercise">
         <p><strong>16.</strong> Responde: ¿Qué errores comunes de inglés has cometido? Usa DO/MAKE correctamente.</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "mistake" /mɪˈsteɪk/ — 2 sílabas, diptongo /eɪ/ en "stake"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="16" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>17.</strong> Traduce: "Me dijo que dijiste algo inapropiado en la cena."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "dinner" /ˈdɪnər/ — 2 sílabas, vocal corta /ɪ/ en "din"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="17" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>18.</strong> Opina: "¿Cuál es el falso amigo más peligroso para los hispanohablantes?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "dangerous" /ˈdeɪndʒərəs/ — 3 sílabas, sílaba fuerte en "DAN"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="18" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>19.</strong> Describe: "I made breakfast, but I didn't do the dishes. She told me to do them."</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "dishes" /ˈdɪʃɪz/ — 2 sílabas, la "sh" suena como /ʃ/</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="19" oninput="saveSpeaking(this)"></textarea>
       </div>
 
       <div class="exercise">
         <p><strong>20.</strong> Inicia una conversación: "What's the most embarrassing mistake you've ever made in English?"</p>
         <div class="pronunciation-tip"><strong>Sound:</strong> "embarrassing" /ɪmˈbærəsɪŋ/ — 4 sílabas, sílaba fuerte en "BAR"</div>
-        <textarea rows="2" placeholder="Escribe tu respuesta aquí..."></textarea>
+        <textarea rows="2" placeholder="Escribe tu respuesta aquí..." data-session="11" data-exercise="20" oninput="saveSpeaking(this)"></textarea>
       </div>
     </div>
   </div>
@@ -2580,60 +2627,75 @@ textarea{resize:vertical;min-height:80px;}
 
 <script>
 // ===== SESSION DATA =====
-var SESSIONS={
-  2:{title:"Present Perfect I",total:10},
-  3:{title:"Present Perfect II",total:15},
-  4:{title:"Reflexive Pronouns",total:10},
-  5:{title:"Present Perfect Continuous",total:10},
-  6:{title:"Modal Verbs II",total:8},
-  7:{title:"Modals in the Past",total:8},
-  8:{title:"First & Second Conditional",total:8},
-  9:{title:"Prepositions: in/on/at",total:13},
-  10:{title:"Future II",total:8},
-  11:{title:"Common Mistakes",total:12}
+const SESSIONS={
+  2:{title:"Present Perfect I",total:10,speak:20},
+  3:{title:"Present Perfect II",total:15,speak:20},
+  4:{title:"Reflexive Pronouns",total:10,speak:20},
+  5:{title:"Present Perfect Continuous",total:10,speak:20},
+  6:{title:"Modal Verbs II",total:8,speak:20},
+  7:{title:"Modals in the Past",total:8,speak:20},
+  8:{title:"First & Second Conditional",total:8,speak:20},
+  9:{title:"Prepositions: in/on/at",total:13,speak:20},
+  10:{title:"Future II",total:8,speak:20},
+  11:{title:"Common Mistakes",total:12,speak:20}
 };
+
+// ===== DARK MODE =====
+function toggleDark(){
+  document.body.classList.toggle('dark');
+  const isDark=document.body.classList.contains('dark');
+  localStorage.setItem('poliglota-b1-dark',isDark?'1':'0');
+  document.getElementById('dark-btn').textContent=isDark?'Modo claro':'Modo oscuro';
+}
+(function(){
+  if(localStorage.getItem('poliglota-b1-dark')==='1'){
+    document.body.classList.add('dark');
+    document.getElementById('dark-btn').textContent='Modo claro';
+  }
+})();
 
 // ===== NAVIGATION =====
 function showSession(n){
-  var sessions=document.querySelectorAll('.session');
-  for(var i=0;i<sessions.length;i++){sessions[i].classList.add('hidden');}
-  var navItems=document.querySelectorAll('.navbar a');
-  for(var i=0;i<navItems.length;i++){navItems[i].classList.remove('active');}
+  const sessions=document.querySelectorAll('.session');
+  for(let i=0;i<sessions.length;i++){sessions[i].classList.add('hidden');}
+  const navItems=document.querySelectorAll('.navbar a');
+  for(let i=0;i<navItems.length;i++){navItems[i].classList.remove('active');}
   if(n==='home'){
     document.getElementById('session-home').classList.remove('hidden');
     document.getElementById('nav-home').classList.add('active');
     renderHome();
   }else{
-    var el=document.getElementById('session-'+n);
+    const el=document.getElementById('session-'+n);
     if(el){el.classList.remove('hidden');}
-    var nav=document.getElementById('nav-s'+n);
+    const nav=document.getElementById('nav-s'+n);
     if(nav){nav.classList.add('active');}
+    updateSpeakingCounter(n);
   }
   window.scrollTo(0,0);
 }
 
 function switchTab(btn,tabId){
-  var parent=btn.parentElement;
-  var tabs=parent.querySelectorAll('button');
-  for(var i=0;i<tabs.length;i++){tabs[i].classList.remove('active');}
+  const parent=btn.parentElement;
+  const tabs=parent.querySelectorAll('button');
+  for(let i=0;i<tabs.length;i++){tabs[i].classList.remove('active');}
   btn.classList.add('active');
-  var container=parent.parentElement;
-  var contents=container.querySelectorAll('.tab-content');
-  for(var i=0;i<contents.length;i++){contents[i].style.display='none';}
+  const container=parent.parentElement;
+  const contents=container.querySelectorAll('.tab-content');
+  for(let i=0;i<contents.length;i++){contents[i].style.display='none';}
   document.getElementById(tabId).style.display='block';
 }
 
 // ===== CLASSIFICATION EXERCISES =====
-var classifySelections={};
+const classifySelections={};
 
 function selectClassifyGroup(btn,groupId){
-  var group=document.getElementById(groupId+'-items');
-  var buttons=group.querySelectorAll('.classify-choices .choice-btn');
-  for(var i=0;i<buttons.length;i++){buttons[i].classList.remove('selected');}
+  const group=document.getElementById(groupId+'-items');
+  const buttons=group.querySelectorAll('.classify-choices .choice-btn');
+  for(let i=0;i<buttons.length;i++){buttons[i].classList.remove('selected');}
   btn.classList.add('selected');
-  var value=btn.getAttribute('data-value');
-  var items=group.querySelectorAll('.classify-grid .item');
-  for(var i=0;i<items.length;i++){
+  const value=btn.getAttribute('data-value');
+  const items=group.querySelectorAll('.classify-grid .item');
+  for(let i=0;i<items.length;i++){
     if(items[i].classList.contains('selected')){
       items[i].setAttribute('data-group',value);
       items[i].style.background=value==='regular'?'#d4edda':value==='irregular'?'#f8d7da':value==='singular'?'#d4edda':'#f8d7da';
@@ -2648,7 +2710,7 @@ function classifyItem(item){
 // ===== PROGRESS TRACKING =====
 function getProgress(){
   try{
-    var p=localStorage.getItem('poliglota-b1-progress');
+    const p=localStorage.getItem('poliglota-b1-progress');
     return p?JSON.parse(p):{};
   }catch(e){return {};}
 }
@@ -2658,7 +2720,7 @@ function saveProgress(progress){
 }
 
 function markExerciseComplete(sessionId,exerciseId){
-  var progress=getProgress();
+  const progress=getProgress();
   if(!progress[sessionId])progress[sessionId]={};
   if(!progress[sessionId].exercises)progress[sessionId].exercises={};
   progress[sessionId].exercises[exerciseId]=true;
@@ -2667,13 +2729,13 @@ function markExerciseComplete(sessionId,exerciseId){
 }
 
 function getSessionPercent(sessionId){
-  var progress=getProgress();
+  const progress=getProgress();
   if(!progress[sessionId])return 0;
-  var total=SESSIONS[sessionId]?SESSIONS[sessionId].total:10;
-  var done=0;
+  const total=SESSIONS[sessionId]?SESSIONS[sessionId].total:10;
+  let done=0;
   if(progress[sessionId].exercises){
-    var keys=Object.keys(progress[sessionId].exercises);
-    for(var i=0;i<keys.length;i++){
+    const keys=Object.keys(progress[sessionId].exercises);
+    for(let i=0;i<keys.length;i++){
       if(progress[sessionId].exercises[keys[i]])done++;
     }
   }
@@ -2681,87 +2743,163 @@ function getSessionPercent(sessionId){
 }
 
 function updateSessionProgress(sessionId){
-  // Update card on home if visible
-  var card=document.getElementById('card-s'+sessionId);
+  const card=document.getElementById('card-s'+sessionId);
   if(card){
-    var pct=getSessionPercent(sessionId);
-    var bar=card.querySelector('.progress-bar');
+    const pct=getSessionPercent(sessionId);
+    const bar=card.querySelector('.progress-bar');
     if(bar)bar.style.width=pct+'%';
-    var txt=card.querySelector('span');
+    const txt=card.querySelector('span');
     if(txt)txt.textContent=pct+'% completado';
   }
 }
 
 function renderHome(){
-  var container=document.getElementById('session-cards');
+  const container=document.getElementById('session-cards');
   container.innerHTML='';
-  var totalSessions=10;
-  var totalPct=0;
-  for(var s=2;s<=11;s++){
-    var pct=getSessionPercent(s);
+  const totalSessions=10;
+  let totalPct=0;
+  for(let s=2;s<=11;s++){
+    const pct=getSessionPercent(s);
     totalPct+=pct;
-    var card=document.createElement('div');
+    const card=document.createElement('div');
     card.className='session-card';
     card.id='card-s'+s;
     card.onclick=(function(num){return function(){showSession(num);};})(s);
     card.innerHTML='<h3>S'+s+': '+SESSIONS[s].title+'</h3><p>Sesión '+((s-1))+' de 10</p><div class="card-progress"><div class="progress-bar-container"><div class="progress-bar" style="width:'+pct+'%"></div></div><span>'+pct+'% completado</span></div>';
     container.appendChild(card);
   }
-  var avgPct=Math.round(totalPct/totalSessions);
+  const avgPct=Math.round(totalPct/totalSessions);
   document.getElementById('total-progress').style.width=avgPct+'%';
   document.getElementById('progress-text').textContent=avgPct+'% completado';
 }
 
+// ===== RESET PROGRESS =====
+function resetProgress(){
+  if(!confirm('¿Borrar todo el progreso? Esta acción no se puede deshacer.'))return;
+  localStorage.removeItem('poliglota-b1-progress');
+  localStorage.removeItem('poliglota-b1-speaking');
+  renderHome();
+}
+
+// ===== SPEAKING EXERCISES =====
+function saveSpeaking(textarea){
+  const session=textarea.getAttribute('data-session');
+  const exercise=textarea.getAttribute('data-exercise');
+  if(!session||!exercise)return;
+  const key='poliglota-b1-speaking';
+  let data={};
+  try{const raw=localStorage.getItem(key);data=raw?JSON.parse(raw):{};}catch(e){data={}}
+  if(!data[session])data[session]={};
+  data[session][exercise]=textarea.value;
+  try{localStorage.setItem(key,JSON.stringify(data));}catch(e){}
+  updateSpeakingCounter(session);
+}
+
+function loadSpeaking(){
+  let data={};
+  try{const raw=localStorage.getItem('poliglota-b1-speaking');data=raw?JSON.parse(raw):{};}catch(e){data={}}
+  const textareas=document.querySelectorAll('textarea[data-session]');
+  for(let i=0;i<textareas.length;i++){
+    const t=textareas[i];
+    const s=t.getAttribute('data-session');
+    const e=t.getAttribute('data-exercise');
+    if(data[s]&&data[s][e]!==undefined){t.value=data[s][e];}
+  }
+}
+
+function updateSpeakingCounter(sessionId){
+  const speakTab=document.getElementById('s'+sessionId+'-speak');
+  if(!speakTab)return;
+  const textareas=speakTab.querySelectorAll('textarea[data-session]');
+  let filled=0;
+  for(let i=0;i<textareas.length;i++){
+    if(textareas[i].value.trim().length>0)filled++;
+  }
+  const counter=speakTab.querySelector('.speak-progress');
+  if(counter)counter.textContent=filled+'/20 completados';
+}
+
 // ===== FEEDBACK HELPERS =====
-function showFeedback(id,correctCount,totalCount){
-  var el=document.getElementById(id);
+function showFeedback(id,correctCount,totalCount,explanations){
+  const el=document.getElementById(id);
   if(correctCount===totalCount){
-    el.innerHTML='<div class="feedback correct">¡Correcto! '+correctCount+'/'+totalCount+'</div>';
+    el.innerHTML='<div class="feedback correct">¡Perfecto! '+correctCount+'/'+totalCount+' — ¡Excelente trabajo!</div>';
   }else{
-    el.innerHTML='<div class="feedback incorrect">Incorrecto. '+correctCount+'/'+totalCount+'. Intenta de nuevo.</div>';
+    let html='<div class="feedback incorrect">Incorrecto. '+correctCount+'/'+totalCount+'. ';
+    if(explanations&&explanations.length>0){
+      html+='<br><strong>Revisa:</strong><ul style="margin:6px 0 0 16px;">';
+      for(let i=0;i<explanations.length;i++){
+        html+='<li>'+explanations[i]+'</li>';
+      }
+      html+='</ul>';
+    }else{
+      html+='Intenta de nuevo.';
+    }
+    html+='</div>';
+    el.innerHTML=html;
   }
 }
 
 function checkSelectGroup(prefix,start,end,sessionId,feedbackId){
-  var correct=0;
-  var total=0;
-  for(var i=start;i<=end;i++){
-    var sel=document.getElementById(prefix+'-'+i);
+  let correct=0;
+  let total=0;
+  const explanations=[];
+  for(let i=start;i<=end;i++){
+    const sel=document.getElementById(prefix+'-'+i);
     if(sel){
       total++;
-      var val=sel.value.toLowerCase().trim();
-      var ans=sel.getAttribute('data-answer').toLowerCase().trim();
-      if(val===ans){correct++;sel.style.borderColor='var(--success)';}
-      else{sel.style.borderColor='var(--danger)';}
+      const val=sel.value.toLowerCase().trim();
+      const ans=sel.getAttribute('data-answer').toLowerCase().trim();
+      if(val===ans){
+        correct++;
+        sel.style.borderColor='var(--success)';
+      }else{
+        sel.style.borderColor='var(--danger)';
+        const correctDisplay=sel.getAttribute('data-answer');
+        const questionLabel=sel.closest('.exercise');
+        const qText=questionLabel?questionLabel.querySelector('p'):null;
+        const qNum=qText?qText.textContent.substring(0,qText.textContent.indexOf('.')):('Pregunta '+i);
+        explanations.push(qNum+'. Respuesta correcta: <strong>'+correctDisplay+'</strong>');
+      }
     }
   }
-  showFeedback(feedbackId,correct,total);
+  showFeedback(feedbackId,correct,total,explanations);
   if(correct===total)markExerciseComplete(sessionId,feedbackId);
 }
 
 function checkInputGroup(prefix,start,end,sessionId,feedbackId){
-  var correct=0;
-  var total=0;
-  for(var i=start;i<=end;i++){
-    var inp=document.getElementById(prefix+'-'+i);
+  let correct=0;
+  let total=0;
+  const explanations=[];
+  for(let i=start;i<=end;i++){
+    const inp=document.getElementById(prefix+'-'+i);
     if(inp){
       total++;
-      var val=inp.value.toLowerCase().trim();
-      var ans=inp.getAttribute('data-answer').toLowerCase().trim();
-      if(val===ans){correct++;inp.style.borderColor='var(--success)';}
-      else{inp.style.borderColor='var(--danger)';}
+      const val=inp.value.toLowerCase().trim();
+      const ans=inp.getAttribute('data-answer').toLowerCase().trim();
+      if(val===ans){
+        correct++;
+        inp.style.borderColor='var(--success)';
+      }else{
+        inp.style.borderColor='var(--danger)';
+        const correctDisplay=inp.getAttribute('data-answer');
+        const questionLabel=inp.closest('.exercise');
+        const qText=questionLabel?questionLabel.querySelector('p'):null;
+        const qNum=qText?qText.textContent.substring(0,qText.textContent.indexOf('.')):('Pregunta '+i);
+        explanations.push(qNum+'. Respuesta correcta: <strong>'+correctDisplay+'</strong>');
+      }
     }
   }
-  showFeedback(feedbackId,correct,total);
+  showFeedback(feedbackId,correct,total,explanations);
   if(correct===total)markExerciseComplete(sessionId,feedbackId);
 }
 
 // ===== EXERCISE CHECKERS =====
 function checkS2Ex1(){checkInputGroup('s2e1',1,5,2,'s2e1-feedback');}
 function checkS2Ex2(){
-  var correct=0;var total=0;
-  var items=document.querySelectorAll('#s2e2-items .classify-grid .item');
-  for(var i=0;i<items.length;i++){
+  let correct=0;let total=0;
+  const items=document.querySelectorAll('#s2e2-items .classify-grid .item');
+  for(let i=0;i<items.length;i++){
     total++;
     if(items[i].getAttribute('data-group')===items[i].getAttribute('data-correct')){
       correct++;items[i].style.borderColor='var(--success)';
@@ -2779,9 +2917,9 @@ function checkS3Ex3(){checkInputGroup('s3e3',1,5,3,'s3e3-feedback');}
 
 function checkS4Ex1(){checkSelectGroup('s4e1',1,5,4,'s4e1-feedback');}
 function checkS4Ex2(){
-  var correct=0;var total=0;
-  var items=document.querySelectorAll('#s4e2-items .classify-grid .item');
-  for(var i=0;i<items.length;i++){
+  let correct=0;let total=0;
+  const items=document.querySelectorAll('#s4e2-items .classify-grid .item');
+  for(let i=0;i<items.length;i++){
     total++;
     if(items[i].getAttribute('data-group')===items[i].getAttribute('data-correct')){
       correct++;items[i].style.borderColor='var(--success)';
@@ -2818,6 +2956,8 @@ function checkS11Ex3(){checkSelectGroup('s11e3',1,4,11,'s11e3-feedback');}
 
 // ===== INIT =====
 showSession('home');
+loadSpeaking();
+for(let s=2;s<=11;s++){updateSpeakingCounter(s);}
 </script>
 </body>
 </html>
