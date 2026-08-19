@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Japón - Frases Esenciales</title>
+<style>
+:root{
+  --primary:#e74c3c;--primary-dark:#c0392b;--secondary:#f39c12;--accent:#e84393;
+  --bg:#f8f9fa;--card-bg:#fff;--text:#2d3436;--text-light:#636e72;--border:#dfe6e9;
+  --success:#00b894;--shadow:0 4px 15px rgba(0,0,0,.08);--radius:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;}
+.hero{background:linear-gradient(135deg,#e74c3c,#f39c12);color:#fff;padding:50px 20px 30px;text-align:center;}
+.hero h1{font-size:2.2rem;margin-bottom:4px;}
+.hero p{opacity:.9;font-size:1rem;}
+.hero .date{background:rgba(255,255,255,.2);display:inline-block;padding:4px 14px;border-radius:20px;margin-top:10px;font-weight:600;font-size:.9rem;}
+.search-bar{position:sticky;top:0;z-index:100;background:var(--card-bg);padding:12px 16px;box-shadow:0 2px 10px rgba(0,0,0,.08);}
+.search-bar input{width:100%;padding:12px 16px;border:2px solid var(--border);border-radius:var(--radius);font-size:1rem;outline:none;}
+.search-bar input:focus{border-color:var(--primary);}
+.container{max-width:700px;margin:0 auto;padding:16px;}
+.section{margin:20px 0;}
+.section-title{display:flex;align-items:center;gap:8px;margin-bottom:12px;cursor:pointer;padding:10px 14px;background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);user-select:none;}
+.section-title .icon{font-size:1.5rem;}
+.section-title h2{font-size:1.1rem;color:var(--primary);flex:1;}
+.section-title .toggle{color:var(--text-light);font-size:1.2rem;transition:.2s;}
+.section-title.open .toggle{transform:rotate(180deg);}
+.phrase-list{display:none;padding:0 4px;}
+.phrase-list.open{display:block;}
+.phrase{background:var(--card-bg);border-radius:var(--radius);padding:14px 16px;margin:8px 0;box-shadow:var(--shadow);border-left:4px solid var(--primary);}
+.phrase .jp{font-size:1.3rem;font-weight:700;color:var(--primary);margin-bottom:2px;}
+.phrase .romaji{font-size:.95rem;color:var(--text-light);font-style:italic;margin-bottom:2px;}
+.phrase .es{font-size:1rem;font-weight:600;color:var(--text);}
+.phrase .tip{font-size:.8rem;color:var(--text-light);margin-top:4px;background:#f0f0f0;padding:4px 8px;border-radius:6px;display:inline-block;}
+.phrase.hidden{display:none;}
+.numbers-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:8px;}
+.num-card{background:var(--card-bg);border-radius:var(--radius);padding:12px;text-align:center;box-shadow:var(--shadow);}
+.num-card .jp{font-size:1.4rem;font-weight:700;color:var(--primary);}
+.num-card .romaji{font-size:.85rem;color:var(--text-light);font-style:italic;}
+.num-card .es{font-size:.9rem;font-weight:600;}
+.tips-box{background:#fff5f5;border-left:4px solid var(--primary);padding:14px;border-radius:0 var(--radius) var(--radius) 0;margin:12px 0;}
+.tips-box h3{color:var(--primary);margin-bottom:8px;font-size:1rem;}
+.tips-box ul{margin-left:16px;}
+.tips-box li{margin:4px 0;font-size:.9rem;}
+.footer{text-align:center;padding:30px 20px;color:var(--text-light);font-size:.85rem;}
+.dark-toggle{position:fixed;bottom:20px;right:20px;background:var(--primary);color:#fff;border:none;width:50px;height:50px;border-radius:50%;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 15px rgba(231,76,60,.4);z-index:200;}
+body.dark{--bg:#1a1a2e;--card-bg:#16213e;--text:#e0e0e0;--text-light:#a0a0a0;--border:#2a2a4a;--primary:#ff6b6b;--primary-dark:#ee5a5a;--secondary:#ffd93d;}
+body.dark .phrase .tip{background:#2a2a4a;}
+body.dark .tips-box{background:#2a1a1a;border-left-color:#ff6b6b;}
+body.dark .tips-box li{color:#e0c0c0;}
+@media(max-width:400px){
+  .hero h1{font-size:1.6rem;}
+  .numbers-grid{grid-template-columns:repeat(2,1fr);}
+  .phrase .jp{font-size:1.1rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>JP</h1>
+  <p>Guia de frases esenciales para Japon</p>
+  <div class="date">18 Septiembre 2026</div>
+</div>
+
+<div class="search-bar">
+  <input type="text" id="search" placeholder="Buscar frase..." oninput="filterPhrases()">
+</div>
+
+<div class="container">
+
+<div class="section">
+  <div class="section-title open" onclick="toggleSection(this)">
+    <span class="icon">👋</span>
+    <h2>Saludos y cortesia</h2>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phrase-list open">
+    <div class="phrase"><div class="jp">こんにちは</div><div class="romaji">Konnichiwa</div><div class="es">Hola</div><div class="tip">De dia, hasta la tarde</div></div>
+    <div class="phrase"><div class="jp">おはようございます</div><div class="romaji">Ohayō gozaimasu</div><div class="es">Buenos dias</div><div class="tip">Formal, manana temprano</div></div>
+    <div class="phrase"><div class="jp">こんばんは</div><div class="romaji">Konbanwa</div><div class="es">Buenas noches</div></div>
+    <div class="phrase"><div class="jp">ありがとうございます</div><div class="romaji">Arigatō gozaimasu</div><div class="es">Muchas gracias</div><div class="tip">El mas usado. Siempre con "gozaimasu"</div></div>
+    <div class="phrase"><div class="jp">どうも</div><div class="romaji">Dōmo</div><div class="es">Gracias (informal)</div><div class="tip">Corto y casual</div></div>
+    <div class="phrase"><div class="jp">すみません</div><div class="romaji">Sumimasen</div><div class="es">Disculpe / Perdon</div><div class="tip">Para llamar la attention o pedir ayuda</div></div>
+    <div class="phrase"><div class="jp">ごめんなさい</div><div class="romaji">Gomen nasai</div><div class="es">Lo siento</div></div>
+    <div class="phrase"><div class="jp">はい / いいえ</div><div class="romaji">Hai / Iie</div><div class="es">Si / No</div></div>
+    <div class="phrase"><div class="jp">お願いします</div><div class="romaji">Onegai shimasu</div><div class="es">Por favor</div><div class="tip">Agregalo al final de cualquier pedido</div></div>
+    <div class="phrase"><div class="jp">大丈夫です</div><div class="romaji">Daijōbu desu</div><div class="es">Esta bien / No gracias</div><div class="tip">Para rechazar amablemente</div></div>
+    <div class="phrase"><div class="jp">わかりました</div><div class="romaji">Wakarimashita</div><div class="es">Entendido</div></div>
+    <div class="phrase"><div class="jp">ちょっと... </div><div class="romaji">Chotto...</div><div class="es">Un poco... / No puedo...</div><div class="tip">Forma japonesa de decir "no" sin decir no</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title" onclick="toggleSection(this)">
+    <span class="icon">🍜</span>
+    <h2>Restaurantes y comida</h2>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phrase-list">
+    <div class="phrase"><div class="jp">これをください</div><div class="romaji">Kore o kudasai</div><div class="es">Quiero esto (senalando)</div><div class="tip">Tu mejor amigo en Japon</div></div>
+    <div class="phrase"><div class="jp">おすすめは？</div><div class="romaji">Osusume wa?</div><div class="es">Que me recomienda?</div></div>
+    <div class="phrase"><div class="jp">おいしい</div><div class="romaji">Oishii</div><div class="es">Delicioso</div><div class="tip">Los japoneses aman que les digas esto</div></div>
+    <div class="phrase"><div class="jp">お会計お願いします</div><div class="romaji">Okaikei onegai shimasu</div><div class="es">La cuenta, por favor</div></div>
+    <div class="phrase"><div class="jp">英語のメニューありますか？</div><div class="romaji">Eigo no menyū arimasu ka?</div><div class="es">Tienen menu en ingles?</div></div>
+    <div class="phrase"><div class="jp">ベジタリアンです</div><div class="romaji">Bejitarian desu</div><div class="es">Soy vegetariano/a</div></div>
+    <div class="phrase"><div class="jp">过敏があります</div><div class="romaji">Arerugī ga arimasu</div><div class="es">Tengo alergia</div><div class="tip">Senale la lista de alergenos en el menu</div></div>
+    <div class="phrase"><div class="jp">水をください</div><div class="romaji">Mizu o kudasai</div><div class="es">Agua, por favor</div><div class="tip">El agua del grifo es potable en Japon</div></div>
+    <div class="phrase"><div class="jp"> biru o kudasai</div><div class="romaji">Bīru o kudasai</div><div class="es">Una cerveza, por favor</div></div>
+    <div class="phrase"><div class="jp">irasshaimase</div><div class="romaji">Irasshaimase</div><div class="es">Bienvenido (te dicen ellos)</div><div class="tip">No necesitas responder, es cortesia</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title" onclick="toggleSection(this)">
+    <span class="icon">🚃</span>
+    <h2>Transporte</h2>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phrase-list">
+    <div class="phrase"><div class="jp">駅はどこですか？</div><div class="romaji">Eki wa doko desu ka?</div><div class="es">Donde esta la estacion?</div></div>
+    <div class="phrase"><div class="jp">これにします</div><div class="romaji">Kore ni shimasu</div><div class="es">Este (senalando boleto)</div></div>
+    <div class="phrase"><div class="jp">いくらですか？</div><div class="romaji">Ikura desu ka?</div><div class="es">Cuanto cuesta?</div></div>
+    <div class="phrase"><div class="jp">ICカードはありますか？</div><div class="romaji">IC kādo wa arimasu ka?</div><div class="es">Tiene tarjeta IC?</div><div class="tip">Como Suica/Pasmo. Comprala, te sirve en trenes y tiendas</div></div>
+    <div class="phrase"><div class="jp">次の電車は何時ですか？</div><div class="romaji">Tsugi no densha wa nanji desu ka?</div><div class="es">A que hora es el proximo tren?</div></div>
+    <div class="phrase"><div class="jp">ここで降ります</div><div class="romaji">Koko de orimasu</div><div class="es">Bajo aqui</div></div>
+    <div class="phrase"><div class="jp">タクシーを呼んでください</div><div class="romaji">Takushī o yonde kudasai</div><div class="es">Llame un taxi, por favor</div></div>
+    <div class="phrase"><div class="jp">ここに停めてください</div><div class="romaji">Koko ni tomete kudasai</div><div class="es">Pare aqui, por favor</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title" onclick="toggleSection(this)">
+    <span class="icon">🛒</span>
+    <h2>Tiendas y compras</h2>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phrase-list">
+    <div class="phrase"><div class="jp">見ているだけです</div><div class="romaji">Mite iru dake desu</div><div class="es">Solo estoy mirando</div><div class="tip">Para que no te sigan</div></div>
+    <div class="phrase"><div class="jp">これを包んでください</div><div class="romaji">Kore o tsutsunde kudasai</div><div class="es">Envuelvelo por favor</div><div class="tip">Regalo: dicen "presento ni shimasu?"</div></div>
+    <div class="phrase"><div class="jp">カードで払えますか？</div><div class="romaji">Kādo de haraemasu ka?</div><div class="es">Puedo pagar con tarjeta?</div></div>
+    <div class="phrase"><div class="jp">领收书をください</div><div class="romaji">Ryōshūsho o kudasai</div><div class="es">Recibo, por favor</div><div class="tip">Para tax free en el aeropuerto</div></div>
+    <div class="phrase"><div class="jp">免税できますか？</div><div class="romaji">Menzei dekimasu ka?</div><div class="es">Es tax free?</div><div class="tip">En tiendas grandes, si llevas pasaporte</div></div>
+    <div class="phrase"><div class="jp">もう少し安くなりますか？</div><div class="romaji">Mō sukoshi yasuku narimasu ka?</div><div class="es">Se puede mas barato?</div><div class="tip">Funciona en tiendas pequenas, no en konbini</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title" onclick="toggleSection(this)">
+    <span class="icon">🏨</span>
+    <h2>Hotel y alojamiento</h2>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phrase-list">
+    <div class="phrase"><div class="jp">予約があります</div><div class="romaji">Yoyaku ga arimasu</div><div class="es">Tengo reservacion</div></div>
+    <div class="phrase"><div class="jp">チェックインお願いします</div><div class="romaji">Chekkuin onegai shimasu</div><div class="es">Check-in, por favor</div></div>
+    <div class="phrase"><div class="jp">WiFiのパスワードは？</div><div class="romaji">Waihai no pasuwādo wa?</div><div class="es">Cuál es la contraseña del WiFi?</div></div>
+    <div class="phrase"><div class="jp">朝食は何時からですか？</div><div class="romaji">Chōshoku wa nanji kara desu ka?</div><div class="es">A que hora es el desayuno?</div></div>
+    <div class="phrase"><div class="jp">荷物を預けたいです</div><div class="romaji">Nimotsu o azuketai desu</div><div class="es">Quiero dejar mi equipaje</div><div class="tip">Antes del check-in o despues del checkout</div></div>
+    <div class="phrase"><div class="jp">チェックアウトお願いします</div><div class="romaji">Chekuauto onegai shimasu</div><div class="es">Check-out, por favor</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title" onclick="toggleSection(this)">
+    <span class="icon">🚨</span>
+    <h2>Emergencias</h2>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phrase-list">
+    <div class="phrase"><div class="jp">助けてください</div><div class="romaji">Tasukete kudasai</div><div class="es">Ayudeme, por favor</div></div>
+    <div class="phrase"><div class="jp">警察を呼んでください</div><div class="romaji">Keisatsu o yonde kudasai</div><div class="es">Llame a la policia</div></div>
+    <div class="phrase"><div class="jp">病院に行きたいです</div><div class="romaji">Byōin ni ikitai desu</div><div class="es">Quiero ir al hospital</div></div>
+    <div class="phrase"><div class="jp">痛いです</div><div class="romaji">Itai desu</div><div class="es">Me duele</div><div class="tip">Senala la parte del cuerpo</div></div>
+    <div class="phrase"><div class="jp">日本語がわかりません</div><div class="romaji">Nihongo ga wakarimasen</div><div class="es">No entiendo japones</div></div>
+    <div class="phrase"><div class="jp">英話せる人はいますか？</div><div class="romaji">Eigo ga hanaseru hito wa imasu ka?</div><div class="es">Hay alguien que hable ingles?</div></div>
+    <div class="phrase"><div class="jp">パスポートをなくしました</div><div class="romaji">Pasupōto o nakushimashita</div><div class="es">Perdi mi pasaporte</div><div class="tip">Ve a la policia mas cercana (koban)</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-title" onclick="toggleSection(this)">
+    <span class="icon">🔢</span>
+    <h2>Numeros</h2>
+    <span class="toggle">▼</span>
+  </div>
+  <div class="phrase-list">
+    <div class="numbers-grid">
+      <div class="num-card"><div class="jp">一</div><div class="romaji">Ichi</div><div class="es">1</div></div>
+      <div class="num-card"><div class="jp">二</div><div class="romaji">Ni</div><div class="es">2</div></div>
+      <div class="num-card"><div class="jp">三</div><div class="romaji">San</div><div class="es">3</div></div>
+      <div class="num-card"><div class="jp">四</div><div class="romaji">Yon / Shi</div><div class="es">4</div></div>
+      <div class="num-card"><div class="jp">五</div><div class="romaji">Go</div><div class="es">5</div></div>
+      <div class="num-card"><div class="jp">六</div><div class="romaji">Roku</div><div class="es">6</div></div>
+      <div class="num-card"><div class="jp">七</div><div class="romaji">Nana / Shichi</div><div class="es">7</div></div>
+      <div class="num-card"><div class="jp">八</div><div class="romaji">Hachi</div><div class="es">8</div></div>
+      <div class="num-card"><div class="jp">九</div><div class="romaji">Kyū / Ku</div><div class="es">9</div></div>
+      <div class="num-card"><div class="jp">十</div><div class="romaji">Jū</div><div class="es">10</div></div>
+      <div class="num-card"><div class="jp">百</div><div class="romaji">Hyaku</div><div class="es">100</div></div>
+      <div class="num-card"><div class="jp">千</div><div class="romaji">Sen</div><div class="es">1,000</div></div>
+      <div class="num-card"><div class="jp">一万</div><div class="romaji">Ichiman</div><div class="es">10,000</div></div>
+      <div class="num-card"><div class="jp">いくら</div><div class="romaji">Ikura</div><div class="es">Cuanto cuesta?</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="tips-box">
+    <h3>Consejos para Japon</h3>
+    <ul>
+      <li><strong>Senales > Hablar:</strong> Senala lo que quieras en el menu o tienda. Funciona perfecto.</li>
+      <li><strong>Konbini son tu vida:</strong> 7-Eleven, FamilyMart y Lawson tienen comida, cajeros, copias, boletos.</li>
+      <li><strong>No propinas:</strong> En Japon no se da propina. Es ofensivo.</li>
+      <li><strong>Calle:</strong> No comas caminando. Busca un lugar para sentarte.</li>
+      <li><strong>Calzado:</strong> Quitate los zapatos donde veas zapatos depositados en la entrada.</li>
+      <li><strong>Google Translate:</strong> Descarga el paquete de japon offline. Tiene camara para traducir menus.</li>
+      <li><strong>Google Maps:</strong> Funciona perfecto para trenes en Japon. Te dice que linea tomar.</li>
+      <li><strong>Salud:</strong> En Japon usan mascarilla si estan resfriados. Es respetuoso.</li>
+      <li><strong>Bano:</strong> Los banos japoneses tienen senales. Tira de la palanca si no sabes que hace.</li>
+      <li><strong>Dinero:</strong> Lleva efectivo. Muchos lugares pequenos no aceptan tarjeta.</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <p>18 Septiembre 2026</p>
+  <p>Arigatō gozaimasu!</p>
+</div>
+
+<button class="dark-toggle" onclick="toggleDark()">🌙</button>
+
+<script>
+function toggleSection(title){
+  title.classList.toggle('open');
+  const list=title.nextElementSibling;
+  list.classList.toggle('open');
+}
+
+function filterPhrases(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const phrases=document.querySelectorAll('.phrase');
+  const sections=document.querySelectorAll('.section');
+  phrases.forEach(p=>{
+    const text=p.textContent.toLowerCase();
+    p.classList.toggle('hidden',q.length>0&&!text.includes(q));
+  });
+  if(q.length>0){
+    sections.forEach(s=>{
+      const list=s.querySelector('.phrase-list');
+      const title=s.querySelector('.section-title');
+      const visiblePhrases=s.querySelectorAll('.phrase:not(.hidden)');
+      if(visiblePhrases.length===0){s.style.display='none';}
+      else{s.style.display='';list.classList.add('open');title.classList.add('open');}
+    });
+  }else{
+    sections.forEach(s=>{s.style.display='';});
+  }
+}
+
+function toggleDark(){
+  document.body.classList.toggle('dark');
+  const btn=document.querySelector('.dark-toggle');
+  btn.textContent=document.body.classList.contains('dark')?'☀️':'🌙';
+  localStorage.setItem('japan-guide-dark',document.body.classList.contains('dark')?'1':'0');
+}
+
+(function(){
+  if(localStorage.getItem('japan-guide-dark')==='1'){
+    document.body.classList.add('dark');
+    document.querySelector('.dark-toggle').textContent='☀️';
+  }
+  // Open first section by default
+  const first=document.querySelector('.section-title');
+  if(first){first.classList.add('open');first.nextElementSibling.classList.add('open');}
+})();
+</script>
+</body>
+</html>
